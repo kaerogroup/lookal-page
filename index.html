@@ -21,6 +21,18 @@
     .gallery{display:grid;grid-template-columns:1fr;gap:10px}@media(min-width:720px){.gallery{grid-template-columns:repeat(3,1fr)}}.location-card{border:1px solid var(--line);background:var(--panel);overflow:hidden}.location-media{aspect-ratio:4/3;background:#121212;display:grid;place-items:center;color:#6f6f6f;font-size:.86rem}.location-media img{width:100%;height:100%;object-fit:cover}.location-meta{padding:18px}.location-meta strong{display:block}.location-meta span{display:block;color:var(--smoke);font-size:.86rem;margin-top:4px}
     .walkthroughs{display:grid;gap:12px}@media(min-width:820px){.walkthroughs{grid-template-columns:1fr 1fr}}.walk{border:1px solid var(--line);background:var(--panel)}.walk .video-frame{aspect-ratio:16/10}.walk-copy{padding:20px}.walk-copy h3{margin-bottom:8px}.walk-copy p{margin:0;color:var(--smoke);font-size:.92rem}
     .calc{margin-top:2px;background:var(--panel);border:1px solid var(--line);padding:30px 26px}.calcrow{display:flex;gap:10px 16px;align-items:baseline;flex-wrap:wrap;font-weight:700;font-size:clamp(.95rem,2.3vw,1.3rem);letter-spacing:-.02em}.op{color:var(--red)}.pull{border-left:4px solid var(--red);padding:6px 0 6px 22px;margin-top:38px;max-width:58ch}.pull p{font-weight:700;font-size:clamp(1.15rem,2.8vw,1.5rem);line-height:1.3;margin:0}
+    .network-intro{display:grid;gap:18px;margin-top:34px}
+    @media(min-width:840px){.network-intro{grid-template-columns:1.1fr .9fr}}
+    .network-panel{border:1px solid var(--line);background:var(--panel);padding:28px}
+    .network-panel strong{display:block;font-size:1.05rem;margin-bottom:8px}
+    .network-panel p{margin:0;color:var(--smoke)}
+    .network-kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--red);font-weight:800;margin-bottom:12px}
+    .growth-line{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}
+    .growth-chip{border:1px solid var(--line);padding:8px 11px;font-size:.82rem;color:var(--smoke)}
+    .growth-chip.active{color:#fff;border-color:var(--red)}
+    .join-card{border:1px solid var(--line);background:#050505;padding:34px}
+    .join-card h3{font-size:clamp(1.4rem,3vw,2rem);margin-bottom:12px}
+    .join-card p{color:var(--smoke)}
     .split{display:grid;gap:38px}@media(min-width:860px){.split{grid-template-columns:1fr 1fr;gap:56px}}.checklist{list-style:none;padding:0;margin:24px 0}.checklist li{position:relative;padding:13px 0 13px 28px;border-bottom:1px solid var(--line);font-size:.95rem}.checklist li::before{content:"";position:absolute;left:2px;top:20px;width:10px;height:6px;border-left:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(-45deg)}.note{border:1px solid var(--line);background:var(--panel);padding:22px;margin-bottom:2px}.note h3{margin-bottom:8px}.note p{margin:0;color:var(--smoke);font-size:.92rem}
     details{border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;padding:21px 38px 21px 0;font-weight:700;position:relative}summary::-webkit-details-marker{display:none}summary::after{content:"+";position:absolute;right:8px;color:var(--red);font-size:1.4rem;font-weight:400}details[open] summary::after{content:"–"}.ans{padding:0 0 20px;color:var(--smoke);max-width:70ch;font-size:.95rem}.ans p{margin:0}.final{background:var(--panel)}footer{border-top:1px solid var(--line);padding:36px 0;color:var(--smoke);font-size:.85rem}.fgrid{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
   </style>
@@ -43,9 +55,9 @@
   <section class="hero" style="border-top:0">
     <div class="wrap">
       <span class="live"><span class="dot"></span>10 lokasi komuniti sedang beroperasi</span>
-      <h1>Iklan komuniti, dekat dengan pelanggan anda.</h1>
+      <h1>Media komuniti yang hidup di premis sebenar.</h1>
       <div class="rule"></div>
-      <p class="lede">Tayang iklan pada skrin LOOKaL di premis sebenar dalam komuniti — tempat orang makan, membeli, berurusan dan menunggu. Pilih lokasi, pilih hari dan terus siar dari RM2 sehari.</p>
+      <p class="lede">LOOKaL membina rangkaian skrin media komuniti di premis yang orang memang kunjungi. Rangkaian awal sudah beroperasi, dan kami sedang membuka lebih banyak lokasi bersama pemilik premis yang mahu menyertai pertumbuhan seterusnya.</p>
       <div class="btns">
         <a class="btn btn-red" href="https://www.lookal.tech/signup">Mula beriklan</a>
         <a class="btn btn-ghost" href="#lihat">Tengok cara LOOKaL berfungsi</a>
@@ -72,6 +84,39 @@
     <div class="stat"><div class="statn">8<em> saat</em></div><p>Format tayangan ringkas untuk mesej yang cepat dibaca.</p></div>
     <div class="stat"><div class="statn">RM2<em>/hari</em></div><p>Satu lokasi, satu hari. Boleh mula kecil dahulu.</p></div>
   </div></div></section>
+
+
+  <section id="rangkaian">
+    <div class="wrap">
+      <div class="shead">
+        <div class="network-kicker">Rangkaian yang sedang berkembang</div>
+        <h2>Bermula dengan lokasi aktif. Dibina untuk berkembang bersama komuniti.</h2>
+        <p>LOOKaL tidak bermula sebagai konsep atas kertas. Rangkaian awal sudah berjalan di premis sebenar. Fasa seterusnya ialah menambah node secara berperingkat di lokasi yang mempunyai aliran pelanggan dan konteks menunggu yang sesuai.</p>
+      </div>
+
+      <div class="network-intro">
+        <div class="network-panel">
+          <strong>10 lokasi komuniti aktif sebagai rangkaian awal</strong>
+          <p>Ini ialah titik permulaan operasi. Setiap lokasi baru perlu memberi nilai kepada pengiklan, pemilik premis dan komuniti setempat — bukan sekadar menambah angka skrin.</p>
+          <div class="growth-line">
+            <span class="growth-chip active">Aktif sekarang</span>
+            <span class="growth-chip">Tambah premis</span>
+            <span class="growth-chip">Tambah komuniti</span>
+            <span class="growth-chip">Tambah liputan</span>
+          </div>
+        </div>
+
+        <div class="join-card">
+          <div class="network-kicker">Untuk pemilik premis</div>
+          <h3>Premis anda boleh menjadi sebahagian daripada rangkaian LOOKaL.</h3>
+          <p>Jika premis anda mempunyai aliran pelanggan, masa menunggu dan ruang paparan yang sesuai, anda boleh memohon untuk dinilai sebagai lokasi LOOKaL seterusnya.</p>
+          <div class="btns" style="margin-top:20px">
+            <a class="btn btn-red" href="#publisher">Sertai rangkaian LOOKaL</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="cara">
     <div class="wrap">
@@ -115,8 +160,8 @@
 
   <section id="publisher">
     <div class="wrap"><div class="split">
-      <div><h2 style="margin-bottom:16px">Ada premis dengan komuniti yang aktif?</h2><p class="muted">Lokasi yang mempunyai aliran pelanggan dan masa menunggu boleh menjadi sebahagian daripada rangkaian media komuniti LOOKaL.</p><ul class="checklist"><li>LOOKaL mengurus teknologi skrin dan kandungan rangkaian</li><li>Publisher tidak perlu menyusun iklan secara manual</li><li>Prestasi node boleh dipantau melalui platform</li><li>Kesesuaian lokasi dinilai berdasarkan trafik dan konteks premis</li></ul><a class="btn btn-red" href="https://www.lookal.tech/signup">Daftar minat sebagai publisher</a></div>
-      <div><div class="note"><h3>Bukan sekadar pasang TV</h3><p>Node LOOKaL ialah endpoint rangkaian media: scheduling, creative, campaign delivery dan tracking berada di belakang satu skrin fizikal.</p></div><div class="note"><h3>Komuniti dahulu</h3><p>Lokasi dipilih kerana relevan dengan orang yang berada di situ — bukan semata-mata untuk menambah bilangan skrin.</p></div><div class="note"><h3>Model komersial publisher</h3><p>Terma komersial dan perkongsian pendapatan dipaparkan selepas lokasi dinilai. Ini mengelakkan janji pulangan yang belum disokong oleh data operasi lokasi tersebut.</p></div></div>
+      <div><h2 style="margin-bottom:16px">Sertai rangkaian LOOKaL sebagai pemilik premis.</h2><p class="muted">Kami sedang membuka peluang kepada pemilik premis yang mempunyai aliran pelanggan dan masa menunggu yang sesuai untuk menjadi sebahagian daripada rangkaian media komuniti LOOKaL.</p><ul class="checklist"><li>LOOKaL mengurus teknologi skrin dan kandungan rangkaian</li><li>Publisher tidak perlu menyusun iklan secara manual</li><li>Prestasi node boleh dipantau melalui platform</li><li>Kesesuaian lokasi dinilai berdasarkan trafik dan konteks premis</li></ul><a class="btn btn-red" href="https://www.lookal.tech/signup">Mohon sertai rangkaian</a></div>
+      <div><div class="note"><h3>Bukan sekadar pasang TV</h3><p>Node LOOKaL ialah endpoint rangkaian media: scheduling, creative, campaign delivery dan tracking berada di belakang satu skrin fizikal.</p></div><div class="note"><h3>Berkembang secara terpilih</h3><p>LOOKaL akan berkembang secara berperingkat. Lokasi dipilih berdasarkan kesesuaian trafik, masa menunggu, konteks premis dan nilai kepada komuniti setempat.</p></div><div class="note"><h3>Model komersial publisher</h3><p>Terma komersial dan perkongsian pendapatan dipaparkan selepas lokasi dinilai. Ini mengelakkan janji pulangan yang belum disokong oleh data operasi lokasi tersebut.</p></div></div>
     </div></div>
   </section>
 
