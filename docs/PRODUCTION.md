@@ -47,6 +47,26 @@ Keep these separate:
 - estimated people
 - measured audience data
 
-## Current operational blocker
+## Current production status
 
-At the 2026-09-20 production review, `https://lookal.tech/` still returned the legacy JavaScript application shell rather than this static landing page. Domain routing must be moved to the `lookal-page` Vercel project before final SEO launch acceptance.
+As of 2026-09-20:
+
+- `lookal.tech` is assigned to the `lookal-page` Vercel project for the public landing page.
+- `www.lookal.tech` remains the application/signup surface.
+- The public landing has been visually verified in an Incognito browser session.
+- The latest landing release on `main` has a successful Vercel production deployment.
+- SEO/AIEO foundation is present: canonical URL, robots, sitemap, Organization/WebSite/Service structured data, direct-answer FAQ and explicit OAI-SearchBot access.
+
+## Remaining launch gates
+
+The following still require explicit acceptance before SEO launch can be called complete:
+
+1. Verify `robots.txt` and `sitemap.xml` on the live canonical domain.
+2. Verify the primary CTA reaches `https://www.lookal.tech/signup`.
+3. Run physical/mobile acceptance at 360px, 390px and 430px widths.
+4. Confirm all production image and video sources load and play.
+5. Verify `lookal.tech` in Google Search Console.
+6. Submit `https://lookal.tech/sitemap.xml`.
+7. Request indexing for the homepage after verification.
+8. Validate structured data against the live canonical page.
+9. Monitor branded queries such as LOOKaL, LOOKaL Malaysia and LOOKaL iklan after recrawl.
