@@ -60,7 +60,7 @@
     :root{--ink:#1d1d1f;--panel:#ffffff;--panel2:#f3efe8;--line:#ded8cf;--paper:#f8f5ef;--smoke:#68645f;--red:#d9232e;--red2:#b91822;--charcoal:#242326;--max:1120px;--f:'Plus Jakarta Sans',Arial,sans-serif}
     *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--f);-webkit-font-smoothing:antialiased}a,button,video{outline-offset:3px}:focus-visible{outline:3px solid var(--red)}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{scroll-duration:0s!important;transition:none!important;animation:none!important}}img,video{max-width:100%;display:block}a{color:inherit}.wrap{max-width:var(--max);margin:auto;padding:0 22px}h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.025em;line-height:1.05}h1{font-size:clamp(2.45rem,7vw,4.6rem);font-weight:900;max-width:14ch}h2{font-size:clamp(1.8rem,4.5vw,3rem)}h3{font-size:1.12rem;line-height:1.3}p{margin:0 0 1rem}.muted{color:var(--smoke)}.small{font-size:.86rem;line-height:1.55}.lede{font-size:clamp(1.03rem,2.2vw,1.24rem);color:var(--smoke);max-width:64ch}
     header{position:sticky;top:0;z-index:50;background:rgba(248,245,239,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;max-width:var(--max);margin:auto;padding:14px 22px}.brand{display:inline-flex;align-items:center;text-decoration:none;flex:0 0 auto}.brand img{display:block;width:auto;height:42px;max-width:138px;object-fit:contain}@media(max-width:420px){.brand img{height:36px;max-width:118px}}nav{display:none;gap:24px;font-size:.9rem;color:var(--smoke)}nav a{text-decoration:none}nav a:hover{color:var(--ink)}@media(min-width:900px){nav{display:flex}}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border:1px solid transparent;border-radius:2px;text-decoration:none;font-weight:700;font-size:.95rem;transition:.16s ease}.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:var(--red2)}.btn-ghost{border-color:#bcb5ac;background:#fff;color:var(--ink)}.btn-ghost:hover{border-color:var(--ink)}.btn-sm{padding:10px 16px;font-size:.86rem}.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .skip-link{position:absolute;left:12px;top:-80px;z-index:100;background:#fff;color:var(--ink);border:2px solid var(--red);padding:10px 14px;text-decoration:none;font-weight:700}.skip-link:focus{top:12px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border:1px solid transparent;border-radius:2px;text-decoration:none;font-weight:700;font-size:.95rem;transition:.16s ease}.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:var(--red2)}.btn-ghost{border-color:#bcb5ac;background:#fff;color:var(--ink)}.btn-ghost:hover{border-color:var(--ink)}.btn-sm{padding:10px 16px;font-size:.86rem}.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
     .live{display:inline-flex;align-items:center;gap:9px;border:1px solid #d8d1c8;border-radius:999px;padding:7px 13px;color:#5f5a55;background:#fff;font-weight:700;font-size:.84rem}.dot{width:7px;height:7px;border-radius:50%;background:var(--red)}.hero{padding:74px 0 64px}.hero h1{margin:22px 0}.rule{width:54px;height:5px;background:var(--red);margin:0 0 24px}section{padding:78px 0;border-top:1px solid var(--line)}.shead{max-width:66ch;margin-bottom:40px}.shead h2{margin-bottom:14px}
     .proof-hero{margin-top:48px;border:1px solid #343237;background:var(--charcoal);padding:10px;color:#fff}.video-frame{position:relative;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden}.video-frame video{width:100%;height:100%;object-fit:cover}.video-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:26px;color:#bbb6af;background:#2b292d}.proof-caption{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 2px 2px}.proof-caption p{margin:0}
     .stats{display:grid;gap:2px;background:var(--line);border:1px solid var(--line)}@media(min-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}@media(min-width:960px){.stats{grid-template-columns:repeat(4,1fr)}}.stat{background:#fff;padding:28px 24px}.statn{font-weight:900;font-size:clamp(1.85rem,4vw,2.6rem);line-height:1;letter-spacing:-.04em;margin-bottom:10px}.statn em{font-style:normal;font-size:.48em;color:var(--smoke)}.stat p{margin:0;color:var(--smoke);font-size:.9rem;line-height:1.45}
@@ -88,6 +88,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Langkau ke kandungan utama</a>
 <header>
   <div class="bar">
     <a class="brand" href="#top" aria-label="LOOKaL"><img src="assets/brand/IMG-20251231-WA0002.jpg" alt="LOOKaL" width="554" height="225"></a>
@@ -101,7 +102,7 @@
   </div>
 </header>
 
-<main id="top">
+<main id="main" tabindex="-1"><div id="top"></div>
   <section class="hero" style="border-top:0">
     <div class="wrap">
       <span class="live"><span class="dot"></span>10 lokasi komuniti sedang beroperasi</span>
@@ -115,7 +116,7 @@
 
       <div class="proof-hero">
         <div class="video-frame">
-          <video controls muted playsinline preload="metadata">
+          <video controls muted playsinline preload="metadata" aria-label="Rakaman skrin komuniti LOOKaL beroperasi">
             <source src="assets/screens/VID-20260915-WA0001.mp4" type="video/mp4">
           </video>
           <div class="video-fallback"><div><strong>Rakaman sebenar rangkaian LOOKaL</strong><br><span class="small">Kompilasi skrin yang sedang beroperasi akan dipaparkan di sini.</span></div></div>
@@ -183,9 +184,9 @@
     <div class="wrap">
       <div class="shead"><h2>Tempat sebenar. Orang sebenar. Komuniti sebenar.</h2><p>Skrin LOOKaL berada di premis yang orang memang datang setiap hari — bukan paparan contoh atau lokasi rekaan.</p></div>
       <div class="gallery">
-        <article class="location-card"><div class="location-media"><img src="assets/locations/160017.jpg" loading="lazy" decoding="async" alt="Skrin komuniti LOOKaL di premis tempatan" onerror="this.remove();this.parentNode.textContent='Tambah gambar lokasi sebenar 01';"></div><div class="location-meta"><strong>Lokasi komuniti 01</strong><span>Nama premis & kawasan</span></div></article>
-        <article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260910-WA0004.jpg" loading="lazy" decoding="async" alt="Lokasi skrin iklan komuniti LOOKaL" onerror="this.remove();this.parentNode.textContent='Tambah gambar lokasi sebenar 02';"></div><div class="location-meta"><strong>Lokasi komuniti 02</strong><span>Nama premis & kawasan</span></div></article>
-        <article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260920-WA0000.jpg" loading="lazy" decoding="async" alt="Skrin LOOKaL di premis komuniti" onerror="this.remove();this.parentNode.textContent='Tambah gambar lokasi sebenar 03';"></div><div class="location-meta"><strong>Lokasi komuniti 03</strong><span>Nama premis & kawasan</span></div></article>
+        <article class="location-card"><div class="location-media"><img src="assets/locations/160017.jpg" width="1280" height="960" loading="lazy" decoding="async" alt="Skrin komuniti LOOKaL di premis tempatan" onerror="this.remove();this.parentNode.textContent='Tambah gambar lokasi sebenar 01';"></div><div class="location-meta"><strong>Lokasi komuniti 01</strong><span>Nama premis & kawasan</span></div></article>
+        <article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260910-WA0004.jpg" width="2560" height="1706" loading="lazy" decoding="async" alt="Lokasi skrin iklan komuniti LOOKaL" onerror="this.remove();this.parentNode.textContent='Tambah gambar lokasi sebenar 02';"></div><div class="location-meta"><strong>Lokasi komuniti 02</strong><span>Nama premis & kawasan</span></div></article>
+        <article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260920-WA0000.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Skrin LOOKaL di premis komuniti" onerror="this.remove();this.parentNode.textContent='Tambah gambar lokasi sebenar 03';"></div><div class="location-meta"><strong>Lokasi komuniti 03</strong><span>Nama premis & kawasan</span></div></article>
       </div>
     </div>
   </section>
@@ -194,9 +195,9 @@
     <div class="wrap">
       <div class="shead"><h2>Tengok sendiri bagaimana LOOKaL digunakan.</h2><p>Tiga walkthrough ringkas: kenali dashboard, bina iklan dengan Snap2Ads, atau terus upload poster yang anda sudah siapkan.</p></div>
       <div class="walkthroughs">
-        <article class="walk"><div class="video-frame"><video controls playsinline preload="none" poster="assets/locations/160017.jpg"><source src="assets/video/browsing%20dashboard%20Dan%20function.mp4" type="video/mp4"></video><div class="video-fallback"><strong>Video 01 — Signup, dashboard & browsing</strong></div></div><div class="walk-copy"><h3>01 · Dari signup ke dashboard</h3><p>Daftar, masuk workspace, browse lokasi dan fahami aliran kempen LOOKaL.</p></div></article>
-        <article class="walk"><div class="video-frame"><video controls playsinline preload="none" poster="assets/locations/IMG-20260910-WA0004.jpg"><source src="assets/video/snap2ads%20editor%20new%20(1).mp4" type="video/mp4"></video><div class="video-fallback"><strong>Video 02 — Snap2Ads hingga submit</strong></div></div><div class="walk-copy"><h3>02 · Bina iklan dengan Snap2Ads</h3><p>Masukkan maklumat, bina atau gunakan bahan iklan sendiri, preview dan submit.</p></div></article>
-        <article class="walk"><div class="video-frame"><video controls playsinline preload="none" poster="assets/locations/IMG-20260920-WA0000.jpg"><source src="assets/video/snap2ads%20own%20poster.mp4" type="video/mp4"></video><div class="video-fallback"><strong>Video 03 — Upload poster sendiri</strong></div></div><div class="walk-copy"><h3>03 · Sudah ada poster? Terus upload.</h3><p>Pastikan poster anda dalam format portrait 8:9 — contohnya 1080×1215 px atau 1280×1440 px. LOOKaL mengekalkan design asal tanpa crop atau stretch.</p></div></article>
+        <article class="walk"><div class="video-frame"><video controls playsinline preload="none" poster="assets/locations/160017.jpg" aria-label="Walkthrough dashboard LOOKaL"><source src="assets/video/browsing%20dashboard%20Dan%20function.mp4" type="video/mp4"></video><div class="video-fallback"><strong>Video 01 — Signup, dashboard & browsing</strong></div></div><div class="walk-copy"><h3>01 · Dari signup ke dashboard</h3><p>Daftar, masuk workspace, browse lokasi dan fahami aliran kempen LOOKaL.</p></div></article>
+        <article class="walk"><div class="video-frame"><video controls playsinline preload="none" poster="assets/locations/IMG-20260910-WA0004.jpg" aria-label="Walkthrough bina iklan dengan Snap2Ads"><source src="assets/video/snap2ads%20editor%20new%20(1).mp4" type="video/mp4"></video><div class="video-fallback"><strong>Video 02 — Snap2Ads hingga submit</strong></div></div><div class="walk-copy"><h3>02 · Bina iklan dengan Snap2Ads</h3><p>Masukkan maklumat, bina atau gunakan bahan iklan sendiri, preview dan submit.</p></div></article>
+        <article class="walk"><div class="video-frame"><video controls playsinline preload="none" poster="assets/locations/IMG-20260920-WA0000.jpg" aria-label="Walkthrough upload poster sendiri ke Snap2Ads"><source src="assets/video/snap2ads%20own%20poster.mp4" type="video/mp4"></video><div class="video-fallback"><strong>Video 03 — Upload poster sendiri</strong></div></div><div class="walk-copy"><h3>03 · Sudah ada poster? Terus upload.</h3><p>Pastikan poster anda dalam format portrait 8:9 — contohnya 1080×1215 px atau 1280×1440 px. LOOKaL mengekalkan design asal tanpa crop atau stretch.</p></div></article>
       </div>
       <div class="addon">
         <strong>Mahu tambah video pada Zon B?</strong>
