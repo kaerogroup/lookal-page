@@ -8,19 +8,19 @@
   <meta name="theme-color" content="#000000" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--ink:#000;--panel:#0e0e0e;--line:#292929;--paper:#fff;--smoke:#a2a2a2;--red:#e8121b;--max:1120px;--f:'Archivo','Helvetica Neue',Arial,sans-serif}
-    *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{margin:0;background:var(--ink);color:var(--paper);font:400 17px/1.65 var(--f);-webkit-font-smoothing:antialiased}img,video{max-width:100%;display:block}a{color:inherit}.wrap{max-width:var(--max);margin:auto;padding:0 22px}h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.025em;line-height:1.05}h1{font-size:clamp(2.45rem,7vw,4.6rem);font-weight:900;max-width:14ch}h2{font-size:clamp(1.8rem,4.5vw,3rem)}h3{font-size:1.12rem;line-height:1.3}p{margin:0 0 1rem}.muted{color:var(--smoke)}.small{font-size:.86rem;line-height:1.55}.lede{font-size:clamp(1.03rem,2.2vw,1.24rem);color:var(--smoke);max-width:64ch}
-    header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.84);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;max-width:var(--max);margin:auto;padding:14px 22px}.brand{font-size:1.25rem;font-weight:900;letter-spacing:-.05em;text-decoration:none}.brand .a{color:var(--red)}nav{display:none;gap:24px;font-size:.9rem;color:var(--smoke)}nav a{text-decoration:none}nav a:hover{color:#fff}@media(min-width:900px){nav{display:flex}}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border:1px solid transparent;border-radius:2px;text-decoration:none;font-weight:700;font-size:.95rem;transition:.16s ease}.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#ff2b34}.btn-ghost{border-color:var(--line)}.btn-ghost:hover{border-color:#fff}.btn-sm{padding:10px 16px;font-size:.86rem}.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-    .live{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:999px;padding:7px 13px;color:var(--smoke);font-weight:600;font-size:.84rem}.dot{width:7px;height:7px;border-radius:50%;background:var(--red)}.hero{padding:74px 0 64px}.hero h1{margin:22px 0}.rule{width:54px;height:5px;background:var(--red);margin:0 0 24px}section{padding:78px 0;border-top:1px solid var(--line)}.shead{max-width:66ch;margin-bottom:40px}.shead h2{margin-bottom:14px}
-    .proof-hero{margin-top:48px;border:1px solid var(--line);background:var(--panel);padding:10px}.video-frame{position:relative;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden}.video-frame video{width:100%;height:100%;object-fit:cover}.video-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:26px;color:var(--smoke);background:linear-gradient(135deg,#111,#080808)}.proof-caption{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 2px 2px}.proof-caption p{margin:0}
-    .stats{display:grid;gap:2px;background:var(--line);border:1px solid var(--line)}@media(min-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}@media(min-width:960px){.stats{grid-template-columns:repeat(4,1fr)}}.stat{background:#000;padding:28px 24px}.statn{font-weight:900;font-size:clamp(1.85rem,4vw,2.6rem);line-height:1;letter-spacing:-.04em;margin-bottom:10px}.statn em{font-style:normal;font-size:.48em;color:var(--smoke)}.stat p{margin:0;color:var(--smoke);font-size:.9rem;line-height:1.45}
-    .steps{display:grid;gap:2px;background:var(--line);border:1px solid var(--line)}@media(min-width:800px){.steps{grid-template-columns:repeat(3,1fr)}}.step{background:#000;padding:30px 26px}.stepn{color:var(--red);font-size:.8rem;font-weight:800;margin-bottom:14px}.step h3{margin-bottom:8px}.step p{color:var(--smoke);font-size:.94rem;margin:0}
-    .gallery{display:grid;grid-template-columns:1fr;gap:10px}@media(min-width:720px){.gallery{grid-template-columns:repeat(3,1fr)}}.location-card{border:1px solid var(--line);background:var(--panel);overflow:hidden}.location-media{aspect-ratio:4/3;background:#121212;display:grid;place-items:center;color:#6f6f6f;font-size:.86rem}.location-media img{width:100%;height:100%;object-fit:cover}.location-meta{padding:18px}.location-meta strong{display:block}.location-meta span{display:block;color:var(--smoke);font-size:.86rem;margin-top:4px}
-    .walkthroughs{display:grid;gap:12px}@media(min-width:820px){.walkthroughs{grid-template-columns:1fr 1fr}}.walk{border:1px solid var(--line);background:var(--panel)}.walk .video-frame{aspect-ratio:16/10}.walk-copy{padding:20px}.walk-copy h3{margin-bottom:8px}.walk-copy p{margin:0;color:var(--smoke);font-size:.92rem}
-    .calc{margin-top:2px;background:var(--panel);border:1px solid var(--line);padding:30px 26px}.calcrow{display:flex;gap:10px 16px;align-items:baseline;flex-wrap:wrap;font-weight:700;font-size:clamp(.95rem,2.3vw,1.3rem);letter-spacing:-.02em}.op{color:var(--red)}.pull{border-left:4px solid var(--red);padding:6px 0 6px 22px;margin-top:38px;max-width:58ch}.pull p{font-weight:700;font-size:clamp(1.15rem,2.8vw,1.5rem);line-height:1.3;margin:0}
+    :root{--ink:#1d1d1f;--panel:#ffffff;--panel2:#f3efe8;--line:#ded8cf;--paper:#f8f5ef;--smoke:#68645f;--red:#d9232e;--red2:#b91822;--charcoal:#242326;--max:1120px;--f:'Plus Jakarta Sans',Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--f);-webkit-font-smoothing:antialiased}img,video{max-width:100%;display:block}a{color:inherit}.wrap{max-width:var(--max);margin:auto;padding:0 22px}h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.025em;line-height:1.05}h1{font-size:clamp(2.45rem,7vw,4.6rem);font-weight:900;max-width:14ch}h2{font-size:clamp(1.8rem,4.5vw,3rem)}h3{font-size:1.12rem;line-height:1.3}p{margin:0 0 1rem}.muted{color:var(--smoke)}.small{font-size:.86rem;line-height:1.55}.lede{font-size:clamp(1.03rem,2.2vw,1.24rem);color:var(--smoke);max-width:64ch}
+    header{position:sticky;top:0;z-index:50;background:rgba(248,245,239,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;max-width:var(--max);margin:auto;padding:14px 22px}.brand{font-size:1.25rem;font-weight:800;letter-spacing:-.045em;text-decoration:none;color:var(--ink)}.brand .a{color:var(--red)}nav{display:none;gap:24px;font-size:.9rem;color:var(--smoke)}nav a{text-decoration:none}nav a:hover{color:var(--ink)}@media(min-width:900px){nav{display:flex}}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border:1px solid transparent;border-radius:2px;text-decoration:none;font-weight:700;font-size:.95rem;transition:.16s ease}.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:var(--red2)}.btn-ghost{border-color:#bcb5ac;background:#fff;color:var(--ink)}.btn-ghost:hover{border-color:var(--ink)}.btn-sm{padding:10px 16px;font-size:.86rem}.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .live{display:inline-flex;align-items:center;gap:9px;border:1px solid #d8d1c8;border-radius:999px;padding:7px 13px;color:#5f5a55;background:#fff;font-weight:700;font-size:.84rem}.dot{width:7px;height:7px;border-radius:50%;background:var(--red)}.hero{padding:74px 0 64px}.hero h1{margin:22px 0}.rule{width:54px;height:5px;background:var(--red);margin:0 0 24px}section{padding:78px 0;border-top:1px solid var(--line)}.shead{max-width:66ch;margin-bottom:40px}.shead h2{margin-bottom:14px}
+    .proof-hero{margin-top:48px;border:1px solid #343237;background:var(--charcoal);padding:10px;color:#fff}.video-frame{position:relative;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden}.video-frame video{width:100%;height:100%;object-fit:cover}.video-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:26px;color:#bbb6af;background:#2b292d}.proof-caption{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:12px 2px 2px}.proof-caption p{margin:0}
+    .stats{display:grid;gap:2px;background:var(--line);border:1px solid var(--line)}@media(min-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}@media(min-width:960px){.stats{grid-template-columns:repeat(4,1fr)}}.stat{background:#fff;padding:28px 24px}.statn{font-weight:900;font-size:clamp(1.85rem,4vw,2.6rem);line-height:1;letter-spacing:-.04em;margin-bottom:10px}.statn em{font-style:normal;font-size:.48em;color:var(--smoke)}.stat p{margin:0;color:var(--smoke);font-size:.9rem;line-height:1.45}
+    .steps{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}@media(min-width:800px){.steps{grid-template-columns:repeat(3,1fr)}}.step{background:#fff;padding:30px 26px}.stepn{color:var(--red);font-size:.8rem;font-weight:800;margin-bottom:14px}.step h3{margin-bottom:8px}.step p{color:var(--smoke);font-size:.94rem;margin:0}
+    .gallery{display:grid;grid-template-columns:1fr;gap:10px}@media(min-width:720px){.gallery{grid-template-columns:repeat(3,1fr)}}.location-card{border:1px solid var(--line);background:#fff;overflow:hidden}.location-media{aspect-ratio:4/3;background:#ebe6de;display:grid;place-items:center;color:#6f6f6f;font-size:.86rem}.location-media img{width:100%;height:100%;object-fit:cover}.location-meta{padding:18px}.location-meta strong{display:block}.location-meta span{display:block;color:var(--smoke);font-size:.86rem;margin-top:4px}
+    .walkthroughs{display:grid;gap:12px}@media(min-width:820px){.walkthroughs{grid-template-columns:1fr 1fr}}.walk{border:1px solid var(--line);background:#fff}.walk .video-frame{aspect-ratio:16/10}.walk-copy{padding:20px}.walk-copy h3{margin-bottom:8px}.walk-copy p{margin:0;color:var(--smoke);font-size:.92rem}
+    .calc{margin-top:2px;background:#fff;border:1px solid var(--line);padding:30px 26px}.calcrow{display:flex;gap:10px 16px;align-items:baseline;flex-wrap:wrap;font-weight:700;font-size:clamp(.95rem,2.3vw,1.3rem);letter-spacing:-.02em}.op{color:var(--red)}.pull{border-left:4px solid var(--red);padding:6px 0 6px 22px;margin-top:38px;max-width:58ch}.pull p{font-weight:700;font-size:clamp(1.15rem,2.8vw,1.5rem);line-height:1.3;margin:0}
     .network-intro{display:grid;gap:18px;margin-top:34px}
     @media(min-width:840px){.network-intro{grid-template-columns:1.1fr .9fr}}
     .network-panel{border:1px solid var(--line);background:var(--panel);padding:28px}
@@ -33,8 +33,8 @@
     .join-card{border:1px solid var(--line);background:#050505;padding:34px}
     .join-card h3{font-size:clamp(1.4rem,3vw,2rem);margin-bottom:12px}
     .join-card p{color:var(--smoke)}
-    .split{display:grid;gap:38px}@media(min-width:860px){.split{grid-template-columns:1fr 1fr;gap:56px}}.checklist{list-style:none;padding:0;margin:24px 0}.checklist li{position:relative;padding:13px 0 13px 28px;border-bottom:1px solid var(--line);font-size:.95rem}.checklist li::before{content:"";position:absolute;left:2px;top:20px;width:10px;height:6px;border-left:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(-45deg)}.note{border:1px solid var(--line);background:var(--panel);padding:22px;margin-bottom:2px}.note h3{margin-bottom:8px}.note p{margin:0;color:var(--smoke);font-size:.92rem}
-    details{border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;padding:21px 38px 21px 0;font-weight:700;position:relative}summary::-webkit-details-marker{display:none}summary::after{content:"+";position:absolute;right:8px;color:var(--red);font-size:1.4rem;font-weight:400}details[open] summary::after{content:"–"}.ans{padding:0 0 20px;color:var(--smoke);max-width:70ch;font-size:.95rem}.ans p{margin:0}.final{background:var(--panel)}footer{border-top:1px solid var(--line);padding:36px 0;color:var(--smoke);font-size:.85rem}.fgrid{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+    .split{display:grid;gap:38px}@media(min-width:860px){.split{grid-template-columns:1fr 1fr;gap:56px}}.checklist{list-style:none;padding:0;margin:24px 0}.checklist li{position:relative;padding:13px 0 13px 28px;border-bottom:1px solid var(--line);font-size:.95rem}.checklist li::before{content:"";position:absolute;left:2px;top:20px;width:10px;height:6px;border-left:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(-45deg)}.note{border:1px solid var(--line);background:#fff;padding:22px;margin-bottom:2px}.note h3{margin-bottom:8px}.note p{margin:0;color:var(--smoke);font-size:.92rem}
+    details{border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;padding:21px 38px 21px 0;font-weight:700;position:relative}summary::-webkit-details-marker{display:none}summary::after{content:"+";position:absolute;right:8px;color:var(--red);font-size:1.4rem;font-weight:400}details[open] summary::after{content:"–"}.ans{padding:0 0 20px;color:var(--smoke);max-width:70ch;font-size:.95rem}.ans p{margin:0}.final{background:var(--charcoal);color:#fff}.final .lede{color:#c9c4bd}footer{border-top:1px solid var(--line);padding:36px 0;color:var(--smoke);font-size:.85rem;background:#fff}.fgrid{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
   </style>
 </head>
 <body>
@@ -45,7 +45,7 @@
       <a href="#cara">Cara berfungsi</a>
       <a href="#lokasi">Lokasi sebenar</a>
       <a href="#lihat">Lihat platform</a>
-      <a href="#publisher">Publisher</a>
+      <a href="#pemilik premis">Pemilik Premis</a>
     </nav>
     <a class="btn btn-red btn-sm" href="https://www.lookal.tech/signup">Mula beriklan</a>
   </div>
@@ -55,9 +55,9 @@
   <section class="hero" style="border-top:0">
     <div class="wrap">
       <span class="live"><span class="dot"></span>10 lokasi komuniti sedang beroperasi</span>
-      <h1>Media komuniti yang hidup di premis sebenar.</h1>
+      <h1>Iklan anda, dekat dengan komuniti anda.</h1>
       <div class="rule"></div>
-      <p class="lede">LOOKaL membina rangkaian skrin media komuniti di premis yang orang memang kunjungi. Rangkaian awal sudah beroperasi, dan kami sedang membuka lebih banyak lokasi bersama pemilik premis yang mahu menyertai pertumbuhan seterusnya.</p>
+      <p class="lede">LOOKaL meletakkan skrin komuniti di premis yang orang memang datang setiap hari — tempat makan, kedai gunting, kedai runcit dan ruang menunggu. Anda pilih tempat, pilih hari, dan iklan anda muncul dekat dengan orang yang anda mahu capai.</p>
       <div class="btns">
         <a class="btn btn-red" href="https://www.lookal.tech/signup">Mula beriklan</a>
         <a class="btn btn-ghost" href="#lihat">Tengok cara LOOKaL berfungsi</a>
@@ -72,14 +72,14 @@
         </div>
         <div class="proof-caption">
           <p><strong>LOOKaL sedang beroperasi.</strong></p>
-          <p class="small muted">Rakaman skrin dan rotation iklan sebenar di lokasi komuniti.</p>
+          <p class="small muted">Rakaman skrin dan giliran tayangan iklan sebenar di lokasi komuniti.</p>
         </div>
       </div>
     </div>
   </section>
 
   <section><div class="wrap"><div class="stats">
-    <div class="stat"><div class="statn">10<em> lokasi</em></div><p>Node komuniti yang sudah beroperasi.</p></div>
+    <div class="stat"><div class="statn">10<em> lokasi</em></div><p>Skrin komuniti yang sudah beroperasi.</p></div>
     <div class="stat"><div class="statn">65<em> inci</em></div><p>Skrin besar di dalam premis sebenar.</p></div>
     <div class="stat"><div class="statn">8<em> saat</em></div><p>Format tayangan ringkas untuk mesej yang cepat dibaca.</p></div>
     <div class="stat"><div class="statn">RM2<em>/hari</em></div><p>Satu lokasi, satu hari. Boleh mula kecil dahulu.</p></div>
@@ -89,15 +89,15 @@
   <section id="rangkaian">
     <div class="wrap">
       <div class="shead">
-        <div class="network-kicker">Rangkaian yang sedang berkembang</div>
-        <h2>Bermula dengan lokasi aktif. Dibina untuk berkembang bersama komuniti.</h2>
-        <p>LOOKaL tidak bermula sebagai konsep atas kertas. Rangkaian awal sudah berjalan di premis sebenar. Fasa seterusnya ialah menambah node secara berperingkat di lokasi yang mempunyai aliran pelanggan dan konteks menunggu yang sesuai.</p>
+        <div class="network-kicker">Bermula di sini, berkembang bersama</div>
+        <h2>10 lokasi aktif sekarang. Lebih banyak komuniti selepas ini.</h2>
+        <p>LOOKaL sudah beroperasi di premis sebenar. Kami bermula dengan lokasi awal yang dekat dengan komuniti, dan akan berkembang secara berperingkat ke lebih banyak tempat yang sesuai.</p>
       </div>
 
       <div class="network-intro">
         <div class="network-panel">
-          <strong>10 lokasi komuniti aktif sebagai rangkaian awal</strong>
-          <p>Ini ialah titik permulaan operasi. Setiap lokasi baru perlu memberi nilai kepada pengiklan, pemilik premis dan komuniti setempat — bukan sekadar menambah angka skrin.</p>
+          <strong>10 lokasi aktif sebagai permulaan</strong>
+          <p>Setiap lokasi baru dipilih kerana ada orang yang benar-benar datang, menunggu dan berbelanja di situ. Bukan sekadar untuk menambah bilangan skrin.</p>
           <div class="growth-line">
             <span class="growth-chip active">Aktif sekarang</span>
             <span class="growth-chip">Tambah premis</span>
@@ -108,10 +108,10 @@
 
         <div class="join-card">
           <div class="network-kicker">Untuk pemilik premis</div>
-          <h3>Premis anda boleh menjadi sebahagian daripada rangkaian LOOKaL.</h3>
-          <p>Jika premis anda mempunyai aliran pelanggan, masa menunggu dan ruang paparan yang sesuai, anda boleh memohon untuk dinilai sebagai lokasi LOOKaL seterusnya.</p>
+          <h3>Ada premis yang selalu dikunjungi orang? Sertai LOOKaL.</h3>
+          <p>Jika pelanggan anda selalu datang, duduk, menunggu atau berurusan di premis anda, ruang itu mungkin sesuai untuk menjadi lokasi skrin komuniti LOOKaL.</p>
           <div class="btns" style="margin-top:20px">
-            <a class="btn btn-red" href="#publisher">Sertai rangkaian LOOKaL</a>
+            <a class="btn btn-red" href="#pemilik premis">Saya pemilik premis</a>
           </div>
         </div>
       </div>
@@ -120,18 +120,18 @@
 
   <section id="cara">
     <div class="wrap">
-      <div class="shead"><h2>Dari telefon anda ke skrin komuniti.</h2><p>Tak perlu hubungi agensi atau tunggu proses manual. LOOKaL menyatukan pemilihan lokasi, penghasilan creative dan penghantaran kempen dalam satu aliran.</p></div>
+      <div class="shead"><h2>Mudah dari mula sampai iklan ke skrin.</h2><p>Pilih lokasi, siapkan iklan dan hantar. Semuanya dalam satu aliran yang mudah difahami.</p></div>
       <div class="steps">
-        <div class="step"><div class="stepn">01</div><h3>Pilih lokasi dan tarikh</h3><p>Lihat lokasi yang tersedia dan pilih kawasan yang relevan dengan pelanggan anda.</p></div>
-        <div class="step"><div class="stepn">02</div><h3>Bina dengan Snap2Ads</h3><p>Gunakan creative sendiri atau bina iklan DOOH yang ringkas, jelas dan sesuai dibaca dari jauh.</p></div>
-        <div class="step"><div class="stepn">03</div><h3>Submit dan siar</h3><p>Selepas semakan kandungan, kempen dihantar ke rangkaian skrin yang dipilih.</p></div>
+        <div class="step"><div class="stepn">01</div><h3>Pilih tempat dan hari</h3><p>Pilih premis yang dekat dengan pelanggan anda dan tentukan bila iklan mahu berjalan.</p></div>
+        <div class="step"><div class="stepn">02</div><h3>Siapkan iklan</h3><p>Gunakan poster sendiri atau bina dengan Snap2Ads supaya mesej kekal ringkas, jelas dan mudah dibaca.</p></div>
+        <div class="step"><div class="stepn">03</div><h3>Hantar dan mula tayang</h3><p>Selepas semakan, iklan anda dihantar ke skrin yang anda pilih.</p></div>
       </div>
     </div>
   </section>
 
   <section id="lokasi">
     <div class="wrap">
-      <div class="shead"><h2>Ini lokasi sebenar. Bukan mockup.</h2><p>LOOKaL berada di dalam premis komuniti di mana orang memang datang, duduk, menunggu dan berbelanja.</p></div>
+      <div class="shead"><h2>Tempat sebenar. Orang sebenar. Komuniti sebenar.</h2><p>Skrin LOOKaL berada di premis yang orang memang datang setiap hari — bukan paparan contoh atau lokasi rekaan.</p></div>
       <div class="gallery">
         <article class="location-card"><div class="location-media"><img src="assets/location-01.jpg" alt="Lokasi LOOKaL 1" onerror="this.remove();this.parentNode.textContent='Tambah gambar lokasi sebenar 01';"></div><div class="location-meta"><strong>Lokasi komuniti 01</strong><span>Nama premis & kawasan</span></div></article>
         <article class="location-card"><div class="location-media"><img src="assets/location-02.jpg" alt="Lokasi LOOKaL 2" onerror="this.remove();this.parentNode.textContent='Tambah gambar lokasi sebenar 02';"></div><div class="location-meta"><strong>Lokasi komuniti 02</strong><span>Nama premis & kawasan</span></div></article>
@@ -142,42 +142,42 @@
 
   <section id="lihat">
     <div class="wrap">
-      <div class="shead"><h2>Tengok sendiri bagaimana LOOKaL digunakan.</h2><p>Dua walkthrough ringkas: dari daftar hingga memilih kempen, dan dari Snap2Ads hingga submit creative.</p></div>
+      <div class="shead"><h2>Tengok sendiri bagaimana LOOKaL digunakan.</h2><p>Dua walkthrough ringkas: dari daftar hingga memilih kempen, dan dari Snap2Ads hingga submit bahan iklan.</p></div>
       <div class="walkthroughs">
         <article class="walk"><div class="video-frame"><video controls playsinline preload="metadata"><source src="assets/walkthrough-platform.mp4" type="video/mp4"></video><div class="video-fallback"><strong>Video 01 — Signup, dashboard & browsing</strong></div></div><div class="walk-copy"><h3>01 · Dari signup ke dashboard</h3><p>Daftar, masuk workspace, browse lokasi dan fahami aliran kempen LOOKaL.</p></div></article>
-        <article class="walk"><div class="video-frame"><video controls playsinline preload="metadata"><source src="assets/walkthrough-snap2ads.mp4" type="video/mp4"></video><div class="video-fallback"><strong>Video 02 — Snap2Ads hingga submit</strong></div></div><div class="walk-copy"><h3>02 · Bina iklan dengan Snap2Ads</h3><p>Masukkan maklumat, bina atau gunakan creative sendiri, preview dan submit.</p></div></article>
+        <article class="walk"><div class="video-frame"><video controls playsinline preload="metadata"><source src="assets/walkthrough-snap2ads.mp4" type="video/mp4"></video><div class="video-fallback"><strong>Video 02 — Snap2Ads hingga submit</strong></div></div><div class="walk-copy"><h3>02 · Bina iklan dengan Snap2Ads</h3><p>Masukkan maklumat, bina atau gunakan bahan iklan sendiri, preview dan submit.</p></div></article>
       </div>
     </div>
   </section>
 
   <section id="angka">
     <div class="wrap">
-      <div class="shead"><h2>Bayar untuk tayangan sebenar pada skrin.</h2><p>LOOKaL membezakan tayangan skrin daripada jumlah orang yang melihat. Kami tidak akan memanggil setiap play sebagai seorang viewer.</p></div>
-      <div class="calc"><div class="calcrow"><span>30 slot</span><span class="op">×</span><span>8.5 saat</span><span class="op">=</span><span>255 saat satu rotation</span></div><p class="small muted" style="margin:14px 0 0">Jika skrin beroperasi 8–12 jam sehari dan semua 30 slot terisi, satu iklan secara matematik boleh dimainkan sekitar 112–169 kali sehari. Angka ini ialah tayangan pada skrin, bukan jumlah individu yang melihat.</p></div>
+      <div class="shead"><h2>Anda bayar untuk iklan yang benar-benar dimainkan di skrin.</h2><p>Kami bezakan jumlah tayangan daripada jumlah orang. Satu tayangan bermaksud iklan dimainkan di skrin — bukan bermaksud seorang individu pasti melihatnya.</p></div>
+      <div class="calc"><div class="calcrow"><span>30 slot</span><span class="op">×</span><span>8.5 saat</span><span class="op">=</span><span>255 saat satu giliran tayangan</span></div><p class="small muted" style="margin:14px 0 0">Jika skrin beroperasi 8–12 jam sehari dan semua 30 slot terisi, satu iklan secara matematik boleh dimainkan sekitar 112–169 kali sehari. Angka ini ialah tayangan pada skrin, bukan jumlah individu yang melihat.</p></div>
       <div class="pull"><p>Sepanjang 30 minit menunggu, satu slot berpeluang muncul kira-kira tujuh kali.</p></div>
     </div>
   </section>
 
-  <section id="publisher">
+  <section id="pemilik premis">
     <div class="wrap"><div class="split">
-      <div><h2 style="margin-bottom:16px">Sertai rangkaian LOOKaL sebagai pemilik premis.</h2><p class="muted">Kami sedang membuka peluang kepada pemilik premis yang mempunyai aliran pelanggan dan masa menunggu yang sesuai untuk menjadi sebahagian daripada rangkaian media komuniti LOOKaL.</p><ul class="checklist"><li>LOOKaL mengurus teknologi skrin dan kandungan rangkaian</li><li>Publisher tidak perlu menyusun iklan secara manual</li><li>Prestasi node boleh dipantau melalui platform</li><li>Kesesuaian lokasi dinilai berdasarkan trafik dan konteks premis</li></ul><a class="btn btn-red" href="https://www.lookal.tech/signup">Mohon sertai rangkaian</a></div>
-      <div><div class="note"><h3>Bukan sekadar pasang TV</h3><p>Node LOOKaL ialah endpoint rangkaian media: scheduling, creative, campaign delivery dan tracking berada di belakang satu skrin fizikal.</p></div><div class="note"><h3>Berkembang secara terpilih</h3><p>LOOKaL akan berkembang secara berperingkat. Lokasi dipilih berdasarkan kesesuaian trafik, masa menunggu, konteks premis dan nilai kepada komuniti setempat.</p></div><div class="note"><h3>Model komersial publisher</h3><p>Terma komersial dan perkongsian pendapatan dipaparkan selepas lokasi dinilai. Ini mengelakkan janji pulangan yang belum disokong oleh data operasi lokasi tersebut.</p></div></div>
+      <div><h2 style="margin-bottom:16px">Jadikan premis anda sebahagian daripada LOOKaL.</h2><p class="muted">Kami sedang mencari lebih banyak premis yang sesuai untuk membawa skrin komuniti LOOKaL ke kawasan setempat.</p><ul class="checklist"><li>LOOKaL mengurus sistem dan kandungan pada skrin</li><li>Anda tidak perlu susun iklan satu per satu</li><li>Prestasi skrin boleh dilihat melalui platform</li><li>Kami semak kesesuaian premis sebelum pemasangan</li></ul><a class="btn btn-red" href="https://www.lookal.tech/signup">Mohon sertai rangkaian</a></div>
+      <div><div class="note"><h3>Bukan sekadar pasang TV</h3><p>Node LOOKaL ialah endpoint rangkaian media: scheduling, bahan iklan, campaign delivery dan tracking berada di belakang satu skrin fizikal.</p></div><div class="note"><h3>Kita pilih lokasi yang sesuai</h3><p>LOOKaL berkembang secara berperingkat. Kami utamakan premis yang memang ada aliran orang dan masa menunggu yang sesuai.</p></div><div class="note"><h3>Terma yang jelas selepas penilaian</h3><p>Butiran kerjasama dan perkongsian hasil diterangkan selepas premis dinilai, supaya janji dibuat berdasarkan keadaan sebenar lokasi.</p></div></div>
     </div></div>
   </section>
 
   <section>
     <div class="wrap">
       <div class="shead"><h2>Soalan biasa.</h2></div>
-      <details open><summary>Saya tak reti design iklan. Boleh guna LOOKaL?</summary><div class="ans"><p>Boleh. Snap2Ads membantu membina creative yang sesuai untuk skrin DOOH. Fokusnya ialah mesej ringkas, hierarchy jelas dan kebolehbacaan dari jarak tontonan sebenar.</p></div></details>
-      <details><summary>Saya sudah ada poster sendiri.</summary><div class="ans"><p>Boleh gunakan creative sendiri. Creative asal tidak sepatutnya dicrop atau direka semula semata-mata untuk memaksa ratio; spesifikasi paparan akan ditunjukkan sebelum submit.</p></div></details>
+      <details open><summary>Saya tak reti design iklan. Boleh guna LOOKaL?</summary><div class="ans"><p>Boleh. Snap2Ads membantu membina bahan iklan yang sesuai untuk skrin DOOH. Fokusnya ialah mesej ringkas, hierarchy jelas dan kebolehbacaan dari jarak tontonan sebenar.</p></div></details>
+      <details><summary>Saya sudah ada poster sendiri.</summary><div class="ans"><p>Boleh gunakan bahan iklan sendiri. Creative asal tidak sepatutnya dicrop atau direka semula semata-mata untuk memaksa ratio; spesifikasi paparan akan ditunjukkan sebelum submit.</p></div></details>
       <details><summary>Boleh pilih satu lokasi sahaja?</summary><div class="ans"><p>Ya. LOOKaL membenarkan anda bermula dengan lokasi yang paling relevan dengan komuniti pelanggan anda.</p></div></details>
       <details><summary>Minimum berapa lama?</summary><div class="ans"><p>Boleh bermula satu hari. Anda boleh tambah tempoh atau lokasi berdasarkan keperluan kempen.</p></div></details>
-      <details><summary>Macam mana saya tahu kempen berjalan?</summary><div class="ans"><p>Platform merekodkan status kempen dan tayangan. Jika creative menggunakan QR atau action anchor yang boleh dijejak, tindakan itu boleh digunakan sebagai signal tambahan — berasingan daripada bilangan tayangan skrin.</p></div></details>
+      <details><summary>Macam mana saya tahu kempen berjalan?</summary><div class="ans"><p>Platform merekodkan status kempen dan tayangan. Jika bahan iklan menggunakan QR atau action anchor yang boleh dijejak, tindakan itu boleh digunakan sebagai signal tambahan — berasingan daripada bilangan tayangan skrin.</p></div></details>
     </div>
   </section>
 
   <section class="final">
-    <div class="wrap"><h2 style="max-width:18ch;margin-bottom:16px">Mula dalam komuniti anda.</h2><p class="lede">Pilih satu lokasi. Cuba satu hari. Lihat sendiri bagaimana media komuniti LOOKaL berfungsi untuk perniagaan anda.</p><div class="btns"><a class="btn btn-red" href="https://www.lookal.tech/signup">Mula beriklan</a><a class="btn btn-ghost" href="#publisher">Jadi publisher</a></div></div>
+    <div class="wrap"><h2 style="max-width:18ch;margin-bottom:16px">Mulakan dekat dengan orang yang anda mahu capai.</h2><p class="lede">Pilih satu lokasi, cuba satu hari, dan lihat sendiri bagaimana skrin komuniti LOOKaL boleh membawa iklan anda lebih dekat kepada pelanggan.</p><div class="btns"><a class="btn btn-red" href="https://www.lookal.tech/signup">Mula beriklan</a><a class="btn btn-ghost" href="#pemilik premis">Jadi pemilik premis</a></div></div>
   </section>
 </main>
 
