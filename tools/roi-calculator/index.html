@@ -294,8 +294,8 @@
 
     const warnings = [];
     if (plays !== null && scans > plays) warnings.push('QR scans lebih tinggi daripada tayangan skrin yang dimasukkan.');
-    if (enquiries > scans && scans > 0) warnings.push('Enquiry lebih tinggi daripada QR scans. Semak sama ada semua enquiry benar-benar datang daripada kempen ini.');
-    if (sales > enquiries && enquiries > 0) warnings.push('Sale lebih tinggi daripada enquiry. Semak funnel attribution yang digunakan.');
+    if (enquiries > scans) warnings.push('Enquiry lebih tinggi daripada QR scans. Semak sama ada semua enquiry benar-benar datang daripada kempen ini.');
+    if (sales > enquiries) warnings.push('Sale lebih tinggi daripada enquiry. Semak funnel attribution yang digunakan.');
     if (sales === 0 && revenue > 0) warnings.push('Revenue diisi tetapi jumlah sale ialah 0.');
     if (warnings.length) {
       warning.textContent = warnings.join(' ');
