@@ -51,7 +51,7 @@
 
       <div class="field">
         <label for="message">Mesej</label>
-        <textarea id="message" placeholder="Contoh: Hai, saya nak tahu lebih lanjut tentang promosi ini."></textarea>
+        <textarea id="message" placeholder="Contoh: Hai, saya nak tahu lebih lanjut tentang promosi ini." required></textarea>
       </div>
 
       <div class="btnrow">
@@ -124,7 +124,17 @@
       return;
     }
 
-    const link = 'https://wa.me/' + normalized + (text ? '?text=' + encodeURIComponent(text) : '');
+    if (!text) {
+      result.classList.add('show');
+      generatedLink.textContent = '';
+      test.setAttribute('href', '#');
+      status.textContent = 'Masukkan mesej yang mahu disediakan dalam WhatsApp.';
+      status.className = 'status error';
+      message.focus();
+      return;
+    }
+
+    const link = 'https://wa.me/' + normalized + '?text=' + encodeURIComponent(text);
     generatedLink.textContent = link;
     test.setAttribute('href', link);
     result.classList.add('show');
