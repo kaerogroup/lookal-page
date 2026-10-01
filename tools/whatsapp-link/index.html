@@ -62,6 +62,10 @@
     @media(min-width:821px){
       .phone-grid{grid-template-columns:minmax(220px,.9fr) minmax(0,1.1fr)}
     }
+    @media(hover:none) and (pointer:coarse){
+      .phone-grid{grid-template-columns:1fr}
+      .btn{min-height:48px}
+    }
 
   </style>
 </head>
