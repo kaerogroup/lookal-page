@@ -5,6 +5,7 @@
   const STORAGE_KEY = 'lookal-language';
 
   const nodePairs = [
+    ['Sertai rangkaian. LOOKaL mengurus infrastrukturnya.','Participate in the network. LOOKaL operates the infrastructure.'],
     ['Spesifikasi Node','Node Specs'],
     ['Paparan komersial yang dibina untuk operasi rangkaian, bukan sekadar sebuah TV.','Commercial display built for network operations, not simply a TV.'],
     ['Business Partner menyertai kapasiti komersial rangkaian. LOOKaL menentukan konfigurasi akhir hardware supaya setiap node mengekalkan standard operasi, reliability dan compatibility yang diperlukan.','Business Partners participate in the network’s commercial capacity. LOOKaL determines the final hardware configuration so each node maintains the required operating, reliability and compatibility standards.'],
@@ -93,9 +94,6 @@
 
   const cleanBusinessPartnerChrome = () => {
     if (!isBusinessPartner()) return;
-
-    // Business Partner is a focused corporate proposal page.
-    // It intentionally has no site header, burger, drawer or language control.
     document.querySelector('header')?.remove();
     document.getElementById('drawerOverlay')?.remove();
     document.getElementById('siteDrawer')?.remove();
@@ -108,29 +106,23 @@
     cleanBusinessPartnerChrome();
 
     const switcher = document.querySelector('.lookal-lang-switch');
-
-    // Language selection is controlled from the public homepage only.
-    // Secondary pages still inherit and apply the stored BM/EN preference.
     if (!isHomepage()) {
       if (switcher) switcher.remove();
       return;
     }
 
-    // Keep the mobile homepage header compact: logo + burger + BM/EN.
-    // Advertising CTA remains available in the hero/drawer instead of crowding the header.
     const style = document.createElement('style');
     style.id = 'lookal-home-header-fix';
     style.textContent = `
       @media(max-width:899px){
         header .bar{gap:10px;justify-content:flex-start;padding:11px 14px}
-        header .brand{margin-right:auto}
+        header .brand{display:none!important}
         header .header-cta{display:none!important}
-        header .menu-btn{flex:0 0 44px}
-        header .lookal-lang-switch{margin-left:0!important;flex:0 0 auto;min-height:44px;padding:0 11px}
+        header .menu-btn{order:0;flex:0 0 44px;margin-right:auto}
+        header .lookal-lang-switch{order:1;margin-left:0!important;flex:0 0 auto;min-height:44px;padding:0 11px}
       }
       @media(max-width:420px){
         header .bar{gap:8px;padding-left:12px;padding-right:12px}
-        header .brand img{height:32px;max-width:104px}
         header .lookal-lang-switch{gap:5px;padding:0 9px}
       }
     `;
@@ -163,9 +155,9 @@
       applyHeaderPolicy();
       queueMicrotask(() => { mutating = false; });
     });
-    observer.observe(document.documentElement, {subtree:true, childList:true, characterData:true});
+    observer.observe(document.documentElement, {subtree:true, childList:true,characterData:true});
 
-    window.LOOKAL_I18N_QA = '2026-10-bilingual-qa-v3';
+    window.LOOKAL_I18N_QA = '2026-10-bilingual-qa-v4';
   };
 
   const core = document.createElement('script');
