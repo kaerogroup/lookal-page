@@ -9,6 +9,38 @@
   const storedLang = localStorage.getItem(STORAGE_KEY);
   const wantsEnglish = storedLang === 'en';
 
+  const addPrefetch = (href) => {
+    if (document.querySelector(`link[rel="prefetch"][href="${href}"]`)) return;
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = href;
+    link.as = 'document';
+    document.head.appendChild(link);
+  };
+
+  const optimiseHomepageMedia = () => {
+    if (!isHomepage) return;
+    document.querySelectorAll('video').forEach((video) => {
+      video.preload = 'none';
+      try { video.load(); } catch (_) {}
+    });
+  };
+
+  const installFastHomeReturn = () => {
+    if (isHomepage) return;
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href="/"], a[href="/index.html"]');
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      try {
+        const ref = new URL(document.referrer);
+        if (ref.origin === location.origin && (ref.pathname === '/' || ref.pathname === '/index.html') && history.length > 1) {
+          event.preventDefault();
+          history.back();
+        }
+      } catch (_) {}
+    });
+  };
+
   // Keep homepage controls lightweight and deterministic.
   if (isHomepage && !document.getElementById('lookal-home-header-fix')) {
     const style = document.createElement('style');
@@ -39,7 +71,6 @@
     const description = document.querySelector('meta[name="description"]');
     if (description) description.content = 'Ketahui program Rakan Niaga LOOKaL: sewaan komersial Unit Nod Terurus selama 60 bulan dengan agihan bulanan yang berubah mengikut hasil pengiklanan yang layak.';
 
-    // Only normalise the product term. No translation observer or full-page runtime is needed in BM.
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     let node;
     while ((node = walker.nextNode())) {
@@ -87,24 +118,27 @@
     document.head.appendChild(core);
   };
 
-  // Homepage needs the language control immediately.
+  installFastHomeReturn();
+
   if (isHomepage) {
+    optimiseHomepageMedia();
+    addPrefetch('/tools/whatsapp-link/');
+    addPrefetch('/business-partner/');
     loadCore();
-    window.LOOKAL_I18N_QA = '2026-10-fast-secondary-v9';
+    window.LOOKAL_I18N_QA = '2026-10-navigation-perf-v10';
     return;
   }
 
-  // BM is the authored/default language. Do not download the 44 KB translation core on
-  // secondary pages unless English was explicitly selected. This keeps tools interactive
-  // immediately and removes translation work from the navigation critical path.
+  // Warm the homepage HTML while the user reads a lightweight secondary page.
+  addPrefetch('/');
+
   if (!wantsEnglish) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', normalisePartnerMalay, {once:true});
     else normalisePartnerMalay();
-    window.LOOKAL_I18N_QA = '2026-10-fast-secondary-v9';
+    window.LOOKAL_I18N_QA = '2026-10-navigation-perf-v10';
     return;
   }
 
-  // For EN secondary pages, paint and enable native page JS first, then translate when idle.
   const scheduleEnglish = () => {
     const run = () => loadCore(() => {
       partnerEnglishCorrections();
@@ -117,5 +151,5 @@
   if (document.readyState === 'complete') scheduleEnglish();
   else window.addEventListener('load', scheduleEnglish, {once:true});
 
-  window.LOOKAL_I18N_QA = '2026-10-fast-secondary-v9';
+  window.LOOKAL_I18N_QA = '2026-10-navigation-perf-v10';
 })();
