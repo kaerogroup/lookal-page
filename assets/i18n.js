@@ -4,11 +4,11 @@
   const CORE_SRC = '/assets/i18n-core.js';
   const STORAGE_KEY = 'lookal-language';
 
-  // Business Partner copy standard:
+  // Rakan Niaga / Business Partner copy standard:
   // BM = natural Malaysian corporate Malay, low jargon, clear to non-technical readers.
   // EN = concise international corporate English, commercially precise and free of marketing filler.
-  // Product/technical names may remain in English where that is clearer (LOOKaL Business Partner,
-  // Managed Media Node, OTP, QR, OTA, Wi-Fi, Ethernet, Android, 4K UHD).
+  // Technical names may remain in English where that is clearer (Managed Media Node,
+  // OTP, QR, OTA, Wi-Fi, Ethernet, Android, 4K UHD).
 
   const legacyBm = {
     'Program Business Partner membolehkan rakan niaga menyertai satu atau lebih Unit Nod Media Terurus LOOKaL untuk tempoh 60 bulan melalui sewaan komersial. Aset kekal milik UNIRAS, manakala LOOKaL mengurus penempatan, perisian, lokasi, penyelenggaraan dan penjanaan hasil rangkaian.': 'Melalui program Business Partner, Rakan Niaga menyertai rangkaian LOOKaL bagi tempoh 60 bulan tanpa perlu membeli atau mengurus skrin sendiri. Aset kekal milik UNIRAS, manakala LOOKaL mengurus pemasangan, lokasi, perisian, penyelenggaraan dan operasi pengiklanan.',
@@ -247,6 +247,12 @@
 
   const normalizeBm = (value) => legacyBm[value] || value;
 
+  const normalizePartnerTerm = (value, lang) => {
+    if (!value) return value;
+    if (lang === 'en') return value.replace(/Rakan Niaga/g, 'Business Partner');
+    return value.replace(/Business Partner/g, 'Rakan Niaga');
+  };
+
   const translateExact = (value, lang) => {
     if (!value) return value;
     const normalized = normalizeBm(value);
@@ -283,7 +289,35 @@
     const core = raw.trim();
     let translated = translateExact(core, lang);
     translated = translateDynamic(translated, lang);
+    translated = normalizePartnerTerm(translated, lang);
     if (translated !== core) node.nodeValue = leading + translated + trailing;
+  };
+
+  const applyPartnerMetadata = () => {
+    const lang = currentLang();
+    const normalizeAttr = (el, name) => {
+      if (!el?.hasAttribute(name)) return;
+      const value = el.getAttribute(name);
+      const normalized = normalizePartnerTerm(value, lang);
+      if (normalized !== value) el.setAttribute(name, normalized);
+    };
+
+    document.querySelectorAll('[aria-label],[alt],[title]').forEach((el) => {
+      normalizeAttr(el, 'aria-label');
+      normalizeAttr(el, 'alt');
+      normalizeAttr(el, 'title');
+    });
+
+    if (!isBusinessPartner()) return;
+    document.title = lang === 'en'
+      ? 'LOOKaL Business Partner | Managed Node Partnership'
+      : 'LOOKaL Rakan Niaga | Program Nod Terurus';
+    const description = document.querySelector('meta[name="description"]');
+    if (description) {
+      description.setAttribute('content', lang === 'en'
+        ? 'Learn about the LOOKaL Business Partner model: a 60-month managed-node commercial lease with variable distributions through the Business Partner Revenue Pool.'
+        : 'Ketahui program Rakan Niaga LOOKaL: sewaan komersial Unit Nod Terurus selama 60 bulan dengan agihan bulanan yang berubah mengikut hasil pengiklanan yang layak.');
+    }
   };
 
   const applySupplement = (root = document.body) => {
@@ -296,6 +330,7 @@
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     let node;
     while ((node = walker.nextNode())) translateTextNode(node, lang);
+    applyPartnerMetadata();
   };
 
   const cleanBusinessPartnerChrome = () => {
@@ -360,12 +395,13 @@
           else if (node.nodeType === Node.ELEMENT_NODE) applySupplement(node);
         });
       }
+      applyPartnerMetadata();
       applyHeaderPolicy();
       queueMicrotask(() => { mutating = false; });
     });
     observer.observe(document.documentElement, {subtree:true, childList:true, characterData:true});
 
-    window.LOOKAL_I18N_QA = '2026-10-bilingual-corporate-v6';
+    window.LOOKAL_I18N_QA = '2026-10-rakan-niaga-v7';
   };
 
   const core = document.createElement('script');
