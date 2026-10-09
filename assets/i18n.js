@@ -33,6 +33,7 @@
   const forwardNodePairs = Object.fromEntries(nodePairs);
 
   const isHomepage = () => location.pathname === '/' || location.pathname === '/index.html';
+  const isBusinessPartner = () => location.pathname === '/business-partner/' || location.pathname === '/business-partner/index.html';
 
   const currentLang = () => {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -90,7 +91,22 @@
     while ((node = walker.nextNode())) translateTextNode(node, lang);
   };
 
+  const cleanBusinessPartnerChrome = () => {
+    if (!isBusinessPartner()) return;
+
+    // Business Partner is a focused corporate proposal page.
+    // It intentionally has no site header, burger, drawer or language control.
+    document.querySelector('header')?.remove();
+    document.getElementById('drawerOverlay')?.remove();
+    document.getElementById('siteDrawer')?.remove();
+    document.querySelector('.lookal-lang-switch')?.remove();
+    document.body.classList.remove('drawer-open');
+    document.body.style.overflow = '';
+  };
+
   const applyHeaderPolicy = () => {
+    cleanBusinessPartnerChrome();
+
     const switcher = document.querySelector('.lookal-lang-switch');
 
     // Language selection is controlled from the public homepage only.
@@ -149,7 +165,7 @@
     });
     observer.observe(document.documentElement, {subtree:true, childList:true, characterData:true});
 
-    window.LOOKAL_I18N_QA = '2026-10-bilingual-qa-v2';
+    window.LOOKAL_I18N_QA = '2026-10-bilingual-qa-v3';
   };
 
   const core = document.createElement('script');
