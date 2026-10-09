@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--ink:#1d1d1f;--panel:#fff;--panel2:#f3efe8;--line:#ded8cf;--paper:#f8f5ef;--smoke:#5e5a55;--red:#d9232e;--red2:#b91822;--charcoal:#242326;--max:1120px;--f:'Plus Jakarta Sans',Arial,sans-serif}
+    :root{--ink:#1d1d1f;--panel:#fff;--panel2:#f3efe8;--line:#ded8cf;--paper:#f8f5ef;--smoke:#5e5a55;--red:#d9232e;--red2:#b91822;--charcoal:#242326;--green:#12805c;--max:1120px;--f:'Plus Jakarta Sans',Arial,sans-serif}
     *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.68 var(--f);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}body.drawer-open{overflow:hidden}a,button{color:inherit}img{max-width:100%;display:block}.wrap{max-width:var(--max);margin:auto;padding:0 22px}h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.025em;line-height:1.1}h1{font-size:clamp(2.55rem,6.4vw,4.8rem);max-width:14ch}h2{font-size:clamp(1.9rem,4.3vw,3rem)}h3{font-size:1.22rem}p{margin:0 0 1rem}.muted{color:var(--smoke)}.eyebrow{display:block;color:var(--red);font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
     header{position:sticky;top:0;z-index:60;background:rgba(248,245,239,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.bar{display:flex;align-items:center;justify-content:space-between;gap:18px;max-width:var(--max);margin:auto;padding:13px 22px}.brand{display:inline-flex;align-items:center;text-decoration:none}.brand img{width:auto;height:42px;max-width:138px;object-fit:contain;mix-blend-mode:multiply}.menu-btn{width:44px;height:44px;border:1px solid var(--line);background:#fff;border-radius:8px;display:grid;place-items:center;cursor:pointer}.menu-icon{width:20px;display:grid;gap:4px}.menu-icon span{height:2px;background:var(--ink);border-radius:99px;display:block}.drawer-overlay{position:fixed;inset:0;z-index:80;background:rgba(20,20,22,.48);opacity:0;pointer-events:none;transition:.2s ease}.drawer{position:fixed;top:0;right:0;z-index:90;width:min(360px,88vw);height:100dvh;background:#fff;border-left:1px solid var(--line);transform:translateX(100%);transition:.22s ease;display:flex;flex-direction:column}.drawer-open .drawer-overlay{opacity:1;pointer-events:auto}.drawer-open .drawer{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--line)}.drawer-head strong{font-size:.95rem}.drawer-close{width:40px;height:40px;border:1px solid var(--line);background:#fff;border-radius:8px;font-size:1.3rem;cursor:pointer}.drawer-nav{display:grid;padding:12px 18px}.drawer-nav a{padding:15px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:750}.drawer-nav a[aria-current="page"]{color:var(--red)}.drawer-cta{margin-top:auto;padding:18px;border-top:1px solid var(--line)}
     .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border:1px solid transparent;border-radius:7px;text-decoration:none;font-weight:800;font-size:.94rem;transition:.16s ease}.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:var(--red2)}.btn-ghost{border-color:#bbb4aa;background:#fff}.btn-disabled{background:#dfdbd4;color:#8b857d;cursor:not-allowed}.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
@@ -23,9 +23,10 @@
     .timeline{display:grid;border:1px solid var(--line);background:#fff}.time-row{display:grid;gap:8px;padding:22px;border-bottom:1px solid var(--line)}.time-row:last-child{border-bottom:0}@media(min-width:760px){.time-row{grid-template-columns:150px 1fr 1.3fr;gap:24px;align-items:start}}.time-kicker{font-size:.78rem;color:var(--red);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.time-row h3{font-size:1.02rem}.time-row p{margin:0;color:var(--smoke);font-size:.92rem}.buffer{margin-top:18px;border-left:4px solid var(--red);background:#fff;padding:18px 20px}.buffer p{margin:5px 0 0;color:var(--smoke);font-size:.92rem}
     .pool-surface{display:grid;gap:28px}@media(min-width:900px){.pool-surface{grid-template-columns:1fr .9fr;gap:54px;align-items:start}}.pool-example{background:#fff;border:1px solid var(--line);padding:28px}.pool-example p{margin:0}.formula{font-weight:800;margin-top:10px!important}.pool-note{margin-top:18px;color:var(--smoke);font-size:.9rem}.pool-card{background:var(--charcoal);color:#fff;padding:30px}.pool-card .big{font-size:clamp(2.7rem,6vw,4.6rem);font-weight:800;letter-spacing:-.05em;line-height:1}.pool-card .big span{font-size:.28em;color:#c9c4bd;letter-spacing:0}.pool-card p{margin:14px 0 0;color:#d0cbc4}
     .dashboard-shot{background:#eef1f4;border:1px solid #d8dce2;padding:14px;border-radius:18px;overflow:hidden}.dashboard-shot img{width:100%;height:auto;border-radius:10px;border:1px solid #e2e4e8;background:#fff}.dashboard-caption{margin-top:12px;color:var(--smoke);font-size:.88rem}.legal{margin-top:18px;color:#7a746c;font-size:.78rem;line-height:1.55;max-width:82ch}
+    .docs-grid{display:grid;gap:16px}@media(min-width:900px){.docs-grid{grid-template-columns:repeat(3,1fr)}}.doc-card{background:#fff;border:1px solid var(--line);padding:22px;display:flex;flex-direction:column;min-width:0}.doc-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.doc-icon{width:42px;height:42px;border-radius:9px;background:#fde9eb;color:var(--red);display:grid;place-items:center;font-weight:800;flex:0 0 auto}.doc-title{display:flex;gap:12px;min-width:0}.doc-title h3{font-size:1.08rem;margin-bottom:4px}.doc-title p{font-size:.82rem;color:var(--smoke);line-height:1.45;margin:0}.doc-status{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:999px;background:#e6f6ed;color:#11633f;font-size:.72rem;font-weight:800;white-space:nowrap}.doc-paper{margin:18px 0 16px;border:1px solid #dfe2e6;background:#fff;padding:18px;min-height:260px;box-shadow:0 8px 22px rgba(29,29,31,.06)}.doc-logo{height:24px;width:auto;object-fit:contain;margin-bottom:14px}.paper-rule{height:2px;background:var(--red);width:100%;margin:0 0 14px}.paper-title{font-size:.84rem;font-weight:800;line-height:1.25;margin-bottom:14px}.paper-meta{display:grid;gap:6px;font-size:.72rem;color:#4f5662}.paper-row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #eceef0;padding-bottom:5px}.otp-box{margin-top:14px;border:1px solid #cfe3d9;background:#f2faf6;padding:10px;font-size:.72rem;color:#245e44}.doc-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}.doc-action{border:1px solid var(--line);background:#fff;padding:10px;border-radius:7px;font-size:.78rem;font-weight:800;text-align:center}.doc-action.email{background:#fff1f2;color:var(--red);border-color:#f5d8db}.docs-note{margin-top:18px;padding:18px 20px;border-left:4px solid var(--red);background:#fff}.docs-note strong{display:block;margin-bottom:5px}.docs-note p{margin:0;color:var(--smoke);font-size:.9rem}
     .risk-grid{display:grid;gap:12px}@media(min-width:800px){.risk-grid{grid-template-columns:repeat(2,1fr)}}.risk{background:#fff;border:1px solid var(--line);padding:24px}.risk h3{margin-bottom:8px}.risk p{margin:0;color:var(--smoke);font-size:.92rem}.risk strong{color:var(--ink)}
     details{border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;padding:20px 36px 20px 0;font-weight:800;position:relative}summary::-webkit-details-marker{display:none}summary::after{content:'+';position:absolute;right:6px;color:var(--red);font-size:1.35rem;font-weight:400}details[open] summary::after{content:'–'}.ans{padding:0 0 20px;color:var(--smoke);max-width:76ch;font-size:.94rem}.ans p{margin:0}
-    .final{background:#fff}.final-box{border:1px solid var(--line);padding:clamp(28px,5vw,48px);display:grid;gap:28px}@media(min-width:850px){.final-box{grid-template-columns:1fr auto;align-items:center}}.final h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:10px}.final p{margin:0;color:var(--smoke);max-width:62ch}footer{border-top:1px solid var(--line);padding:34px 0;background:#fff;color:var(--smoke);font-size:.84rem}.fgrid{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}@media(max-width:600px){section{padding:62px 0}.hero{padding:58px 0}.hero-card{padding:25px}.bar{padding:11px 18px}.brand img{height:36px}.wrap{padding:0 18px}.btn{width:100%}}
+    .final{background:#fff}.final-box{border:1px solid var(--line);padding:clamp(28px,5vw,48px);display:grid;gap:28px}@media(min-width:850px){.final-box{grid-template-columns:1fr auto;align-items:center}}.final h2{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:10px}.final p{margin:0;color:var(--smoke);max-width:62ch}footer{border-top:1px solid var(--line);padding:34px 0;background:#fff;color:var(--smoke);font-size:.84rem}.fgrid{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}@media(max-width:600px){section{padding:62px 0}.hero{padding:58px 0}.hero-card{padding:25px}.bar{padding:11px 18px}.brand img{height:36px}.wrap{padding:0 18px}.btn{width:100%}.doc-actions{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -42,6 +43,7 @@
     <a href="/">Utama</a>
     <a href="/#pemilik-premis">Pemilik Premis</a>
     <a href="/business-partner/" aria-current="page">Business Partner</a>
+    <a href="#documents">Digital Documents</a>
     <a href="/#lihat">Lihat Platform</a>
   </nav>
   <div class="drawer-cta"><a class="btn btn-red" href="#mula-daftar">Mula Daftar</a></div>
@@ -94,7 +96,7 @@
   <section id="deployment"><div class="wrap">
     <div class="shead"><span class="eyebrow">Deployment & Activation Period</span><h2>Sehingga 90 hari untuk node menjadi revenue-ready.</h2><p class="muted">Buffer ini meliputi custom production, logistics, installation, provisioning serta onboarding inventory iklan.</p></div>
     <div class="timeline">
-      <div class="time-row"><span class="time-kicker">Day 0</span><h3>Agreement & Payment</h3><p>Onboarding, perjanjian digital dan bayaran sewaan dilengkapkan.</p></div>
+      <div class="time-row"><span class="time-kicker">Day 0</span><h3>OTP Agreement & Payment</h3><p>Business Partner menyemak perjanjian digital, mengesahkan penerimaan melalui OTP dan melengkapkan bayaran sewaan.</p></div>
       <div class="time-row"><span class="time-kicker">Week 1–6</span><h3>Factory Order</h3><p>Custom node production dan persediaan hardware mengikut konfigurasi LOOKaL.</p></div>
       <div class="time-row"><span class="time-kicker">Week 5–10</span><h3>Delivery, Installation & Setup</h3><p>Penghantaran, pemasangan, pairing, LOOKaL APK, connectivity dan commissioning.</p></div>
       <div class="time-row"><span class="time-kicker">Week 8–12</span><h3>Network Activation</h3><p>Lokasi dan inventory diaktifkan serta kempen mula di-onboard ke network.</p></div>
@@ -125,6 +127,58 @@
     </figure>
   </div></section>
 
+  <section id="documents"><div class="wrap">
+    <div class="shead"><span class="eyebrow">Digital Documents</span><h2>Agreement, invoice dan income slip tersusun dalam satu tempat.</h2><p class="muted">Dokumen rasmi dihantar ke email Business Partner dan salinan PDF boleh dimuat turun semula dari dashboard. Digital agreement disahkan menggunakan OTP — tanpa tandatangan lukisan atau upload signature.</p></div>
+    <div class="docs-grid">
+      <article class="doc-card">
+        <div class="doc-head"><div class="doc-title"><div class="doc-icon">01</div><div><h3>Digital Agreement</h3><p>Perjanjian Business Partner untuk Managed Node Unit.</p></div></div><span class="doc-status">✓ OTP Verified</span></div>
+        <div class="doc-paper">
+          <img class="doc-logo" src="/assets/brand/IMG-20251231-WA0002.jpg" alt="LOOKaL">
+          <div class="paper-rule"></div><div class="paper-title">BUSINESS PARTNER AGREEMENT</div>
+          <div class="paper-meta">
+            <div class="paper-row"><span>Agreement ID</span><strong>LKBP-2026-0012</strong></div>
+            <div class="paper-row"><span>Managed Units</span><strong>3 units</strong></div>
+            <div class="paper-row"><span>Lease Term</span><strong>60 months</strong></div>
+            <div class="paper-row"><span>Activation</span><strong>Upon activation</strong></div>
+          </div>
+          <div class="otp-box"><strong>OTP verification</strong><br>Acceptance confirmed using one-time password sent to the registered contact.</div>
+        </div>
+        <div class="doc-actions"><div class="doc-action email">✉ Sent to email</div><div class="doc-action">↓ Download PDF</div></div>
+      </article>
+      <article class="doc-card">
+        <div class="doc-head"><div class="doc-title"><div class="doc-icon">02</div><div><h3>Digital Invoice</h3><p>Invoice bagi Managed Node Lease yang telah dibayar.</p></div></div><span class="doc-status">✓ Paid</span></div>
+        <div class="doc-paper">
+          <img class="doc-logo" src="/assets/brand/IMG-20251231-WA0002.jpg" alt="LOOKaL">
+          <div class="paper-rule"></div><div class="paper-title">INVOICE</div>
+          <div class="paper-meta">
+            <div class="paper-row"><span>Invoice No.</span><strong>LKBP-INV-2026-0008</strong></div>
+            <div class="paper-row"><span>Item</span><strong>Managed Node Lease</strong></div>
+            <div class="paper-row"><span>Qty</span><strong>1</strong></div>
+            <div class="paper-row"><span>Total</span><strong>RM4,000.00</strong></div>
+          </div>
+          <div class="otp-box"><strong>Payment status: Paid</strong><br>Official invoice remains available in the partner dashboard.</div>
+        </div>
+        <div class="doc-actions"><div class="doc-action email">✉ Sent to email</div><div class="doc-action">↓ Download PDF</div></div>
+      </article>
+      <article class="doc-card">
+        <div class="doc-head"><div class="doc-title"><div class="doc-icon">03</div><div><h3>Digital Income Slip</h3><p>Rekod agihan bulanan untuk rujukan Business Partner.</p></div></div><span class="doc-status">✓ Paid</span></div>
+        <div class="doc-paper">
+          <img class="doc-logo" src="/assets/brand/IMG-20251231-WA0002.jpg" alt="LOOKaL">
+          <div class="paper-rule"></div><div class="paper-title">INCOME SLIP</div>
+          <div class="paper-meta">
+            <div class="paper-row"><span>Period</span><strong>Sep 2026</strong></div>
+            <div class="paper-row"><span>Eligible Units</span><strong>3 units</strong></div>
+            <div class="paper-row"><span>Pool Distribution</span><strong>RM1,200.00</strong></div>
+            <div class="paper-row"><span>Net Paid</span><strong>RM1,200.00</strong></div>
+          </div>
+          <div class="otp-box"><strong>Distribution record</strong><br>Monthly record is emailed and retained as downloadable PDF.</div>
+        </div>
+        <div class="doc-actions"><div class="doc-action email">✉ Sent to email</div><div class="doc-action">↓ Download PDF</div></div>
+      </article>
+    </div>
+    <div class="docs-note"><strong>Document trail yang jelas</strong><p>Agreement → OTP verification → invoice → activation → monthly income slip. Semua dokumen mempunyai reference number sendiri, dihantar ke email dan tersedia semula dari dashboard.</p></div>
+  </div></section>
+
   <section><div class="wrap">
     <div class="shead"><span class="eyebrow">Perkara yang perlu difahami</span><h2>Revenue variable. Operasi diurus oleh LOOKaL.</h2></div>
     <div class="risk-grid">
@@ -140,6 +194,7 @@
   <section><div class="wrap">
     <div class="shead"><span class="eyebrow">FAQ</span><h2>Soalan biasa sebelum menyertai.</h2></div>
     <details open><summary>Adakah saya membeli skrin dengan RM4,000?</summary><div class="ans"><p>Tidak. RM4,000 ialah bayaran sewaan komersial bagi satu Managed Node Unit untuk tempoh 60 bulan. Ownership hardware kekal pada UNIRAS.</p></div></details>
+    <details><summary>Bagaimana saya sahkan digital agreement?</summary><div class="ans"><p>Business Partner menyemak dokumen digital dan mengesahkan penerimaan menggunakan OTP yang dihantar ke contact berdaftar. Tiada keperluan melukis atau upload tandatangan.</p></div></details>
     <details><summary>Bila tempoh 5 tahun bermula?</summary><div class="ans"><p>Tempoh 60 bulan bermula pada Activation Date selepas proses deployment dan activation selesai.</p></div></details>
     <details><summary>Kenapa revenue menggunakan pool?</summary><div class="ans"><p>Pool mengurangkan kebergantungan kepada prestasi satu lokasi. Business Partner mengambil bahagian dalam prestasi eligible network secara kolektif.</p></div></details>
     <details><summary>Adakah RM tertentu dijamin setiap bulan?</summary><div class="ans"><p>Tidak. Monthly distribution adalah variable berdasarkan eligible advertising revenue sebenar dan bilangan eligible Business Partner Units.</p></div></details>
@@ -148,7 +203,7 @@
   </div></section>
 
   <section id="mula-daftar" class="final"><div class="wrap"><div class="final-box">
-    <div><span class="eyebrow">Next step</span><h2>Fahami proposal dahulu. Daftar bila onboarding dibuka.</h2><p>Modul Business Partner akan menggunakan application, digital agreement, verification, payment, activation dan dashboard.</p><p class="legal">Terma akhir tertakluk kepada dokumen kontrak rasmi dan semakan korporat yang berkaitan sebelum pendaftaran awam diaktifkan.</p></div>
+    <div><span class="eyebrow">Next step</span><h2>Fahami proposal dahulu. Daftar bila onboarding dibuka.</h2><p>Modul Business Partner akan menggunakan application, digital agreement, OTP verification, payment, activation, digital invoice, monthly income slip dan dashboard.</p><p class="legal">Terma akhir tertakluk kepada dokumen kontrak rasmi dan semakan korporat yang berkaitan sebelum pendaftaran awam diaktifkan.</p></div>
     <span class="btn btn-disabled" aria-disabled="true">Mula Daftar · Akan dibuka</span>
   </div></div></section>
 </main>
