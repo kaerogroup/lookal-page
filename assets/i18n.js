@@ -32,6 +32,8 @@
   const reverseNodePairs = Object.fromEntries(nodePairs.map(([bm,en]) => [en,bm]));
   const forwardNodePairs = Object.fromEntries(nodePairs);
 
+  const isHomepage = () => location.pathname === '/' || location.pathname === '/index.html';
+
   const currentLang = () => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === 'en' || stored === 'bm') return stored;
@@ -88,11 +90,46 @@
     while ((node = walker.nextNode())) translateTextNode(node, lang);
   };
 
+  const applyHeaderPolicy = () => {
+    const switcher = document.querySelector('.lookal-lang-switch');
+
+    // Language selection is controlled from the public homepage only.
+    // Secondary pages still inherit and apply the stored BM/EN preference.
+    if (!isHomepage()) {
+      if (switcher) switcher.remove();
+      return;
+    }
+
+    // Keep the mobile homepage header compact: logo + burger + BM/EN.
+    // Advertising CTA remains available in the hero/drawer instead of crowding the header.
+    const style = document.createElement('style');
+    style.id = 'lookal-home-header-fix';
+    style.textContent = `
+      @media(max-width:899px){
+        header .bar{gap:10px;justify-content:flex-start;padding:11px 14px}
+        header .brand{margin-right:auto}
+        header .header-cta{display:none!important}
+        header .menu-btn{flex:0 0 44px}
+        header .lookal-lang-switch{margin-left:0!important;flex:0 0 auto;min-height:44px;padding:0 11px}
+      }
+      @media(max-width:420px){
+        header .bar{gap:8px;padding-left:12px;padding-right:12px}
+        header .brand img{height:32px;max-width:104px}
+        header .lookal-lang-switch{gap:5px;padding:0 9px}
+      }
+    `;
+    if (!document.getElementById(style.id)) document.head.appendChild(style);
+  };
+
   const startSupplement = () => {
     applySupplement();
+    applyHeaderPolicy();
 
     document.addEventListener('lookal:languagechange', () => {
-      queueMicrotask(() => applySupplement());
+      queueMicrotask(() => {
+        applySupplement();
+        applyHeaderPolicy();
+      });
     });
 
     let mutating = false;
@@ -107,11 +144,12 @@
           else if (node.nodeType === Node.ELEMENT_NODE) applySupplement(node);
         });
       }
+      applyHeaderPolicy();
       queueMicrotask(() => { mutating = false; });
     });
     observer.observe(document.documentElement, {subtree:true, childList:true, characterData:true});
 
-    window.LOOKAL_I18N_QA = '2026-10-bilingual-qa-v1';
+    window.LOOKAL_I18N_QA = '2026-10-bilingual-qa-v2';
   };
 
   const core = document.createElement('script');
