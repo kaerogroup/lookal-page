@@ -120,14 +120,24 @@ fs.writeFileSync(homePath, home);
 const bpPath = path.join(out, 'business-partner/index.html');
 if (fs.existsSync(bpPath)) {
   let bp = fs.readFileSync(bpPath, 'utf8');
-  // Do not use content-visibility on this long, dynamically enhanced page. It caused blank
-  // sections and scroll-position jumps on some mobile/Chromium builds.
+
+  // Stability first: the partner page is a normal document. Do not run the shared i18n
+  // mutation stack, scroll repair code, or multiple post-load DOM rewriters here.
+  // Those scripts repeatedly changed section geometry after first paint and caused large
+  // blank areas / scroll jumps on Chromium and mobile browsers.
+  bp = bp.replace(/\s*<script src="\/assets\/i18n\.js" defer><\/script>\s*/g, '\n');
   bp = bp.replaceAll('section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 720px}', '');
-  if (!bp.includes('rel="prefetch" href="/"')) bp = bp.replace('</head>', '  <link rel="prefetch" href="/">\n</head>');
+  bp = bp.replaceAll('scroll-behavior:smooth;', 'scroll-behavior:auto;');
+
+  // Keep the current dashboard as the only progressive enhancement on this page.
+  // Everything else must remain visible and usable even if JavaScript is disabled.
+  bp = bp.replace(/\s*<script src="\/assets\/(?:partner-slip-sync|partner-copy-fix|site-fixes)\.js" defer><\/script>\s*/g, '\n');
   if (!bp.includes('/assets/partner-dashboard.js')) bp = bp.replace('</body>', '  <script src="/assets/partner-dashboard.js" defer></script>\n</body>');
-  if (!bp.includes('/assets/partner-slip-sync.js')) bp = bp.replace('</body>', '  <script src="/assets/partner-slip-sync.js" defer></script>\n</body>');
-  if (!bp.includes('/assets/partner-copy-fix.js')) bp = bp.replace('</body>', '  <script src="/assets/partner-copy-fix.js" defer></script>\n</body>');
-  if (!bp.includes('/assets/site-fixes.js')) bp = bp.replace('</body>', '  <script src="/assets/site-fixes.js" defer></script>\n</body>');
+
+  // Hard browser guard: no containment, snap, animation or anchoring on the long proposal.
+  const stabilityCss = `<style id="bp-static-scroll-guard">html,body{scroll-behavior:auto!important;scroll-snap-type:none!important;overflow-anchor:none!important}body{overflow-x:hidden!important}main,section,.wrap,.shead,.pool-surface,.docs-grid,.risk-grid,.faq-list,.bp-dashboard{content-visibility:visible!important;contain:none!important;contain-intrinsic-size:auto!important;scroll-snap-align:none!important;scroll-snap-stop:normal!important;transform:none!important}section{min-height:0!important}</style>`;
+  if (!bp.includes('bp-static-scroll-guard')) bp = bp.replace('</head>', `${stabilityCss}\n<link rel="prefetch" href="/">\n</head>`);
+
   fs.writeFileSync(bpPath, bp);
 }
 
@@ -146,4 +156,4 @@ for (const topLevelVideo of ['browsing dashboard Dan function.mp4', 'snap2ads ow
   fs.rmSync(path.join(out, topLevelVideo), { force: true });
 }
 
-console.log('LOOKaL static build complete. Compressed media is interaction-first and raw videos are excluded from dist.');
+console.log('LOOKaL static build complete. Partner page uses static document flow with a single dashboard enhancement.');
