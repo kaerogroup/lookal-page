@@ -124,6 +124,7 @@ if (fs.existsSync(bpPath)) {
   }
   if (!bp.includes('rel="prefetch" href="/"')) bp = bp.replace('</head>', '  <link rel="prefetch" href="/">\n</head>');
   if (!bp.includes('/assets/partner-dashboard.js')) bp = bp.replace('</body>', '  <script src="/assets/partner-dashboard.js" defer></script>\n</body>');
+  if (!bp.includes('/assets/partner-slip-sync.js')) bp = bp.replace('</body>', '  <script src="/assets/partner-slip-sync.js" defer></script>\n</body>');
   fs.writeFileSync(bpPath, bp);
 }
 
