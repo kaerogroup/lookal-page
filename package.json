@@ -1,0 +1,12 @@
+{
+  "name": "lookal-public-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-static.mjs"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0"
+  }
+}
