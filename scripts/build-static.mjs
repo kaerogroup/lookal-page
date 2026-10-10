@@ -114,18 +114,20 @@ if (!home.includes('content-visibility:auto')) {
 if (!home.includes('rel="prefetch" href="/tools/whatsapp-link/"')) {
   home = home.replace('</head>', '  <link rel="prefetch" href="/tools/whatsapp-link/">\n  <link rel="prefetch" href="/business-partner/">\n</head>');
 }
+if (!home.includes('/assets/site-fixes.js')) home = home.replace('</body>', '  <script src="/assets/site-fixes.js" defer></script>\n</body>');
 fs.writeFileSync(homePath, home);
 
 const bpPath = path.join(out, 'business-partner/index.html');
 if (fs.existsSync(bpPath)) {
   let bp = fs.readFileSync(bpPath, 'utf8');
-  if (!bp.includes('content-visibility:auto')) {
-    bp = bp.replace('section{padding:82px 0;border-top:1px solid var(--line)}', 'section{padding:82px 0;border-top:1px solid var(--line)}section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 720px}');
-  }
+  // Do not use content-visibility on this long, dynamically enhanced page. It caused blank
+  // sections and scroll-position jumps on some mobile/Chromium builds.
+  bp = bp.replaceAll('section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 720px}', '');
   if (!bp.includes('rel="prefetch" href="/"')) bp = bp.replace('</head>', '  <link rel="prefetch" href="/">\n</head>');
   if (!bp.includes('/assets/partner-dashboard.js')) bp = bp.replace('</body>', '  <script src="/assets/partner-dashboard.js" defer></script>\n</body>');
   if (!bp.includes('/assets/partner-slip-sync.js')) bp = bp.replace('</body>', '  <script src="/assets/partner-slip-sync.js" defer></script>\n</body>');
   if (!bp.includes('/assets/partner-copy-fix.js')) bp = bp.replace('</body>', '  <script src="/assets/partner-copy-fix.js" defer></script>\n</body>');
+  if (!bp.includes('/assets/site-fixes.js')) bp = bp.replace('</body>', '  <script src="/assets/site-fixes.js" defer></script>\n</body>');
   fs.writeFileSync(bpPath, bp);
 }
 
