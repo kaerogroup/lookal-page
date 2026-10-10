@@ -123,6 +123,7 @@ if (fs.existsSync(bpPath)) {
     bp = bp.replace('section{padding:82px 0;border-top:1px solid var(--line)}', 'section{padding:82px 0;border-top:1px solid var(--line)}section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 720px}');
   }
   if (!bp.includes('rel="prefetch" href="/"')) bp = bp.replace('</head>', '  <link rel="prefetch" href="/">\n</head>');
+  if (!bp.includes('/assets/partner-dashboard.js')) bp = bp.replace('</body>', '  <script src="/assets/partner-dashboard.js" defer></script>\n</body>');
   fs.writeFileSync(bpPath, bp);
 }
 
