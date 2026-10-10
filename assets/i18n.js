@@ -41,16 +41,28 @@
     });
   };
 
-  // Keep homepage controls lightweight and deterministic.
+  // Keep homepage navigation compact on every viewport: logo/CTA/language remain visible,
+  // while secondary navigation lives in the drawer. Mobile keeps the menu trigger on the left;
+  // desktop keeps it on the right so the header reads like a clean corporate masthead.
   if (isHomepage && !document.getElementById('lookal-home-header-fix')) {
     const style = document.createElement('style');
     style.id = 'lookal-home-header-fix';
     style.textContent = `
+      header .desktop-nav{display:none!important}
+      @media(min-width:900px){
+        header .bar{gap:12px;padding:12px 22px}
+        header .brand{display:inline-flex!important;margin-right:auto}
+        header .header-cta{display:inline-flex!important;order:2}
+        header .lookal-lang-switch{order:3;margin-left:0!important;flex:0 0 auto;min-height:44px}
+        header .menu-btn{display:inline-grid!important;order:4;flex:0 0 44px;margin-left:2px}
+        .drawer{left:auto!important;right:0!important;transform:translateX(100%)!important;box-shadow:-20px 0 60px rgba(0,0,0,.16)!important}
+        .drawer.is-open{transform:translateX(0)!important}
+      }
       @media(max-width:899px){
         header .bar{gap:10px;justify-content:space-between;padding:11px 14px}
         header .brand{display:none!important}
         header .header-cta{display:none!important}
-        header .menu-btn{order:1;flex:0 0 44px;margin-right:auto}
+        header .menu-btn{display:inline-grid!important;order:1;flex:0 0 44px;margin-right:auto}
         header .lookal-lang-switch{order:2;margin-left:auto!important;flex:0 0 auto;min-height:44px;padding:0 11px}
         .drawer{left:0!important;right:auto!important;transform:translateX(-100%)!important;box-shadow:20px 0 60px rgba(0,0,0,.16)!important}
         .drawer.is-open{transform:translateX(0)!important}
@@ -125,7 +137,7 @@
     addPrefetch('/tools/whatsapp-link/');
     addPrefetch('/business-partner/');
     loadCore();
-    window.LOOKAL_I18N_QA = '2026-10-navigation-perf-v10';
+    window.LOOKAL_I18N_QA = '2026-10-desktop-drawer-v11';
     return;
   }
 
@@ -135,7 +147,7 @@
   if (!wantsEnglish) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', normalisePartnerMalay, {once:true});
     else normalisePartnerMalay();
-    window.LOOKAL_I18N_QA = '2026-10-navigation-perf-v10';
+    window.LOOKAL_I18N_QA = '2026-10-desktop-drawer-v11';
     return;
   }
 
@@ -151,5 +163,5 @@
   if (document.readyState === 'complete') scheduleEnglish();
   else window.addEventListener('load', scheduleEnglish, {once:true});
 
-  window.LOOKAL_I18N_QA = '2026-10-navigation-perf-v10';
+  window.LOOKAL_I18N_QA = '2026-10-desktop-drawer-v11';
 })();
