@@ -41,9 +41,8 @@
     });
   };
 
-  // Keep homepage navigation compact on every viewport: logo/CTA/language remain visible,
-  // while secondary navigation lives in the drawer. Mobile keeps the menu trigger on the left;
-  // desktop keeps it on the right so the header reads like a clean corporate masthead.
+  // Keep homepage navigation compact on every viewport. The menu trigger and its drawer
+  // share the same left-side origin on both mobile and desktop for consistent behaviour.
   if (isHomepage && !document.getElementById('lookal-home-header-fix')) {
     const style = document.createElement('style');
     style.id = 'lookal-home-header-fix';
@@ -51,11 +50,11 @@
       header .desktop-nav{display:none!important}
       @media(min-width:900px){
         header .bar{gap:12px;padding:12px 22px}
-        header .brand{display:inline-flex!important;margin-right:auto}
-        header .header-cta{display:inline-flex!important;order:2}
-        header .lookal-lang-switch{order:3;margin-left:0!important;flex:0 0 auto;min-height:44px}
-        header .menu-btn{display:inline-grid!important;order:4;flex:0 0 44px;margin-left:2px}
-        .drawer{left:auto!important;right:0!important;transform:translateX(100%)!important;box-shadow:-20px 0 60px rgba(0,0,0,.16)!important}
+        header .menu-btn{display:inline-grid!important;order:1;flex:0 0 44px;margin-right:4px;margin-left:0}
+        header .brand{display:inline-flex!important;order:2;margin-right:auto}
+        header .header-cta{display:inline-flex!important;order:3}
+        header .lookal-lang-switch{order:4;margin-left:0!important;flex:0 0 auto;min-height:44px}
+        .drawer{left:0!important;right:auto!important;transform:translateX(-100%)!important;box-shadow:20px 0 60px rgba(0,0,0,.16)!important}
         .drawer.is-open{transform:translateX(0)!important}
       }
       @media(max-width:899px){
@@ -137,7 +136,7 @@
     addPrefetch('/tools/whatsapp-link/');
     addPrefetch('/business-partner/');
     loadCore();
-    window.LOOKAL_I18N_QA = '2026-10-desktop-drawer-v11';
+    window.LOOKAL_I18N_QA = '2026-10-left-drawer-v12';
     return;
   }
 
@@ -147,7 +146,7 @@
   if (!wantsEnglish) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', normalisePartnerMalay, {once:true});
     else normalisePartnerMalay();
-    window.LOOKAL_I18N_QA = '2026-10-desktop-drawer-v11';
+    window.LOOKAL_I18N_QA = '2026-10-left-drawer-v12';
     return;
   }
 
@@ -163,5 +162,5 @@
   if (document.readyState === 'complete') scheduleEnglish();
   else window.addEventListener('load', scheduleEnglish, {once:true});
 
-  window.LOOKAL_I18N_QA = '2026-10-desktop-drawer-v11';
+  window.LOOKAL_I18N_QA = '2026-10-left-drawer-v12';
 })();
