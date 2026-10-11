@@ -62,10 +62,19 @@
     else drawer.appendChild(link);
   };
 
+  const syncFooter = () => {
+    const footerMeta = document.querySelector('footer .fgrid > span');
+    if (!footerMeta) return;
+    footerMeta.textContent = isEnglish()
+      ? 'Operated by Uniras Sdn Bhd · lookal.tech'
+      : 'Dikendalikan oleh Uniras Sdn Bhd · lookal.tech';
+  };
+
   const apply = () => {
     const section = document.getElementById('bukti');
     installStyle();
     syncDrawerWhatsApp();
+    syncFooter();
     if (!section) return;
     const c = copy();
     const eyebrow = section.querySelector('.quest-eyebrow');
