@@ -7,19 +7,21 @@
 
   const STORAGE_KEY = 'lookal-language';
   const copy = () => localStorage.getItem(STORAGE_KEY) === 'en' ? {
-    eyebrow: 'Campaigns in the real world',
+    eyebrow: 'Proof in the real world',
     title: 'See real campaigns playing on LOOKaL screens.',
-    body: 'These are real recordings from operating LOOKaL locations. The first video is the main proof; the supporting clips show different premises and screen placements.',
-    primary: 'Real campaign playback on a LOOKaL screen.',
-    support1: 'A different premise, with the screen operating in its actual environment.',
-    support2: 'Another LOOKaL location showing the network in use.'
+    body: 'These recordings come from real LOOKaL screens operating inside real premises. The network is still local and growing, but the campaign experience is already happening in the real world.',
+    proofline: ['Real screens', 'Real premises', 'Real campaign playback'],
+    primary: 'A real campaign playing on an operating LOOKaL screen.',
+    support1: 'Another premise showing LOOKaL in its actual operating environment.',
+    support2: 'A different LOOKaL location with the screen in active use.'
   } : {
-    eyebrow: 'Kempen di dunia sebenar',
+    eyebrow: 'Bukti di dunia sebenar',
     title: 'Lihat kempen sebenar sedang ditayangkan di skrin LOOKaL.',
-    body: 'Ini ialah rakaman sebenar daripada lokasi LOOKaL yang sedang beroperasi. Video utama menunjukkan tayangan kempen sebenar, manakala dua rakaman sokongan menunjukkan premis dan kedudukan skrin yang berbeza.',
-    primary: 'Kempen sebenar sedang ditayangkan pada skrin LOOKaL.',
-    support1: 'Premis berbeza dengan skrin beroperasi dalam persekitaran sebenar.',
-    support2: 'Satu lagi lokasi LOOKaL yang menunjukkan rangkaian sedang digunakan.'
+    body: 'Rakaman ini datang daripada skrin LOOKaL yang benar-benar beroperasi di premis sebenar. Rangkaian masih setempat dan sedang berkembang, tetapi pengalaman kempen LOOKaL sudah berlaku di dunia sebenar.',
+    proofline: ['Skrin sebenar', 'Premis sebenar', 'Tayangan kempen sebenar'],
+    primary: 'Kempen sebenar sedang ditayangkan pada skrin LOOKaL yang beroperasi.',
+    support1: 'Premis lain yang menunjukkan LOOKaL dalam persekitaran operasi sebenar.',
+    support2: 'Lokasi LOOKaL berbeza dengan skrin sedang digunakan.'
   };
 
   const installStyle = () => {
@@ -30,6 +32,9 @@
       #bukti .proof-grid{align-items:stretch}
       #bukti .proof-item{height:100%}
       #bukti .proof-item .video-frame{background:#111}
+      #bukti .proof-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+      #bukti .proof-fact{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid var(--line);background:#fff;font-size:.78rem;font-weight:750;color:var(--charcoal)}
+      #bukti .proof-fact::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex:0 0 auto}
       @media(min-width:860px){
         #bukti .proof-grid{grid-template-columns:1.6fr .7fr .7fr}
         #bukti .proof-item:first-child .video-frame{aspect-ratio:16/10}
@@ -50,6 +55,17 @@
     if (eyebrow) eyebrow.textContent = c.eyebrow;
     if (title) title.textContent = c.title;
     if (body) body.textContent = c.body;
+
+    const shead = section.querySelector('.shead');
+    if (shead) {
+      let facts = shead.querySelector('.proof-facts');
+      if (!facts) {
+        facts = document.createElement('div');
+        facts.className = 'proof-facts';
+        shead.appendChild(facts);
+      }
+      facts.innerHTML = c.proofline.map((item) => `<span class="proof-fact">${item}</span>`).join('');
+    }
 
     const captions = section.querySelectorAll('.proof-item .proof-caption');
     const texts = [c.primary, c.support1, c.support2];
