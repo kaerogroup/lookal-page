@@ -115,6 +115,7 @@ if (!home.includes('rel="prefetch" href="/tools/whatsapp-link/"')) {
   home = home.replace('</head>', '  <link rel="prefetch" href="/tools/whatsapp-link/">\n  <link rel="prefetch" href="/business-partner/">\n</head>');
 }
 if (!home.includes('/assets/site-fixes.js')) home = home.replace('</body>', '  <script src="/assets/site-fixes.js" defer></script>\n</body>');
+if (!home.includes('/assets/home-copy-patch.js')) home = home.replace('</body>', '  <script src="/assets/home-copy-patch.js" defer></script>\n</body>');
 fs.writeFileSync(homePath, home);
 
 const bpPath = path.join(out, 'business-partner/index.html');
