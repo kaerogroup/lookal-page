@@ -22,35 +22,40 @@ const run = (args, label) => {
   if (result.status !== 0) throw new Error(`ffmpeg failed: ${label}`);
 };
 
-const encode = (inputRel, outputRel, posterRel) => {
+const encode = (inputRel, outputRel, posterRel, profile = 'walkthrough') => {
   const input = path.join(root, inputRel);
   const output = path.join(out, outputRel);
   const poster = path.join(out, posterRel);
   fs.mkdirSync(path.dirname(output), { recursive: true });
   fs.mkdirSync(path.dirname(poster), { recursive: true });
 
+  const isProof = profile === 'proof';
+  const maxEdge = isProof ? 960 : 1280;
+  const crf = isProof ? '30' : '28';
+  const mediaArgs = isProof ? ['-an'] : ['-c:a', 'aac', '-b:a', '96k'];
+
   run([
     '-y', '-i', input,
-    '-vf', "scale='if(gt(iw,ih),min(1280,iw),-2)':'if(gt(iw,ih),-2,min(1280,ih))'",
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '28', '-pix_fmt', 'yuv420p',
-    '-c:a', 'aac', '-b:a', '96k',
+    '-vf', `scale='if(gt(iw,ih),min(${maxEdge},iw),-2)':'if(gt(iw,ih),-2,min(${maxEdge},ih))'`,
+    '-c:v', 'libx264', '-preset', 'medium', '-crf', crf, '-pix_fmt', 'yuv420p',
+    ...mediaArgs,
     '-movflags', '+faststart',
     output,
   ], outputRel);
 
   run([
     '-y', '-ss', '00:00:01', '-i', output,
-    '-frames:v', '1', '-q:v', '5', poster,
+    '-frames:v', '1', '-q:v', '6', poster,
   ], posterRel);
 };
 
 const media = [
-  ['assets/screens/VID-20260915-WA0001.mp4', 'assets/web-media/screens/location-01.mp4', 'assets/web-media/screens/location-01.jpg'],
-  ['assets/screens/VID20260920082504 (1).mp4', 'assets/web-media/screens/location-02.mp4', 'assets/web-media/screens/location-02.jpg'],
-  ['assets/screens/VID20260920083827.mp4', 'assets/web-media/screens/location-03.mp4', 'assets/web-media/screens/location-03.jpg'],
-  ['assets/video/browsing dashboard Dan function.mp4', 'assets/web-media/walkthroughs/dashboard.mp4', 'assets/web-media/walkthroughs/dashboard.jpg'],
-  ['assets/video/snap2ads editor new (1).mp4', 'assets/web-media/walkthroughs/snap2ads-editor.mp4', 'assets/web-media/walkthroughs/snap2ads-editor.jpg'],
-  ['assets/video/snap2ads own poster.mp4', 'assets/web-media/walkthroughs/own-poster.mp4', 'assets/web-media/walkthroughs/own-poster.jpg'],
+  ['assets/screens/VID-20260915-WA0001.mp4', 'assets/web-media/screens/location-01.mp4', 'assets/web-media/screens/location-01.jpg', 'proof'],
+  ['assets/screens/VID20260920082504 (1).mp4', 'assets/web-media/screens/location-02.mp4', 'assets/web-media/screens/location-02.jpg', 'proof'],
+  ['assets/screens/VID20260920083827.mp4', 'assets/web-media/screens/location-03.mp4', 'assets/web-media/screens/location-03.jpg', 'proof'],
+  ['assets/video/browsing dashboard Dan function.mp4', 'assets/web-media/walkthroughs/dashboard.mp4', 'assets/web-media/walkthroughs/dashboard.jpg', 'walkthrough'],
+  ['assets/video/snap2ads editor new (1).mp4', 'assets/web-media/walkthroughs/snap2ads-editor.mp4', 'assets/web-media/walkthroughs/snap2ads-editor.jpg', 'walkthrough'],
+  ['assets/video/snap2ads own poster.mp4', 'assets/web-media/walkthroughs/own-poster.mp4', 'assets/web-media/walkthroughs/own-poster.jpg', 'walkthrough'],
 ];
 
 for (const item of media) encode(...item);
@@ -116,6 +121,7 @@ if (!home.includes('rel="prefetch" href="/tools/whatsapp-link/"')) {
 }
 if (!home.includes('/assets/site-fixes.js')) home = home.replace('</body>', '  <script src="/assets/site-fixes.js" defer></script>\n</body>');
 if (!home.includes('/assets/home-copy-patch.js')) home = home.replace('</body>', '  <script src="/assets/home-copy-patch.js" defer></script>\n</body>');
+if (!home.includes('/assets/home-proof.js')) home = home.replace('</body>', '  <script src="/assets/home-proof.js" defer></script>\n</body>');
 fs.writeFileSync(homePath, home);
 
 const bpPath = path.join(out, 'business-partner/index.html');
@@ -157,4 +163,4 @@ for (const topLevelVideo of ['browsing dashboard Dan function.mp4', 'snap2ads ow
   fs.rmSync(path.join(out, topLevelVideo), { force: true });
 }
 
-console.log('LOOKaL static build complete. Partner page uses static document flow with a single dashboard enhancement.');
+console.log('LOOKaL static build complete. Proof videos use lightweight web encodes; partner page stays on static document flow.');
