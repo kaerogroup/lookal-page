@@ -6,7 +6,8 @@
   if (!isHome) return;
 
   const STORAGE_KEY = 'lookal-language';
-  const copy = () => localStorage.getItem(STORAGE_KEY) === 'en' ? {
+  const isEnglish = () => localStorage.getItem(STORAGE_KEY) === 'en';
+  const copy = () => isEnglish() ? {
     eyebrow: 'Proof in the real world',
     title: 'See real campaigns playing on LOOKaL screens.',
     body: 'These recordings come from real LOOKaL screens operating inside real premises. The network is still local and growing, but the campaign experience is already happening in the real world.',
@@ -44,10 +45,28 @@
     document.head.appendChild(style);
   };
 
+  const syncDrawerWhatsApp = () => {
+    const drawer = document.querySelector('.drawer-nav');
+    if (!drawer) return;
+    const label = isEnglish() ? 'WhatsApp Link' : 'Pautan WhatsApp';
+    const existing = drawer.querySelector('a[href="/tools/whatsapp-link/"],a[href="/tools/whatsapp-link/index.html"]');
+    if (existing) {
+      existing.textContent = label;
+      return;
+    }
+    const link = document.createElement('a');
+    link.href = '/tools/whatsapp-link/';
+    link.textContent = label;
+    const partner = drawer.querySelector('a[href="/business-partner/"],a[href="/business-partner/index.html"]');
+    if (partner) drawer.insertBefore(link, partner);
+    else drawer.appendChild(link);
+  };
+
   const apply = () => {
     const section = document.getElementById('bukti');
-    if (!section) return;
     installStyle();
+    syncDrawerWhatsApp();
+    if (!section) return;
     const c = copy();
     const eyebrow = section.querySelector('.quest-eyebrow');
     const title = section.querySelector('.shead h2');
