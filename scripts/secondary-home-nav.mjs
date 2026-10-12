@@ -37,15 +37,27 @@ const write = ({ file, html }) => fs.writeFileSync(file, html);
   }
 }
 
-// Dedicated Rakan Niaga detail pages already have a contextual back link. Keep that,
-// and add the same explicit return to the main LOOKaL homepage on the right.
-for (const rel of ['business-partner/revenue-share/index.html', 'business-partner/node-specifications/index.html']) {
-  const doc = read(rel);
-  if (!doc || doc.html.includes('detail-home-link')) continue;
-  const css = `<style id="detail-home-nav-style">.topbar .sub-actions{display:flex;align-items:center;gap:12px}.topbar .detail-home-link{display:inline-flex;align-items:center;min-height:38px;padding:7px 11px;border:1px solid var(--line);border-radius:7px;background:#fff;text-decoration:none;font-size:.8rem;font-weight:800}.topbar .detail-home-link:hover{border-color:var(--ink)}@media(max-width:620px){.topbar .mark{display:none}.topbar .detail-home-link{font-size:.75rem;padding:7px 9px}}</style>`;
-  doc.html = doc.html.replace('</head>', `${css}\n</head>`);
-  doc.html = doc.html.replace(/<span class="mark">([^<]+)<\/span>/, '<div class="sub-actions"><span class="mark">$1</span><a class="detail-home-link" href="/">← Kembali ke LOOKaL</a></div>');
-  write(doc);
+// Revenue-share page already has a contextual back link. Add an explicit route to LOOKaL home.
+{
+  const doc = read('business-partner/revenue-share/index.html');
+  if (doc && !doc.html.includes('detail-home-link')) {
+    const css = `<style id="detail-home-nav-style">.topbar .sub-actions{display:flex;align-items:center;gap:12px}.topbar .detail-home-link{display:inline-flex;align-items:center;min-height:38px;padding:7px 11px;border:1px solid var(--line);border-radius:7px;background:#fff;text-decoration:none;font-size:.8rem;font-weight:800}.topbar .detail-home-link:hover{border-color:var(--ink)}@media(max-width:620px){.topbar .mark{display:none}.topbar .detail-home-link{font-size:.75rem;padding:7px 9px}}</style>`;
+    doc.html = doc.html.replace('</head>', `${css}\n</head>`);
+    doc.html = doc.html.replace(/<span class="mark">([^<]+)<\/span>/, '<div class="sub-actions"><span class="mark">$1</span><a class="detail-home-link" href="/">← Kembali ke LOOKaL</a></div>');
+    write(doc);
+  }
+}
+
+// Node-specifications uses a different topbar class, so handle it explicitly instead of
+// relying on the revenue-share selector.
+{
+  const doc = read('business-partner/node-specifications/index.html');
+  if (doc && !doc.html.includes('detail-home-link')) {
+    const css = `<style id="detail-home-nav-style">.top .sub-actions{display:flex;align-items:center;gap:12px}.top .detail-home-link{display:inline-flex;align-items:center;min-height:38px;padding:7px 11px;border:1px solid var(--line);border-radius:7px;background:#fff;text-decoration:none;font-size:.8rem;font-weight:800}.top .detail-home-link:hover{border-color:var(--ink)}@media(max-width:620px){.top .lang{display:none}.top .detail-home-link{font-size:.75rem;padding:7px 9px}}</style>`;
+    doc.html = doc.html.replace('</head>', `${css}\n</head>`);
+    doc.html = doc.html.replace(/<span class="lang">([\s\S]*?)<\/span><\/div><\/div>/, '<div class="sub-actions"><span class="lang">$1</span><a class="detail-home-link" href="/">← Kembali ke LOOKaL</a></div></div></div>');
+    write(doc);
+  }
 }
 
 console.log('Secondary-page return-home navigation standardized.');
