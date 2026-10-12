@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build-static.mjs"
+    "build": "node scripts/build-static.mjs && node scripts/secondary-home-nav.mjs"
   },
   "dependencies": {
     "ffmpeg-static": "^5.2.0"
