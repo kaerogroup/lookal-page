@@ -92,6 +92,21 @@
     else drawer.appendChild(link);
   };
 
+  const syncContactLinks = () => {
+    const label = isEnglish() ? 'Contact Us' : 'Hubungi Kami';
+    document.querySelectorAll('.desktop-nav,.drawer-nav').forEach((nav) => {
+      let link = nav.querySelector('a[href="#hubungi"]');
+      if (!link) {
+        link = document.createElement('a');
+        link.href = '#hubungi';
+        const premise = nav.querySelector('a[href="#pemilik-premis"],a[href="/publisher/"],a[href="/publisher/index.html"]');
+        if (premise) nav.insertBefore(link, premise);
+        else nav.appendChild(link);
+      }
+      link.textContent = label;
+    });
+  };
+
   const syncPublisherLinks = () => {
     const label = isEnglish() ? 'Premise Owners' : 'Pemilik Premis';
     document.querySelectorAll('a[href="#pemilik-premis"]').forEach((link) => {
@@ -163,6 +178,7 @@
     installStyle();
     syncDrawerWhatsApp();
     syncPublisherLinks();
+    syncContactLinks();
     syncFooter();
     const c = copy();
     syncPricing(c);
