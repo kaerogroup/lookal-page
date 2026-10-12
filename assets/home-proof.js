@@ -84,6 +84,14 @@
     else drawer.appendChild(link);
   };
 
+  const syncPublisherLinks = () => {
+    const label = isEnglish() ? 'Premise Owners' : 'Pemilik Premis';
+    document.querySelectorAll('a[href="#pemilik-premis"]').forEach((link) => {
+      link.href = '/publisher/';
+      if (link.closest('.desktop-nav,.drawer-nav')) link.textContent = label;
+    });
+  };
+
   const syncFooter = () => {
     const footerMeta = document.querySelector('footer .fgrid > span');
     if (!footerMeta) return;
@@ -136,6 +144,7 @@
     const section = document.getElementById('bukti');
     installStyle();
     syncDrawerWhatsApp();
+    syncPublisherLinks();
     syncFooter();
     const c = copy();
     syncPricing(c);
