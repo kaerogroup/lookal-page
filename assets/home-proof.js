@@ -14,7 +14,15 @@
     proofline: ['Real screens', 'Real premises', 'Real campaign playback'],
     primary: 'A real campaign playing on an operating LOOKaL screen.',
     support1: 'Another premise showing LOOKaL in its actual operating environment.',
-    support2: 'A different LOOKaL location with the screen in active use.'
+    support2: 'A different LOOKaL location with the screen in active use.',
+    priceTitle: 'Start with the plan available today.',
+    priceBody: 'Basic is the current public campaign plan. Premium formats are being prepared and are not open for booking yet.',
+    basicBody: 'The current option for local campaigns using the three-zone display.',
+    soon: 'Coming soon',
+    premiumBody: 'Fullscreen campaign format is being prepared.',
+    premiumExtendedBody: 'Longer fullscreen campaign format is being prepared.',
+    modelTitle: 'Basic is available now.',
+    modelBody: 'Choose your location and campaign period. Premium options will be introduced later when the format is ready for public campaigns.'
   } : {
     eyebrow: 'Bukti di dunia sebenar',
     title: 'Lihat kempen sebenar sedang ditayangkan di skrin LOOKaL.',
@@ -22,7 +30,15 @@
     proofline: ['Skrin sebenar', 'Premis sebenar', 'Tayangan kempen sebenar'],
     primary: 'Kempen sebenar sedang ditayangkan pada skrin LOOKaL yang beroperasi.',
     support1: 'Premis lain yang menunjukkan LOOKaL dalam persekitaran operasi sebenar.',
-    support2: 'Lokasi LOOKaL berbeza dengan skrin sedang digunakan.'
+    support2: 'Lokasi LOOKaL berbeza dengan skrin sedang digunakan.',
+    priceTitle: 'Mulakan dengan pelan yang tersedia sekarang.',
+    priceBody: 'Basic ialah pelan kempen yang sedang dibuka kepada umum. Format Premium sedang disediakan dan belum dibuka untuk tempahan.',
+    basicBody: 'Pilihan semasa untuk kempen setempat menggunakan paparan tiga zon.',
+    soon: 'Akan datang',
+    premiumBody: 'Format kempen skrin penuh sedang disediakan.',
+    premiumExtendedBody: 'Format kempen skrin penuh lebih panjang sedang disediakan.',
+    modelTitle: 'Basic tersedia sekarang.',
+    modelBody: 'Pilih lokasi dan tempoh kempen anda. Pilihan Premium akan diperkenalkan kemudian apabila format tersebut bersedia untuk kempen umum.'
   };
 
   const installStyle = () => {
@@ -36,6 +52,12 @@
       #bukti .proof-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
       #bukti .proof-fact{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid var(--line);background:#fff;font-size:.78rem;font-weight:750;color:var(--charcoal)}
       #bukti .proof-fact::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex:0 0 auto}
+      #harga .quest-tier.basic-live{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+      #harga .quest-tier.basic-live .tier-name{color:#f06a72}
+      #harga .quest-tier.basic-live .tier-price span,#harga .quest-tier.basic-live p{color:#cbc6bf}
+      #harga .quest-tier.coming-soon{background:#f3efe8;color:var(--ink);border-style:dashed;opacity:.82}
+      #harga .quest-tier.coming-soon .tier-price{font-size:1.25rem;letter-spacing:-.02em;margin:18px 0 14px}
+      #harga .quest-tier.coming-soon .tier-price span{display:none}
       @media(min-width:860px){
         #bukti .proof-grid{grid-template-columns:1.6fr .7fr .7fr}
         #bukti .proof-item:first-child .video-frame{aspect-ratio:16/10}
@@ -70,13 +92,54 @@
       : 'Dikendalikan oleh Uniras Sdn Bhd · lookal.tech';
   };
 
+  const syncPricing = (c) => {
+    const section = document.getElementById('harga');
+    if (!section) return;
+    const heading = section.querySelector('.shead h2');
+    const intro = section.querySelector('.shead p');
+    if (heading) heading.textContent = c.priceTitle;
+    if (intro) intro.textContent = c.priceBody;
+
+    const tiers = section.querySelectorAll('.quest-tier');
+    if (tiers[0]) {
+      tiers[0].classList.remove('featured','coming-soon');
+      tiers[0].classList.add('basic-live');
+      const price = tiers[0].querySelector('.tier-price');
+      const body = tiers[0].querySelector('p');
+      if (price) price.innerHTML = `RM2 <span>${isEnglish() ? '/ day' : '/ hari'}</span>`;
+      if (body) body.textContent = c.basicBody;
+    }
+    if (tiers[1]) {
+      tiers[1].classList.remove('featured','basic-live');
+      tiers[1].classList.add('coming-soon');
+      const price = tiers[1].querySelector('.tier-price');
+      const body = tiers[1].querySelector('p');
+      if (price) price.textContent = c.soon;
+      if (body) body.textContent = c.premiumBody;
+    }
+    if (tiers[2]) {
+      tiers[2].classList.remove('featured','basic-live');
+      tiers[2].classList.add('coming-soon');
+      const price = tiers[2].querySelector('.tier-price');
+      const body = tiers[2].querySelector('p');
+      if (price) price.textContent = c.soon;
+      if (body) body.textContent = c.premiumExtendedBody;
+    }
+
+    const modelTitle = section.querySelector('.quest-model h3');
+    const modelBody = section.querySelector('.quest-model p');
+    if (modelTitle) modelTitle.textContent = c.modelTitle;
+    if (modelBody) modelBody.textContent = c.modelBody;
+  };
+
   const apply = () => {
     const section = document.getElementById('bukti');
     installStyle();
     syncDrawerWhatsApp();
     syncFooter();
-    if (!section) return;
     const c = copy();
+    syncPricing(c);
+    if (!section) return;
     const eyebrow = section.querySelector('.quest-eyebrow');
     const title = section.querySelector('.shead h2');
     const body = section.querySelector('.shead p');
@@ -105,8 +168,13 @@
     });
   };
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply, { once: true });
-  else apply();
-  window.addEventListener('pageshow', apply);
-  document.addEventListener('lookal:languagechange', () => requestAnimationFrame(apply));
+  const schedule = () => {
+    requestAnimationFrame(apply);
+    setTimeout(apply, 100);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  else schedule();
+  window.addEventListener('pageshow', schedule);
+  document.addEventListener('lookal:languagechange', schedule);
 })();
