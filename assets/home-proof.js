@@ -6,6 +6,7 @@
   if (!isHome) return;
 
   const STORAGE_KEY = 'lookal-language';
+  let proofMarkup = null;
   const isEnglish = () => localStorage.getItem(STORAGE_KEY) === 'en';
   const copy = () => isEnglish() ? {
     eyebrow: 'Proof in the real world',
@@ -70,6 +71,13 @@
   const syncDrawerWhatsApp = () => {
     const drawer = document.querySelector('.drawer-nav');
     if (!drawer) return;
+    if (!drawer.dataset.lookalDelegatedClose) {
+      drawer.dataset.lookalDelegatedClose = 'true';
+      drawer.addEventListener('click', (event) => {
+        const link = event.target.closest('a');
+        if (link) document.getElementById('menuClose')?.click();
+      });
+    }
     const label = isEnglish() ? 'WhatsApp Link' : 'Pautan WhatsApp';
     const existing = drawer.querySelector('a[href="/tools/whatsapp-link/"],a[href="/tools/whatsapp-link/index.html"]');
     if (existing) {
@@ -140,6 +148,16 @@
     if (modelBody) modelBody.textContent = c.modelBody;
   };
 
+  const restoreProof = (section) => {
+    if (!section) return;
+    const current = section.querySelector('.proof-grid');
+    if (current) {
+      proofMarkup = current.outerHTML;
+      return;
+    }
+    if (proofMarkup) section.querySelector('.wrap')?.insertAdjacentHTML('beforeend', proofMarkup);
+  };
+
   const apply = () => {
     const section = document.getElementById('bukti');
     installStyle();
@@ -149,6 +167,7 @@
     const c = copy();
     syncPricing(c);
     if (!section) return;
+    restoreProof(section);
     const eyebrow = section.querySelector('.quest-eyebrow');
     const title = section.querySelector('.shead h2');
     const body = section.querySelector('.shead p');
