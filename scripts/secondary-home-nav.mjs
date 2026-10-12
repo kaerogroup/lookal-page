@@ -60,4 +60,26 @@ const write = ({ file, html }) => fs.writeFileSync(file, html);
   }
 }
 
-console.log('Secondary-page return-home navigation standardized.');
+// Shared contact block across all public pages. Keep it build-time and fully functional
+// without JavaScript. WhatsApp and email are direct clickable actions.
+const contactCss = `<style id="lookal-contact-style">#hubungi.lookal-contact{padding:64px 0;border-top:1px solid var(--line,#ded8cf);background:#fff;color:var(--ink,#1d1d1f)}#hubungi .contact-wrap{max-width:var(--max,1120px);margin:auto;padding:0 22px}#hubungi .contact-kicker{display:block;color:var(--red,#d9232e);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}#hubungi h2{margin:0 0 12px;font-size:clamp(1.8rem,4vw,2.65rem);line-height:1.1}#hubungi .contact-intro{max-width:62ch;color:var(--smoke,var(--muted,#5e5a55));margin:0 0 24px}#hubungi .contact-actions{display:flex;gap:12px;flex-wrap:wrap}#hubungi .contact-link{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border-radius:7px;text-decoration:none;font-weight:800;border:1px solid var(--line,#ded8cf);background:#fff;color:var(--ink,#1d1d1f)}#hubungi .contact-link.primary{background:var(--red,#d9232e);border-color:var(--red,#d9232e);color:#fff}#hubungi .contact-link:hover{border-color:var(--ink,#1d1d1f)}#hubungi .contact-link.primary:hover{filter:brightness(.93)}@media(max-width:620px){#hubungi.lookal-contact{padding:52px 0}#hubungi .contact-wrap{padding:0 18px}#hubungi .contact-actions{display:grid}#hubungi .contact-link{width:100%}}</style>`;
+const contactBlock = `<section id="hubungi" class="lookal-contact" aria-labelledby="contact-title"><div class="contact-wrap"><span class="contact-kicker">Hubungi Kami / Contact Us</span><h2 id="contact-title">Perlu bantuan atau mahu berbincang dengan LOOKaL?</h2><p class="contact-intro">Hubungi pasukan kami terus melalui WhatsApp atau e-mel.</p><div class="contact-actions"><a class="contact-link primary" href="https://wa.me/60123533587" target="_blank" rel="noopener noreferrer" aria-label="Hubungi LOOKaL melalui WhatsApp +60 12-353 3587">WhatsApp · +60 12-353 3587</a><a class="contact-link" href="mailto:uniras.capital@gmail.com" aria-label="E-mel LOOKaL di uniras.capital@gmail.com">Email · uniras.capital@gmail.com</a></div></div></section>`;
+
+for (const rel of [
+  'index.html',
+  'publisher/index.html',
+  'business-partner/index.html',
+  'business-partner/revenue-share/index.html',
+  'business-partner/node-specifications/index.html',
+  'tools/whatsapp-link/index.html',
+  'tools/roi-calculator/index.html',
+]) {
+  const doc = read(rel);
+  if (!doc || doc.html.includes('id="hubungi"')) continue;
+  doc.html = doc.html.replace('</head>', `${contactCss}\n</head>`);
+  if (doc.html.includes('</main>')) doc.html = doc.html.replace('</main>', `${contactBlock}\n</main>`);
+  else if (doc.html.includes('<footer')) doc.html = doc.html.replace('<footer', `${contactBlock}\n<footer`);
+  write(doc);
+}
+
+console.log('Secondary-page navigation and shared clickable contact section standardized.');
