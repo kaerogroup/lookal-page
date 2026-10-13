@@ -8,25 +8,43 @@
   const isEnglish = () => localStorage.getItem(STORAGE_KEY) === 'en';
 
   const locations = [
-    'Mak Wan Mee Sup Melayu Champa','Keropok Sri Sura','Pondok Bangku Eatery','Kopi Cerita Kita Dungun','Hurunini Bakery','Elva Crunch','Perut Bakar Hatyai','Alfaz House Dungun','HIT BARBER CLASSIC DUNGUN','Ocean Barber'
+    { name:'Mak Wan Mee Sup Melayu Champa', lat:4.7176929, lng:103.4374809 },
+    { name:'Keropok Sri Sura', lat:4.7347874, lng:103.4288477 },
+    { name:'Pondok Bangku Eatery', lat:4.7382947, lng:103.4193308 },
+    { name:'Kopi Cerita Kita Dungun', lat:4.7408, lng:103.4217 },
+    { name:'Hurunini Bakery', lat:4.7523, lng:103.4119 },
+    { name:'Elva Crunch', lat:4.7833333, lng:103.4333333 },
+    { name:'Perut Bakar Hatyai', lat:4.7431, lng:103.4243 },
+    { name:'Alfaz House Dungun', lat:4.7570, lng:103.4095 },
+    { name:'HIT BARBER CLASSIC DUNGUN', lat:4.7424032, lng:103.4172933 },
+    { name:'Ocean Barber', lat:4.7423599, lng:103.4172919 },
   ];
 
   const copy = () => isEnglish() ? {
     eyebrow:'Live network footprint',
-    title:'LOOKaL active locations in Malaysia.',
-    body:'The current active network is concentrated in Dungun, Terengganu. Each red point represents one confirmed active LOOKaL location.',
+    title:'Explore LOOKaL active locations.',
+    body:'Zoom from Malaysia into Dungun, Terengganu to inspect the current active LOOKaL network. Each red marker represents one confirmed active location.',
     active:'Active locations', state:'State', parliament:'Parliament',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
-    legend:'Active LOOKaL locations',
-    credit:'Malaysia geography: Simple World Map · CC BY-SA 3.0'
+    hint:'Zoom or drag the map to explore locations',
+    popup:'Active LOOKaL location'
   } : {
     eyebrow:'Jejak rangkaian aktif',
-    title:'Lokasi aktif LOOKaL di Malaysia.',
-    body:'Rangkaian aktif semasa tertumpu di Dungun, Terengganu. Setiap titik merah mewakili satu lokasi LOOKaL aktif yang telah disahkan.',
+    title:'Terokai lokasi aktif LOOKaL.',
+    body:'Zum dari Malaysia hingga ke Dungun, Terengganu untuk melihat rangkaian LOOKaL aktif semasa. Setiap penanda merah mewakili satu lokasi aktif yang telah disahkan.',
     active:'Lokasi aktif', state:'Negeri', parliament:'Parlimen',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
-    legend:'Lokasi LOOKaL aktif',
-    credit:'Geografi Malaysia: Simple World Map · CC BY-SA 3.0'
+    hint:'Zum atau gerakkan peta untuk melihat lokasi',
+    popup:'Lokasi LOOKaL aktif'
+  };
+
+  const ensureMapLibreCss = () => {
+    if (document.getElementById('lookal-maplibre-css')) return;
+    const link = document.createElement('link');
+    link.id = 'lookal-maplibre-css';
+    link.rel = 'stylesheet';
+    link.href = 'https://unpkg.com/maplibre-gl@6.14.0/dist/maplibre-gl.css';
+    document.head.appendChild(link);
   };
 
   const installStyle = () => {
@@ -38,20 +56,18 @@
       #network-map .shead{max-width:68ch}#network-map .shead p{color:#c9c5bf}#network-map .quest-eyebrow{color:#f06a72}
       .network-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#424046;border:1px solid #424046;margin-bottom:18px}
       .network-stat{background:#29282c;padding:18px 20px}.network-stat span{display:block;color:#969198;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.network-stat strong{display:block;margin-top:3px;font-size:1.25rem;letter-spacing:-.025em}
-      .malaysia-card{background:radial-gradient(circle at 22% 40%,rgba(226,43,54,.09),transparent 18%),linear-gradient(180deg,#28272b,#202024);border:1px solid #454249;overflow:hidden}
-      .malaysia-stage{position:relative;max-width:1180px;margin:0 auto;padding:28px 28px 18px;aspect-ratio:58/27;min-height:420px}
-      .malaysia-stage img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 28px rgba(0,0,0,.24))}
-      .dungun-dots{position:absolute;left:22.35%;top:36.5%;width:56px;height:34px;transform:translate(-50%,-50%)}
-      .dungun-dots i{position:absolute;width:8px;height:8px;border-radius:50%;background:#ef3340;border:1.5px solid #fff;box-shadow:0 0 0 4px rgba(239,51,64,.14)}
-      .dungun-dots i:nth-child(1){left:4px;top:10px}.dungun-dots i:nth-child(2){left:15px;top:5px}.dungun-dots i:nth-child(3){left:26px;top:10px}.dungun-dots i:nth-child(4){left:37px;top:5px}.dungun-dots i:nth-child(5){left:48px;top:11px}.dungun-dots i:nth-child(6){left:8px;top:23px}.dungun-dots i:nth-child(7){left:19px;top:18px}.dungun-dots i:nth-child(8){left:30px;top:23px}.dungun-dots i:nth-child(9){left:41px;top:18px}.dungun-dots i:nth-child(10){left:51px;top:25px}
-      .dungun-label{position:absolute;left:28%;top:29%;padding:8px 10px;background:rgba(22,22,25,.9);border:1px solid #454249;color:#fff;font-size:.74rem;font-weight:800}.dungun-label small{display:block;color:#99949b;font-size:.63rem;font-weight:600;margin-top:3px}
-      .map-legend{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:13px 16px;border-top:1px solid #454249;color:#aaa59e;font-size:.7rem}.map-legend span{display:inline-flex;align-items:center;gap:8px}.map-legend i{width:8px;height:8px;border-radius:50%;background:#ef3340;box-shadow:0 0 0 5px rgba(239,51,64,.13)}
-      @media(max-width:680px){.network-stats{grid-template-columns:1fr}.malaysia-stage{min-height:260px;padding:18px 10px}.dungun-dots{width:38px;height:24px}.dungun-dots i{width:6px;height:6px;box-shadow:0 0 0 2px rgba(239,51,64,.14)}.dungun-label{left:30%;top:25%;font-size:.62rem}.map-legend{align-items:flex-start;flex-direction:column}}
+      .malaysia-card{position:relative;background:#202024;border:1px solid #454249;overflow:hidden}
+      #lookal-live-map{width:100%;height:520px;background:#232327}
+      .map-hint{position:absolute;z-index:3;left:14px;bottom:14px;padding:8px 10px;border-radius:8px;background:rgba(24,24,27,.88);backdrop-filter:blur(8px);color:#f0ece7;font-size:.72rem;font-weight:700;box-shadow:0 6px 24px rgba(0,0,0,.2);pointer-events:none}
+      .lookal-marker{width:17px;height:17px;border-radius:50%;background:#ef3340;border:2px solid #fff;box-shadow:0 0 0 5px rgba(239,51,64,.18),0 4px 12px rgba(0,0,0,.35);cursor:pointer}
+      .maplibregl-popup-content{background:#242327!important;color:#fff!important;border-radius:10px!important;padding:12px 14px!important;box-shadow:0 14px 34px rgba(0,0,0,.35)!important;font:600 .78rem ui-sans-serif,system-ui,sans-serif}
+      .maplibregl-popup-content strong{display:block;font-size:.82rem;margin-bottom:4px}.maplibregl-popup-content small{color:#aaa5ad}.maplibregl-popup-close-button{color:#fff;font-size:18px;padding:3px 7px}
+      .maplibregl-popup-anchor-bottom .maplibregl-popup-tip{border-top-color:#242327!important}.maplibregl-popup-anchor-top .maplibregl-popup-tip{border-bottom-color:#242327!important}.maplibregl-popup-anchor-left .maplibregl-popup-tip{border-right-color:#242327!important}.maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:#242327!important}
+      .maplibregl-ctrl-group{border-radius:9px!important;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.22)!important}.maplibregl-ctrl-attrib{font-size:10px!important}
+      @media(max-width:680px){.network-stats{grid-template-columns:1fr}#lookal-live-map{height:390px}.map-hint{right:14px;font-size:.65rem}}
     `;
     document.head.appendChild(style);
   };
-
-  const dots = () => locations.map((name) => `<i title="${name}" aria-hidden="true"></i>`).join('');
 
   const sectionHtml = (c) => `
     <div class="wrap">
@@ -62,16 +78,81 @@
         <div class="network-stat"><span>${c.parliament}</span><strong>${c.parliamentValue}</strong></div>
       </div>
       <div class="malaysia-card">
-        <div class="malaysia-stage" role="img" aria-label="Malaysia map showing 10 active LOOKaL locations clustered in Dungun, Terengganu">
-          <img src="/assets/malaysia-network-map.svg" alt="Peta Malaysia" loading="lazy" decoding="async">
-          <div class="dungun-dots">${dots()}</div>
-          <div class="dungun-label">Dungun<small>Terengganu · P039 · 10 lokasi aktif</small></div>
-        </div>
-        <div class="map-legend"><span><i></i>${c.legend}</span><small>${c.credit}</small></div>
+        <div id="lookal-live-map" role="region" aria-label="Interactive map of active LOOKaL locations"></div>
+        <div class="map-hint">${c.hint}</div>
       </div>
     </div>`;
 
+  let map = null;
+  let modulePromise = null;
+
+  const loadMapLibre = () => {
+    if (!modulePromise) modulePromise = import('https://unpkg.com/maplibre-gl@6.14.0/dist/maplibre-gl.mjs');
+    return modulePromise;
+  };
+
+  const buildMap = async () => {
+    const container = document.getElementById('lookal-live-map');
+    if (!container) return;
+
+    try {
+      const maplibregl = await loadMapLibre();
+      if (!document.body.contains(container)) return;
+
+      if (map) {
+        map.remove();
+        map = null;
+      }
+
+      map = new maplibregl.Map({
+        container,
+        style: {
+          version: 8,
+          sources: {
+            osm: {
+              type: 'raster',
+              tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+              tileSize: 256,
+              attribution: '© OpenStreetMap contributors'
+            }
+          },
+          layers: [{ id:'osm', type:'raster', source:'osm' }]
+        },
+        center: [109.6, 4.2],
+        zoom: 4.25,
+        minZoom: 3,
+        maxZoom: 18,
+        attributionControl: true,
+        maplibreLogo: false
+      });
+
+      map.addControl(new maplibregl.NavigationControl({ showCompass:false, visualizePitch:false }), 'top-right');
+
+      const c = copy();
+      locations.forEach((loc) => {
+        const el = document.createElement('button');
+        el.type = 'button';
+        el.className = 'lookal-marker';
+        el.setAttribute('aria-label', loc.name);
+        const popup = new maplibregl.Popup({ offset:18, closeButton:true })
+          .setHTML(`<strong>${loc.name}</strong><small>${c.popup} · Dungun, Terengganu</small>`);
+        new maplibregl.Marker({ element:el, anchor:'center' })
+          .setLngLat([loc.lng, loc.lat])
+          .setPopup(popup)
+          .addTo(map);
+      });
+
+      map.on('load', () => {
+        map.resize();
+      });
+    } catch (error) {
+      console.error('LOOKaL MapLibre map failed to load', error);
+      container.innerHTML = '<div style="padding:40px;color:#c9c5bf;text-align:center">Interactive map is temporarily unavailable.</div>';
+    }
+  };
+
   const render = () => {
+    ensureMapLibreCss();
     installStyle();
     let section = document.getElementById('network-map');
     if (!section) {
@@ -84,9 +165,10 @@
       else document.querySelector('main#main')?.appendChild(section);
     }
     section.innerHTML = sectionHtml(copy());
+    buildMap();
   };
 
-  const schedule = () => { requestAnimationFrame(render); setTimeout(render, 120); };
+  const schedule = () => { requestAnimationFrame(render); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', schedule, { once:true });
   else schedule();
   window.addEventListener('pageshow', schedule);
