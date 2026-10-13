@@ -87,10 +87,11 @@ for (const rel of htmlFiles) {
 const homePath = path.join(out, 'index.html');
 let home = fs.readFileSync(homePath, 'utf8');
 
-// Prevent a flash of the legacy source markup before the accepted homepage runtime patches apply.
-// Header remains visible; main/footer reveal as soon as home-proof.js marks the page ready.
-// A short fail-safe guarantees the page can never remain hidden if a runtime patch errors.
-const prePaintGuard = `<style id="lookal-prepaint-guard">html.lookal-home-patching body>main,html.lookal-home-patching body>footer{visibility:hidden!important}html.lookal-home-ready body>main,html.lookal-home-ready body>footer{visibility:visible!important}</style><script>(function(){var d=document.documentElement;d.classList.add('lookal-home-patching');window.setTimeout(function(){d.classList.remove('lookal-home-patching');d.classList.add('lookal-home-ready')},2200)})();</script>`;
+// Suppress the entire legacy source document before first paint. The accepted homepage
+// is still assembled by the current runtime patch stack, so exposing even the old header
+// for one frame produces a visible flash. Keep body completely hidden until the final
+// patch signals readiness. A fail-safe ensures the page can never remain hidden.
+const prePaintGuard = `<script>(function(){document.documentElement.classList.add('lookal-home-patching')})();</script><style id="lookal-prepaint-guard">html{background:#f8f5ef}html.lookal-home-patching body{visibility:hidden!important;opacity:0!important}html.lookal-home-ready body{visibility:visible!important;opacity:1!important}</style><script>(function(){var d=document.documentElement;window.setTimeout(function(){d.classList.remove('lookal-home-patching');d.classList.add('lookal-home-ready')},2200)})();</script>`;
 if (!home.includes('lookal-prepaint-guard')) home = home.replace('</head>', `${prePaintGuard}\n</head>`);
 
 const proofReplacements = [
