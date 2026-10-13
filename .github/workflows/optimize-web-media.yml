@@ -1,0 +1,180 @@
+name: Optimize public website media
+
+on:
+  push:
+    branches:
+      - wp-business-partner-landing-v1
+    paths:
+      - '.github/workflows/optimize-web-media.yml'
+      - 'assets/screens/*.mp4'
+      - 'assets/video/*.mp4'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optimize-web-media-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    if: ${{ !contains(github.event.head_commit.message, '[skip web-media]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ffmpeg
+
+      - name: Compress videos and create posters
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/web-media/screens assets/web-media/walkthroughs
+
+          encode_video() {
+            input="$1"
+            output="$2"
+            poster="$3"
+            ffmpeg -y -i "$input" \
+              -vf "scale='if(gt(iw,ih),min(1280,iw),-2)':'if(gt(iw,ih),-2,min(1280,ih))'" \
+              -c:v libx264 -preset medium -crf 28 -pix_fmt yuv420p \
+              -c:a aac -b:a 96k -movflags +faststart "$output"
+            ffmpeg -y -ss 00:00:01 -i "$output" -frames:v 1 -q:v 5 "$poster"
+          }
+
+          encode_video "assets/screens/VID-20260915-WA0001.mp4" \
+            "assets/web-media/screens/location-01.mp4" \
+            "assets/web-media/screens/location-01.jpg"
+          encode_video "assets/screens/VID20260920082504 (1).mp4" \
+            "assets/web-media/screens/location-02.mp4" \
+            "assets/web-media/screens/location-02.jpg"
+          encode_video "assets/screens/VID20260920083827.mp4" \
+            "assets/web-media/screens/location-03.mp4" \
+            "assets/web-media/screens/location-03.jpg"
+
+          encode_video "assets/video/browsing dashboard Dan function.mp4" \
+            "assets/web-media/walkthroughs/dashboard.mp4" \
+            "assets/web-media/walkthroughs/dashboard.jpg"
+          encode_video "assets/video/snap2ads editor new (1).mp4" \
+            "assets/web-media/walkthroughs/snap2ads-editor.mp4" \
+            "assets/web-media/walkthroughs/snap2ads-editor.jpg"
+          encode_video "assets/video/snap2ads own poster.mp4" \
+            "assets/web-media/walkthroughs/own-poster.mp4" \
+            "assets/web-media/walkthroughs/own-poster.jpg"
+
+          echo 'Original and optimized sizes:'
+          du -h assets/screens/*.mp4 assets/video/*.mp4 assets/web-media/**/*.mp4 | sort -h
+
+      - name: Make website media interaction-first
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          html_files = [
+              Path('index.html'),
+              Path('business-partner/index.html'),
+              Path('tools/whatsapp-link/index.html'),
+              Path('tools/roi-calculator/index.html'),
+              Path('404.html'),
+          ]
+
+          font_links = [
+              '<link rel="preconnect" href="https://fonts.googleapis.com">\n',
+              '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n',
+              '<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">\n',
+          ]
+
+          for path in html_files:
+              if not path.exists():
+                  continue
+              text = path.read_text(encoding='utf-8')
+              for link in font_links:
+                  text = text.replace(link, '')
+              text = text.replace("'Plus Jakarta Sans',Arial,sans-serif", "ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif")
+              path.write_text(text, encoding='utf-8')
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          proof_map = {
+              'assets/screens/VID-20260915-WA0001.mp4': ('assets/web-media/screens/location-01.mp4','assets/web-media/screens/location-01.jpg'),
+              'assets/screens/VID20260920082504%20(1).mp4': ('assets/web-media/screens/location-02.mp4','assets/web-media/screens/location-02.jpg'),
+              'assets/screens/VID20260920083827.mp4': ('assets/web-media/screens/location-03.mp4','assets/web-media/screens/location-03.jpg'),
+          }
+          for old, (new, poster) in proof_map.items():
+              pattern = rf'<video controls muted playsinline preload="metadata"([^>]*)><source src="{re.escape(old)}" type="video/mp4"></video>'
+              replacement = rf'<video controls muted playsinline preload="none" poster="{poster}"\1><source src="{new}" type="video/mp4"></video>'
+              text, n = re.subn(pattern, replacement, text)
+              if n == 0:
+                  # tolerate prior preload changes
+                  pattern = rf'<video controls muted playsinline preload="none"([^>]*)><source src="{re.escape(old)}" type="video/mp4"></video>'
+                  text = re.sub(pattern, replacement, text)
+
+          walk_map = {
+              'assets/video/browsing%20dashboard%20Dan%20function.mp4': ('assets/web-media/walkthroughs/dashboard.mp4','assets/web-media/walkthroughs/dashboard.jpg'),
+              'assets/video/snap2ads%20editor%20new%20(1).mp4': ('assets/web-media/walkthroughs/snap2ads-editor.mp4','assets/web-media/walkthroughs/snap2ads-editor.jpg'),
+              'assets/video/snap2ads%20own%20poster.mp4': ('assets/web-media/walkthroughs/own-poster.mp4','assets/web-media/walkthroughs/own-poster.jpg'),
+          }
+          for old, (new, poster) in walk_map.items():
+              text = text.replace(f'data-video="{old}"', f'data-video="{new}"')
+              preview = rf'<video muted playsinline preload="metadata" aria-hidden="true"><source src="{re.escape(old)}" type="video/mp4"></video>'
+              img = f'<img src="{poster}" loading="lazy" decoding="async" alt="" aria-hidden="true">'
+              text = re.sub(preview, img, text)
+              preview_none = rf'<video muted playsinline preload="none" aria-hidden="true"><source src="{re.escape(old)}" type="video/mp4"></video>'
+              text = re.sub(preview_none, img, text)
+
+          text = text.replace('.walk-open .video-frame video{pointer-events:none}', '.walk-open .video-frame video{pointer-events:none}.walk-open .video-frame img{width:100%;height:100%;object-fit:cover}')
+          text = text.replace('<video id="walkModalVideo" controls playsinline preload="metadata"></video>', '<video id="walkModalVideo" controls playsinline preload="none"></video>')
+
+          # Delay off-screen layout/paint work while keeping accessible document structure.
+          if 'content-visibility:auto' not in text:
+              text = text.replace('section{padding:78px 0;border-top:1px solid var(--line)}', 'section{padding:78px 0;border-top:1px solid var(--line)}section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 760px}')
+
+          path.write_text(text, encoding='utf-8')
+
+          bp = Path('business-partner/index.html')
+          if bp.exists():
+              text = bp.read_text(encoding='utf-8')
+              if 'content-visibility:auto' not in text:
+                  text = text.replace('section{padding:82px 0;border-top:1px solid var(--line)}', 'section{padding:82px 0;border-top:1px solid var(--line)}section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 720px}')
+              bp.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Verify optimized media
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s assets/web-media/screens/location-01.mp4
+          test -s assets/web-media/screens/location-02.mp4
+          test -s assets/web-media/screens/location-03.mp4
+          test -s assets/web-media/walkthroughs/dashboard.mp4
+          test -s assets/web-media/walkthroughs/snap2ads-editor.mp4
+          test -s assets/web-media/walkthroughs/own-poster.mp4
+          grep -q 'preload="none"' index.html
+          grep -q 'assets/web-media/screens/location-01.mp4' index.html
+          grep -q 'assets/web-media/walkthroughs/dashboard.mp4' index.html
+          ! grep -q 'fonts.googleapis.com' index.html
+
+      - name: Commit optimized website assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html business-partner/index.html tools/whatsapp-link/index.html tools/roi-calculator/index.html 404.html assets/web-media
+          if git diff --cached --quiet; then
+            echo 'No optimization changes to commit.'
+            exit 0
+          fi
+          git commit -m "perf: ship compressed interaction-first web media [skip web-media]"
+          git push origin HEAD:${{ github.ref_name }}
