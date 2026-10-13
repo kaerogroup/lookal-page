@@ -4,137 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#1f1f22">
-  <title>LOOKaL Location Pin</title>
-  <meta name="description" content="Capture exact LOOKaL node coordinates on-site using device location and a draggable map pin.">
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.14.0/dist/maplibre-gl.css">
+  <meta name="robots" content="noindex,nofollow">
+  <title>LOOKaL Location Pin — Disabled</title>
   <style>
-    :root{--bg:#1f1f22;--panel:#29282c;--panel2:#242327;--line:#454249;--text:#f7f3ee;--muted:#aaa5ad;--red:#ef3340;--ok:#51c878}
-    *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}body{min-height:100vh}
-    header{position:sticky;top:0;z-index:10;background:rgba(31,31,34,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-    .top{max-width:920px;margin:auto;padding:14px 16px;display:flex;align-items:center;gap:12px}.brand{font-weight:900;letter-spacing:-.04em;font-size:1.2rem}.back{margin-left:auto;color:var(--text);text-decoration:none;font-size:.82rem;font-weight:800;border:1px solid var(--line);padding:8px 10px;border-radius:10px}
-    main{max-width:920px;margin:auto;padding:20px 16px 42px}.eyebrow{color:#ff7b84;text-transform:uppercase;font-size:.72rem;font-weight:900;letter-spacing:.12em}.hero h1{font-size:clamp(1.8rem,5vw,3rem);letter-spacing:-.045em;margin:.45rem 0 .5rem}.hero p{color:#c7c2c8;line-height:1.55;margin:0 0 18px}
-    .progress{display:flex;gap:6px;margin:14px 0 18px}.progress i{height:5px;flex:1;background:#3b393f;border-radius:99px}.progress i.done{background:var(--ok)}.progress i.active{background:var(--red)}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:14px}.card-head{padding:16px;border-bottom:1px solid var(--line)}.label{display:block;color:var(--muted);font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}.place{font-size:1.15rem;font-weight:900;line-height:1.25}
-    #map{height:min(58vh,520px);min-height:360px;background:#232327}.pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:var(--red);border:3px solid #fff;transform:rotate(-45deg);box-shadow:0 0 0 7px rgba(239,51,64,.18),0 8px 18px rgba(0,0,0,.4)}.pin:after{content:"";position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;left:7px;top:7px}
-    .controls{padding:16px;display:grid;gap:10px}.primary,.secondary,.ghost{appearance:none;border:0;border-radius:12px;padding:13px 14px;font:inherit;font-weight:900;cursor:pointer}.primary{background:var(--red);color:#fff}.secondary{background:#fff;color:#202024}.ghost{background:transparent;color:#fff;border:1px solid var(--line)}button:disabled{opacity:.45;cursor:not-allowed}
-    .status{padding:12px 14px;border-radius:12px;background:#242327;border:1px solid var(--line);font-size:.82rem;color:#d0cbd1;line-height:1.45}.status strong{color:#fff}.status.ok{border-color:rgba(81,200,120,.5)}.status.warn{border-color:rgba(239,51,64,.5)}
-    .coords{display:grid;grid-template-columns:1fr 1fr;gap:8px}.coord{background:#242327;border:1px solid var(--line);padding:10px;border-radius:10px}.coord span{display:block;color:var(--muted);font-size:.68rem;font-weight:800;text-transform:uppercase}.coord b{display:block;margin-top:4px;font-size:.88rem;word-break:break-all}
-    .saved{margin-top:14px}.saved h2{font-size:1rem;margin:0 0 10px}.saved-list{display:grid;gap:7px}.row{display:flex;align-items:center;gap:10px;background:#29282c;border:1px solid var(--line);border-radius:12px;padding:10px 12px}.dot{width:8px;height:8px;border-radius:50%;background:#666}.row.done .dot{background:var(--ok)}.row.active .dot{background:var(--red)}.row-name{font-size:.82rem;font-weight:800;flex:1}.row-state{font-size:.72rem;color:var(--muted)}
-    .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.note{color:#9f9aa2;font-size:.74rem;line-height:1.5;margin-top:12px}
-    .maplibregl-ctrl-group{border-radius:10px!important;overflow:hidden}.maplibregl-ctrl-attrib{font-size:9px!important}
-    @media(max-width:640px){main{padding:16px 12px 36px}.coords,.actions{grid-template-columns:1fr}.back{font-size:.74rem}.hero p{font-size:.9rem}#map{height:52vh;min-height:340px}}
+    :root{--bg:#1f1f22;--panel:#29282c;--line:#454249;--text:#f7f3ee;--muted:#aaa5ad;--red:#ef3340}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+    body{display:grid;place-items:center;padding:24px}
+    .card{width:min(560px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px}
+    .eyebrow{color:#ff7b84;text-transform:uppercase;font-size:.72rem;font-weight:900;letter-spacing:.12em}
+    h1{margin:.55rem 0 .7rem;font-size:clamp(1.8rem,5vw,2.7rem);letter-spacing:-.045em}
+    p{margin:0;color:#c7c2c8;line-height:1.6}
+    a{display:inline-flex;margin-top:20px;text-decoration:none;background:var(--red);color:#fff;font-weight:900;padding:12px 15px;border-radius:11px}
   </style>
 </head>
 <body>
-<header><div class="top"><div class="brand">LOOKaL</div><a class="back" href="/">← Kembali</a></div></header>
-<main>
-  <section class="hero">
-    <span class="eyebrow">Location Pin Capture</span>
-    <h1>Pin lokasi sebenar node LOOKaL.</h1>
-    <p>Nama 10 lokasi sudah disediakan. Bila anda berada di premis, pilih lokasi semasa, semak pin di atas peta, laraskan jika perlu, kemudian simpan.</p>
-    <div class="progress" id="progress"></div>
-  </section>
-
-  <section class="card">
-    <div class="card-head"><span class="label">Lokasi semasa</span><div class="place" id="placeName"></div></div>
-    <div id="map" role="region" aria-label="Peta untuk pin lokasi sebenar"></div>
-    <div class="controls">
-      <button class="primary" id="locateBtn">Gunakan lokasi semasa</button>
-      <div class="status" id="status">Pergi ke premis ini, kemudian tekan <strong>Gunakan lokasi semasa</strong>.</div>
-      <div class="coords">
-        <div class="coord"><span>Latitude</span><b id="latValue">—</b></div>
-        <div class="coord"><span>Longitude</span><b id="lngValue">—</b></div>
-      </div>
-      <div class="coord"><span>GPS accuracy</span><b id="accValue">—</b></div>
-      <button class="secondary" id="saveBtn" disabled>Simpan pin lokasi ini</button>
-      <button class="ghost" id="nextBtn">Seterusnya</button>
-    </div>
-  </section>
-
-  <section class="saved">
-    <h2>Progress lokasi</h2>
-    <div class="saved-list" id="savedList"></div>
-    <div class="actions">
-      <button class="ghost" id="copyBtn">Salin semua koordinat</button>
-      <button class="ghost" id="resetBtn">Reset data pin</button>
-    </div>
-    <p class="note">Data pin disimpan dalam browser peranti ini sahaja sehingga anda salin/export. Untuk bacaan GPS terbaik, berdiri berhampiran node/premis dan tunggu beberapa saat jika accuracy masih tinggi.</p>
-  </section>
-</main>
-<script type="module">
-  import * as maplibregl from 'https://unpkg.com/maplibre-gl@6.14.0/dist/maplibre-gl.mjs';
-
-  const LOCATIONS = [
-    {name:'Mak Wan Mee Sup Melayu Champa',lat:4.7176929,lng:103.4374809},
-    {name:'Keropok Sri Sura',lat:4.7347874,lng:103.4288477},
-    {name:'Pondok Bangku Eatery',lat:4.7382947,lng:103.4193308},
-    {name:'Kopi Cerita Kita Dungun',lat:4.7408,lng:103.4217},
-    {name:'Hurunini Bakery',lat:4.7523,lng:103.4119},
-    {name:'Elva Crunch',lat:4.7833333,lng:103.4333333},
-    {name:'Perut Bakar Hatyai',lat:4.7431,lng:103.4243},
-    {name:'Alfaz House Dungun',lat:4.7570,lng:103.4095},
-    {name:'HIT BARBER CLASSIC DUNGUN',lat:4.7424032,lng:103.4172933},
-    {name:'Ocean Barber',lat:4.7423599,lng:103.4172919}
-  ];
-  const KEY='lookal-location-pin-v1';
-  const saved=JSON.parse(localStorage.getItem(KEY)||'{}');
-  let index=0, marker=null, current=null;
-
-  const map=new maplibregl.Map({
-    container:'map',
-    style:{version:8,sources:{osm:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'osm',type:'raster',source:'osm'}]},
-    center:[103.423,4.745],zoom:13,minZoom:4,maxZoom:20,attributionControl:true,maplibreLogo:false
-  });
-  map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
-
-  const $=id=>document.getElementById(id);
-  const setStatus=(html,kind='')=>{const el=$('status');el.className='status'+(kind?' '+kind:'');el.innerHTML=html};
-  const markerEl=()=>{const el=document.createElement('div');el.className='pin';return el};
-  const setMarker=(lng,lat,accuracy=null,source='manual')=>{
-    current={lat,lng,accuracy,source,capturedAt:new Date().toISOString()};
-    if(marker) marker.remove();
-    marker=new maplibregl.Marker({element:markerEl(),draggable:true,anchor:'bottom'}).setLngLat([lng,lat]).addTo(map);
-    marker.on('dragend',()=>{const p=marker.getLngLat();current={...current,lat:p.lat,lng:p.lng,source:'drag-adjusted'};renderCoords();setStatus('Pin telah dilaraskan secara manual. Semak kedudukan dan tekan <strong>Simpan pin lokasi ini</strong>.','ok')});
-    renderCoords();$('saveBtn').disabled=false;
-  };
-  const renderCoords=()=>{
-    $('latValue').textContent=current?current.lat.toFixed(7):'—';
-    $('lngValue').textContent=current?current.lng.toFixed(7):'—';
-    $('accValue').textContent=current&&Number.isFinite(current.accuracy)?`±${Math.round(current.accuracy)} m`:'—';
-  };
-  const showLocation=()=>{
-    const loc=LOCATIONS[index];$('placeName').textContent=`${index+1}. ${loc.name}`;
-    current=null;$('saveBtn').disabled=true;renderCoords();if(marker){marker.remove();marker=null}
-    const existing=saved[loc.name];
-    if(existing){setMarker(existing.lng,existing.lat,existing.accuracy,'saved');map.flyTo({center:[existing.lng,existing.lat],zoom:18});setStatus('Lokasi ini sudah dipin. Anda boleh ambil GPS semula atau drag pin untuk betulkan.','ok')}
-    else {map.flyTo({center:[loc.lng,loc.lat],zoom:16});setStatus('Pergi ke premis ini, kemudian tekan <strong>Gunakan lokasi semasa</strong>.')}
-    renderProgress();renderList();
-  };
-  const renderProgress=()=>{$('progress').innerHTML=LOCATIONS.map((l,i)=>`<i class="${saved[l.name]?'done':i===index?'active':''}"></i>`).join('')};
-  const renderList=()=>{$('savedList').innerHTML=LOCATIONS.map((l,i)=>{const s=saved[l.name];return `<div class="row ${s?'done':''} ${i===index?'active':''}" data-i="${i}"><span class="dot"></span><span class="row-name">${i+1}. ${l.name}</span><span class="row-state">${s?'Dipin':'Belum'}</span></div>`}).join('');document.querySelectorAll('.row').forEach(r=>r.addEventListener('click',()=>{index=Number(r.dataset.i);showLocation()}))};
-
-  $('locateBtn').addEventListener('click',()=>{
-    if(!navigator.geolocation){setStatus('Peranti/browser ini tidak menyokong GPS browser.','warn');return}
-    $('locateBtn').disabled=true;setStatus('Sedang mendapatkan lokasi GPS…');
-    navigator.geolocation.getCurrentPosition(pos=>{
-      $('locateBtn').disabled=false;
-      const {latitude,longitude,accuracy}=pos.coords;setMarker(longitude,latitude,accuracy,'gps');map.flyTo({center:[longitude,latitude],zoom:19});
-      const kind=accuracy<=15?'ok':accuracy<=40?'':'warn';
-      setStatus(`Lokasi GPS diterima dengan accuracy kira-kira <strong>±${Math.round(accuracy)} m</strong>. ${accuracy>20?'Jika pin lari, drag pin tepat ke premis sebelum simpan.':'Semak pin dan simpan jika tepat.'}`,kind);
-    },err=>{$('locateBtn').disabled=false;setStatus(`Lokasi tidak dapat diambil: <strong>${err.message}</strong>. Pastikan Location/GPS dan permission browser dibenarkan.`,'warn')},{enableHighAccuracy:true,timeout:20000,maximumAge:0});
-  });
-
-  $('saveBtn').addEventListener('click',()=>{
-    if(!current)return;const name=LOCATIONS[index].name;saved[name]={...current};localStorage.setItem(KEY,JSON.stringify(saved));setStatus('Pin lokasi disimpan pada peranti ini.','ok');renderProgress();renderList();
-  });
-  $('nextBtn').addEventListener('click',()=>{index=(index+1)%LOCATIONS.length;showLocation()});
-  $('copyBtn').addEventListener('click',async()=>{
-    const rows=LOCATIONS.map(l=>({name:l.name,...(saved[l.name]||{lat:null,lng:null,accuracy:null,capturedAt:null})}));
-    const text=JSON.stringify(rows,null,2);try{await navigator.clipboard.writeText(text);setStatus('Semua data koordinat telah disalin.','ok')}catch{prompt('Salin data ini:',text)}
-  });
-  $('resetBtn').addEventListener('click',()=>{if(confirm('Reset semua pin yang disimpan pada peranti ini?')){localStorage.removeItem(KEY);for(const k of Object.keys(saved))delete saved[k];showLocation()}});
-
-  map.on('load',()=>{map.resize();showLocation()});
-</script>
+  <main class="card">
+    <span class="eyebrow">Internal tool</span>
+    <h1>Pin Lokasi ditutup sementara.</h1>
+    <p>Batch lokasi semasa telah selesai. Tool ini akan dibuka semula apabila batch lokasi seterusnya bermula.</p>
+    <a href="/">Kembali ke LOOKaL</a>
+  </main>
 </body>
 </html>
