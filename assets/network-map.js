@@ -7,23 +7,24 @@
   const STORAGE_KEY = 'lookal-language';
   const isEnglish = () => localStorage.getItem(STORAGE_KEY) === 'en';
 
+  // Field-pinned location coordinates captured on 2026-10-13.
   const locations = [
-    { name:'Mak Wan Mee Sup Melayu Champa', lat:4.7176929, lng:103.4374809 },
-    { name:'Keropok Sri Sura', lat:4.7347874, lng:103.4288477 },
-    { name:'Pondok Bangku Eatery', lat:4.7382947, lng:103.4193308 },
-    { name:'Kopi Cerita Kita Dungun', lat:4.7408, lng:103.4217 },
-    { name:'Hurunini Bakery', lat:4.7523, lng:103.4119 },
-    { name:'Elva Crunch', lat:4.7833333, lng:103.4333333 },
-    { name:'Perut Bakar Hatyai', lat:4.7431, lng:103.4243 },
-    { name:'Alfaz House Dungun', lat:4.7570, lng:103.4095 },
-    { name:'HIT BARBER CLASSIC DUNGUN', lat:4.7424032, lng:103.4172933 },
-    { name:'Ocean Barber', lat:4.7423599, lng:103.4172919 },
+    { name:'Mak Wan Mee Sup Melayu Champa', lat:4.72589671939167, lng:103.41498127320324, accuracy:100, source:'drag-adjusted', capturedAt:'2026-10-13T08:34:57.840Z' },
+    { name:'Keropok Sri Sura', lat:4.735028523846523, lng:103.42878953451674, accuracy:100, source:'drag-adjusted', capturedAt:'2026-10-13T08:37:50.818Z' },
+    { name:'Pondok Bangku Eatery', lat:4.73821824333011, lng:103.4194980411749, accuracy:76.66100311279297, source:'drag-adjusted', capturedAt:'2026-10-13T08:38:31.503Z' },
+    { name:'Kopi Cerita Kita Dungun', lat:4.724053222973595, lng:103.42416722993153, accuracy:100, source:'drag-adjusted', capturedAt:'2026-10-13T08:40:13.377Z' },
+    { name:'Hurunini Bakery', lat:4.760201983527992, lng:103.41203786502155, accuracy:78.30699920654297, source:'drag-adjusted', capturedAt:'2026-10-13T08:40:57.983Z' },
+    { name:'Elva Crunch', lat:4.7562542, lng:103.4046767, accuracy:4.423999786376953, source:'gps', capturedAt:'2026-10-13T08:31:27.937Z' },
+    { name:'Perut Bakar Hatyai', lat:4.750359848196808, lng:103.41484468690976, accuracy:66.26499938964844, source:'drag-adjusted', capturedAt:'2026-10-13T08:41:32.028Z' },
+    { name:'Alfaz House Dungun', lat:4.751772363772034, lng:103.41210753576019, accuracy:51.066001892089844, source:'drag-adjusted', capturedAt:'2026-10-13T08:41:53.458Z' },
+    { name:'HIT BARBER CLASSIC DUNGUN', lat:4.742351492330954, lng:103.41731293054858, accuracy:14.451000213623047, source:'drag-adjusted', capturedAt:'2026-10-13T08:42:28.935Z' },
+    { name:'Ocean Barber', lat:4.785799784488404, lng:103.39645999028403, accuracy:56.70399856567383, source:'saved', capturedAt:'2026-10-13T08:34:47.241Z' },
   ];
 
   const copy = () => isEnglish() ? {
     eyebrow:'Live network footprint',
     title:'Explore LOOKaL active locations.',
-    body:'The map opens on the current Dungun network so every active location is visible. Zoom out to view the wider Malaysia footprint.',
+    body:'The map opens on the current Dungun network using the latest field-pinned coordinates. Zoom out to view the wider Malaysia footprint.',
     active:'Active locations', state:'State', parliament:'Parliament',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
     hint:'Drag or zoom the map to explore locations',
@@ -31,7 +32,7 @@
   } : {
     eyebrow:'Jejak rangkaian aktif',
     title:'Terokai lokasi aktif LOOKaL.',
-    body:'Peta dibuka terus pada rangkaian Dungun supaya semua lokasi aktif jelas kelihatan. Zum keluar untuk melihat jejak rangkaian Malaysia.',
+    body:'Peta menggunakan koordinat terbaru yang telah dipin di lapangan untuk rangkaian Dungun. Zum keluar untuk melihat jejak rangkaian Malaysia.',
     active:'Lokasi aktif', state:'Negeri', parliament:'Parlimen',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
     hint:'Gerakkan atau zum peta untuk melihat lokasi',
@@ -119,7 +120,7 @@
           },
           layers: [{ id:'osm', type:'raster', source:'osm' }]
         },
-        center: [103.423, 4.746],
+        center: [103.415, 4.750],
         zoom: 12,
         minZoom: 3,
         maxZoom: 19,
@@ -137,8 +138,9 @@
         el.setAttribute('aria-label', loc.name);
         el.title = loc.name;
 
+        const accuracy = Number.isFinite(loc.accuracy) ? ` · ±${Math.round(loc.accuracy)}m` : '';
         const popup = new maplibregl.Popup({ offset:16, closeButton:true })
-          .setHTML(`<strong>${loc.name}</strong><small>${c.popup} · ${loc.lat.toFixed(6)}, ${loc.lng.toFixed(6)}</small>`);
+          .setHTML(`<strong>${loc.name}</strong><small>${c.popup} · ${loc.lat.toFixed(6)}, ${loc.lng.toFixed(6)}${accuracy}</small>`);
 
         new maplibregl.Marker({ element:el, anchor:'center' })
           .setLngLat([loc.lng, loc.lat])
