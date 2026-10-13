@@ -24,11 +24,21 @@
     if (p) p.textContent = c.body;
   };
 
+  const ensureNetworkMap = () => {
+    if (document.querySelector('script[data-lookal-network-map]')) return;
+    const script = document.createElement('script');
+    script.src = '/assets/network-map.js';
+    script.defer = true;
+    script.dataset.lookalNetworkMap = 'true';
+    document.head.appendChild(script);
+  };
+
   const schedule = () => {
     requestAnimationFrame(apply);
     setTimeout(apply, 80);
   };
 
+  ensureNetworkMap();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', schedule, { once: true });
   else schedule();
   window.addEventListener('pageshow', schedule);
