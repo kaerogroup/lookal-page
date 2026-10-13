@@ -95,20 +95,8 @@
     link.textContent = label;
   };
 
-  const syncLocationPinLink = () => {
-    const drawer = document.querySelector('.drawer-nav');
-    if (!drawer) return;
-    ensureDelegatedDrawerClose(drawer);
-    const label = isEnglish() ? 'Location Pin' : 'Pin Lokasi';
-    let link = drawer.querySelector('a[href="/tools/location-pin/"],a[href="/tools/location-pin/index.html"]');
-    if (!link) {
-      link = document.createElement('a');
-      link.href = '/tools/location-pin/';
-    }
-    link.textContent = label;
-    const whatsapp = drawer.querySelector('a[href="/tools/whatsapp-link/"],a[href="/tools/whatsapp-link/index.html"]');
-    if (whatsapp) drawer.insertBefore(link, whatsapp);
-    else drawer.appendChild(link);
+  const removeLocationPinLinks = () => {
+    document.querySelectorAll('a[href="/tools/location-pin/"],a[href="/tools/location-pin/index.html"]').forEach((link) => link.remove());
   };
 
   const syncContactLinks = () => {
@@ -207,7 +195,7 @@
     const section = document.getElementById('bukti');
     installStyle();
     syncDrawerWhatsApp();
-    syncLocationPinLink();
+    removeLocationPinLinks();
     syncPublisherLinks();
     syncContactLinks();
     syncFooter();
