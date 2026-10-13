@@ -7,8 +7,6 @@
   const STORAGE_KEY = 'lookal-language';
   const isEnglish = () => localStorage.getItem(STORAGE_KEY) === 'en';
 
-  // Canonical location coordinates supplied for the current Dungun rollout.
-  // MapLibre renders these directly as GeoJSON coordinates [longitude, latitude].
   const locations = [
     { name:'Mak Wan Mee Sup Melayu Champa', lat:4.7176929, lng:103.4374809 },
     { name:'Keropok Sri Sura', lat:4.7347874, lng:103.4288477 },
@@ -25,30 +23,20 @@
   const copy = () => isEnglish() ? {
     eyebrow:'Live network footprint',
     title:'Explore LOOKaL active locations.',
-    body:'Zoom from Malaysia into Dungun, Terengganu to inspect the current active LOOKaL network. Each red marker is anchored to its recorded latitude and longitude.',
+    body:'The map opens on the current Dungun network so every active location is visible. Zoom out to view the wider Malaysia footprint.',
     active:'Active locations', state:'State', parliament:'Parliament',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
-    hint:'Zoom or drag the map to explore locations',
+    hint:'Drag or zoom the map to explore locations',
     popup:'Active LOOKaL location'
   } : {
     eyebrow:'Jejak rangkaian aktif',
     title:'Terokai lokasi aktif LOOKaL.',
-    body:'Zum dari Malaysia hingga ke Dungun, Terengganu untuk melihat rangkaian LOOKaL aktif semasa. Setiap titik merah diposisikan terus pada latitude dan longitude yang direkodkan.',
+    body:'Peta dibuka terus pada rangkaian Dungun supaya semua lokasi aktif jelas kelihatan. Zum keluar untuk melihat jejak rangkaian Malaysia.',
     active:'Lokasi aktif', state:'Negeri', parliament:'Parlimen',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
-    hint:'Zum atau gerakkan peta untuk melihat lokasi',
+    hint:'Gerakkan atau zum peta untuk melihat lokasi',
     popup:'Lokasi LOOKaL aktif'
   };
-
-  const geojson = () => ({
-    type: 'FeatureCollection',
-    features: locations.map((loc, index) => ({
-      type: 'Feature',
-      id: index + 1,
-      geometry: { type: 'Point', coordinates: [loc.lng, loc.lat] },
-      properties: { name: loc.name, lat: loc.lat, lng: loc.lng }
-    }))
-  });
 
   const ensureMapLibreCss = () => {
     if (document.getElementById('lookal-maplibre-css')) return;
@@ -71,11 +59,13 @@
       .malaysia-card{position:relative;background:#202024;border:1px solid #454249;overflow:hidden}
       #lookal-live-map{width:100%;height:520px;background:#232327}
       .map-hint{position:absolute;z-index:3;left:14px;bottom:14px;padding:8px 10px;border-radius:8px;background:rgba(24,24,27,.88);backdrop-filter:blur(8px);color:#f0ece7;font-size:.72rem;font-weight:700;box-shadow:0 6px 24px rgba(0,0,0,.2);pointer-events:none}
+      .lookal-map-marker{width:18px;height:18px;border-radius:50%;background:#ef3340;border:3px solid #fff;box-sizing:border-box;box-shadow:0 0 0 7px rgba(239,51,64,.20),0 5px 14px rgba(0,0,0,.38);cursor:pointer;padding:0;appearance:none;-webkit-appearance:none}
+      .lookal-map-marker:hover,.lookal-map-marker:focus{transform:scale(1.18);outline:none;box-shadow:0 0 0 8px rgba(239,51,64,.28),0 6px 16px rgba(0,0,0,.42)}
       .maplibregl-popup-content{background:#242327!important;color:#fff!important;border-radius:10px!important;padding:12px 14px!important;box-shadow:0 14px 34px rgba(0,0,0,.35)!important;font:600 .78rem ui-sans-serif,system-ui,sans-serif}
       .maplibregl-popup-content strong{display:block;font-size:.82rem;margin-bottom:4px}.maplibregl-popup-content small{color:#aaa5ad}.maplibregl-popup-close-button{color:#fff;font-size:18px;padding:3px 7px}
       .maplibregl-popup-anchor-bottom .maplibregl-popup-tip{border-top-color:#242327!important}.maplibregl-popup-anchor-top .maplibregl-popup-tip{border-bottom-color:#242327!important}.maplibregl-popup-anchor-left .maplibregl-popup-tip{border-right-color:#242327!important}.maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:#242327!important}
       .maplibregl-ctrl-group{border-radius:9px!important;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.22)!important}.maplibregl-ctrl-attrib{font-size:10px!important}
-      @media(max-width:680px){.network-stats{grid-template-columns:1fr}#lookal-live-map{height:390px}.map-hint{right:14px;font-size:.65rem}}
+      @media(max-width:680px){.network-stats{grid-template-columns:1fr}#lookal-live-map{height:390px}.map-hint{right:14px;font-size:.65rem}.lookal-map-marker{width:16px;height:16px}}
     `;
     document.head.appendChild(style);
   };
@@ -129,8 +119,8 @@
           },
           layers: [{ id:'osm', type:'raster', source:'osm' }]
         },
-        center: [109.6, 4.2],
-        zoom: 4.25,
+        center: [103.423, 4.746],
+        zoom: 12,
         minZoom: 3,
         maxZoom: 19,
         attributionControl: true,
@@ -139,47 +129,27 @@
 
       map.addControl(new maplibregl.NavigationControl({ showCompass:false, visualizePitch:false }), 'top-right');
 
+      const c = copy();
+      locations.forEach((loc) => {
+        const el = document.createElement('button');
+        el.type = 'button';
+        el.className = 'lookal-map-marker';
+        el.setAttribute('aria-label', loc.name);
+        el.title = loc.name;
+
+        const popup = new maplibregl.Popup({ offset:16, closeButton:true })
+          .setHTML(`<strong>${loc.name}</strong><small>${c.popup} · ${loc.lat.toFixed(6)}, ${loc.lng.toFixed(6)}</small>`);
+
+        new maplibregl.Marker({ element:el, anchor:'center' })
+          .setLngLat([loc.lng, loc.lat])
+          .setPopup(popup)
+          .addTo(map);
+      });
+
       map.on('load', () => {
-        map.addSource('lookal-locations', { type:'geojson', data:geojson() });
-
-        map.addLayer({
-          id:'lookal-location-halo',
-          type:'circle',
-          source:'lookal-locations',
-          paint:{
-            'circle-radius':['interpolate',['linear'],['zoom'],4,7,10,10,16,13],
-            'circle-color':'#ef3340',
-            'circle-opacity':0.18
-          }
-        });
-
-        map.addLayer({
-          id:'lookal-location-dot',
-          type:'circle',
-          source:'lookal-locations',
-          paint:{
-            'circle-radius':['interpolate',['linear'],['zoom'],4,4.5,10,6,16,7],
-            'circle-color':'#ef3340',
-            'circle-stroke-color':'#ffffff',
-            'circle-stroke-width':2,
-            'circle-opacity':1
-          }
-        });
-
-        map.on('mouseenter','lookal-location-dot',()=>{ map.getCanvas().style.cursor='pointer'; });
-        map.on('mouseleave','lookal-location-dot',()=>{ map.getCanvas().style.cursor=''; });
-        map.on('click','lookal-location-dot',(event)=>{
-          const feature = event.features?.[0];
-          if (!feature) return;
-          const coordinates = feature.geometry.coordinates.slice();
-          const p = feature.properties || {};
-          const c = copy();
-          new maplibregl.Popup({ offset:14, closeButton:true })
-            .setLngLat(coordinates)
-            .setHTML(`<strong>${p.name || ''}</strong><small>${c.popup} · ${Number(p.lat).toFixed(6)}, ${Number(p.lng).toFixed(6)}</small>`)
-            .addTo(map);
-        });
-
+        const bounds = new maplibregl.LngLatBounds();
+        locations.forEach((loc) => bounds.extend([loc.lng, loc.lat]));
+        map.fitBounds(bounds, { padding:70, maxZoom:13.3, duration:0 });
         map.resize();
       });
     } catch (error) {
