@@ -191,6 +191,11 @@
     if (proofMarkup) section.querySelector('.wrap')?.insertAdjacentHTML('beforeend', proofMarkup);
   };
 
+  const revealHomepage = () => {
+    document.documentElement.classList.add('lookal-home-ready');
+    document.documentElement.classList.remove('lookal-home-patching');
+  };
+
   const apply = () => {
     const section = document.getElementById('bukti');
     installStyle();
@@ -201,7 +206,10 @@
     syncFooter();
     const c = copy();
     syncPricing(c);
-    if (!section) return;
+    if (!section) {
+      revealHomepage();
+      return;
+    }
     restoreProof(section);
     const eyebrow = section.querySelector('.quest-eyebrow');
     const title = section.querySelector('.shead h2');
@@ -229,6 +237,8 @@
       if (strong && texts[index]) strong.textContent = texts[index];
       if (small) small.remove();
     });
+
+    requestAnimationFrame(revealHomepage);
   };
 
   const schedule = () => {
