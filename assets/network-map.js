@@ -1,12 +1,12 @@
 (() => {
   'use strict';
 
-  const path = location.pathname;
-  const isHome = path === '/' || path === '/index.html';
+  const isHome = location.pathname === '/' || location.pathname === '/index.html';
   if (!isHome) return;
 
   const STORAGE_KEY = 'lookal-language';
   const isEnglish = () => localStorage.getItem(STORAGE_KEY) === 'en';
+  const MALAYSIA_MAP = 'https://upload.wikimedia.org/wikipedia/commons/d/dc/Blank_malaysia_map.svg';
 
   const locations = [
     { id:'mak-wan-mee-sup', name:'Mak Wan Mee Sup Melayu Champa', lat:4.7176929, lng:103.4374809 },
@@ -14,7 +14,7 @@
     { id:'pondok-bangku', name:'Pondok Bangku Eatery', lat:4.7382947, lng:103.4193308, alt:'Western Pondok Bangku' },
     { id:'kopi-cerita-kita', name:'Kopi Cerita Kita Dungun', lat:4.7408, lng:103.4217 },
     { id:'hurunini-bakery', name:'Hurunini Bakery', lat:4.7523, lng:103.4119 },
-    { id:'elva-crunch', name:'Elva Crunch', lat:4.7833333, lng:103.4333333, note:'Converted from 4°47′N, 103°26′E' },
+    { id:'elva-crunch', name:'Elva Crunch', lat:4.7833333, lng:103.4333333 },
     { id:'perut-bakar-hatyai', name:'Perut Bakar Hatyai', lat:4.7431, lng:103.4243 },
     { id:'alfaz-house', name:'Alfaz House Dungun', lat:4.7570, lng:103.4095 },
     { id:'hit-barber', name:'HIT BARBER CLASSIC DUNGUN', lat:4.7424032, lng:103.4172933 },
@@ -23,37 +23,41 @@
 
   const copy = () => isEnglish() ? {
     eyebrow:'Live network footprint',
-    title:'LOOKaL is growing from real locations.',
-    body:'The first active cluster is currently concentrated in Dungun, Terengganu. Every point below represents a confirmed LOOKaL location supplied for this network map.',
+    title:'10 active LOOKaL locations in Dungun.',
+    body:'The national view shows where the first LOOKaL cluster is operating today. The Dungun detail plots the supplied coordinates for each active location.',
+    malaysia:'Malaysia footprint',
+    dungun:'Dungun cluster detail',
+    cluster:'10 active locations',
+    status:'Active node',
     active:'Active locations', state:'State', parliament:'Parliament',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
-    malaysia:'Malaysia network overview', dungun:'Dungun active cluster',
-    cluster:'10 active locations', zoom:'Location detail',
-    activeStatus:'Active node', tap:'Tap a point or location name to view details.',
-    coords:'Coordinates', note:'Two barber locations are extremely close to each other and are visually separated slightly on the map for clarity.'
+    coords:'Coordinates', tap:'Tap a point or location name to inspect it.',
+    mapCredit:'Malaysia outline: Wikimedia Commons (CC BY 3.0).',
+    closeNote:'HIT Barber Classic and Ocean Barber are almost co-located, so their markers are offset slightly for usability.'
   } : {
     eyebrow:'Jejak rangkaian aktif',
-    title:'Rangkaian LOOKaL berkembang daripada lokasi sebenar.',
-    body:'Kluster aktif pertama kini tertumpu di Dungun, Terengganu. Setiap titik di bawah mewakili lokasi LOOKaL yang telah disahkan untuk peta rangkaian ini.',
+    title:'10 lokasi LOOKaL aktif di Dungun.',
+    body:'Paparan Malaysia menunjukkan kedudukan kluster LOOKaL pertama yang sedang beroperasi. Paparan Dungun memplot koordinat yang dibekalkan untuk setiap lokasi aktif.',
+    malaysia:'Jejak rangkaian Malaysia',
+    dungun:'Butiran kluster Dungun',
+    cluster:'10 lokasi aktif',
+    status:'Nod aktif',
     active:'Lokasi aktif', state:'Negeri', parliament:'Parlimen',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
-    malaysia:'Gambaran rangkaian Malaysia', dungun:'Kluster aktif Dungun',
-    cluster:'10 lokasi aktif', zoom:'Butiran lokasi',
-    activeStatus:'Nod aktif', tap:'Tekan titik atau nama lokasi untuk melihat butiran.',
-    coords:'Koordinat', note:'Dua lokasi barber berada sangat hampir antara satu sama lain dan dipisahkan sedikit secara visual pada peta untuk kejelasan.'
+    coords:'Koordinat', tap:'Tekan titik atau nama lokasi untuk melihat butiran.',
+    mapCredit:'Bentuk Malaysia: Wikimedia Commons (CC BY 3.0).',
+    closeNote:'HIT Barber Classic dan Ocean Barber berada hampir pada koordinat sama, jadi marker dipisahkan sedikit untuk kegunaan.'
   };
 
   const bounds = { minLat:4.705, maxLat:4.792, minLng:103.400, maxLng:103.447 };
   const project = (loc) => ({
-    x: 7 + ((loc.lng - bounds.minLng) / (bounds.maxLng - bounds.minLng)) * 86,
-    y: 7 + ((bounds.maxLat - loc.lat) / (bounds.maxLat - bounds.minLat)) * 86,
+    x: 8 + ((loc.lng - bounds.minLng) / (bounds.maxLng - bounds.minLng)) * 84,
+    y: 8 + ((bounds.maxLat - loc.lat) / (bounds.maxLat - bounds.minLat)) * 84,
   });
-
-  const adjustedPoint = (loc, index) => {
+  const adjustedPoint = (loc) => {
     const p = project(loc);
-    // These two coordinates are nearly identical. Keep data true, but separate the visual buttons slightly.
-    if (loc.id === 'hit-barber') return { x:p.x - 1.35, y:p.y - 1.05 };
-    if (loc.id === 'ocean-barber') return { x:p.x + 1.35, y:p.y + 1.05 };
+    if (loc.id === 'hit-barber') return { x:p.x - 1.4, y:p.y - 1.1 };
+    if (loc.id === 'ocean-barber') return { x:p.x + 1.4, y:p.y + 1.1 };
     return p;
   };
 
@@ -62,78 +66,72 @@
     const style = document.createElement('style');
     style.id = 'lookal-network-map-style';
     style.textContent = `
-      #network-map{background:#1f1f22;color:#fff;content-visibility:visible!important;contain:none!important}
-      #network-map .shead{max-width:72ch}
-      #network-map .shead p{color:#c9c5bf}
-      #network-map .quest-eyebrow{color:#f06a72}
-      .network-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#454249;border:1px solid #454249;margin:0 0 24px}
-      .network-stat{background:#28272b;padding:18px 20px}.network-stat strong{display:block;font-size:1.35rem;letter-spacing:-.03em}.network-stat span{display:block;color:#aaa59e;font-size:.76rem;font-weight:750;text-transform:uppercase;letter-spacing:.09em;margin-bottom:4px}
-      .network-layout{display:grid;gap:14px}.network-panel{position:relative;background:#262529;border:1px solid #454249;overflow:hidden}.network-panel-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:17px 18px;border-bottom:1px solid #454249}.network-panel-head strong{font-size:.92rem}.network-chip{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;color:#d9d4ce}.network-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:#e22b36;box-shadow:0 0 0 5px rgba(226,43,54,.12)}
-      .malaysia-map{display:block;width:100%;height:auto;min-height:300px;background:radial-gradient(circle at 27% 37%,rgba(217,35,46,.08),transparent 22%),linear-gradient(180deg,#242326,#1e1d20)}
-      .map-land{fill:#39383d;stroke:#5b585f;stroke-width:2}.map-coast{fill:none;stroke:#77727b;stroke-width:1.2;opacity:.55}.map-label{fill:#8f8a92;font:700 13px ui-sans-serif,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
-      .national-pulse{fill:#e22b36;transform-origin:center;animation:lookalPulse 2.1s ease-out infinite}.national-core{fill:#ff4853;stroke:#fff;stroke-width:2}.national-count{fill:#fff;font:800 14px ui-sans-serif,system-ui,sans-serif;text-anchor:middle;dominant-baseline:middle}.national-caption{fill:#fff;font:800 13px ui-sans-serif,system-ui,sans-serif}.national-sub{fill:#aaa59e;font:600 11px ui-sans-serif,system-ui,sans-serif}
-      .dungun-map{position:relative;aspect-ratio:1.38/1;background:radial-gradient(circle at 70% 55%,rgba(217,35,46,.09),transparent 26%),linear-gradient(135deg,#2a292d,#222125);overflow:hidden}.dungun-map::before{content:'';position:absolute;inset:8%;border:1px solid #3f3d43;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:12.5% 12.5%}.dungun-axis{position:absolute;left:10%;bottom:8%;color:#77727b;font-size:.69rem;letter-spacing:.08em;text-transform:uppercase}
-      .network-marker{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border:0;background:transparent;cursor:pointer;z-index:2;padding:0}.network-marker::before{content:'';position:absolute;inset:7px;border-radius:50%;background:#ed313c;border:2px solid #fff;box-shadow:0 0 0 5px rgba(237,49,60,.13);transition:transform .16s ease,box-shadow .16s ease}.network-marker:hover::before,.network-marker:focus-visible::before,.network-marker.is-active::before{transform:scale(1.22);box-shadow:0 0 0 8px rgba(237,49,60,.17)}.network-marker span{position:absolute;left:50%;top:-15px;transform:translateX(-50%);padding:3px 6px;background:#111;color:#fff;font-size:.62rem;font-weight:800;white-space:nowrap;opacity:0;pointer-events:none;border:1px solid #454249}.network-marker:hover span,.network-marker:focus-visible span,.network-marker.is-active span{opacity:1}
-      .network-detail{border-top:1px solid #454249;padding:18px;min-height:116px}.network-detail .status{display:inline-flex;align-items:center;gap:7px;color:#f06a72;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.network-detail .status::before{content:'';width:6px;height:6px;border-radius:50%;background:#ed313c}.network-detail h3{font-size:1.08rem;margin:7px 0 5px}.network-detail p{margin:0;color:#aaa59e;font-size:.82rem}.network-note{margin:11px 0 0;color:#858087;font-size:.7rem;line-height:1.5}
-      .network-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}.network-location{appearance:none;text-align:left;border:1px solid #454249;background:#28272b;color:#e9e6e1;padding:11px 12px;min-height:48px;font:700 .78rem/1.35 ui-sans-serif,system-ui,sans-serif;cursor:pointer}.network-location:hover,.network-location:focus-visible,.network-location.is-active{border-color:#e22b36;background:#30272a}.network-location small{display:block;color:#88838a;font-weight:600;margin-top:3px}
-      @keyframes lookalPulse{0%{opacity:.38;transform:scale(.65)}70%,100%{opacity:0;transform:scale(1.9)}}
-      @media(min-width:900px){.network-layout{grid-template-columns:.95fr 1.05fr}.malaysia-map{min-height:100%}.network-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
-      @media(max-width:680px){.network-stats{grid-template-columns:1fr}.network-list{grid-template-columns:1fr}.network-panel-head{align-items:flex-start;flex-direction:column}.malaysia-map{min-height:250px}.dungun-map{aspect-ratio:1/1.08}}
-      @media(prefers-reduced-motion:reduce){.national-pulse{animation:none;opacity:.2}}
+      #network-map{background:#202024;color:#fff;content-visibility:visible!important;contain:none!important}
+      #network-map .shead{max-width:68ch}#network-map .shead p{color:#c9c5bf}#network-map .quest-eyebrow{color:#f06a72}
+      .network-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#424046;border:1px solid #424046;margin-bottom:18px}
+      .network-stat{background:#29282c;padding:18px 20px}.network-stat span{display:block;color:#969198;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.network-stat strong{display:block;margin-top:3px;font-size:1.25rem;letter-spacing:-.025em}
+      .network-layout{display:grid;gap:14px}.network-card{background:#28272b;border:1px solid #454249;overflow:hidden}.network-card-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 18px;border-bottom:1px solid #454249}.network-card-head strong{font-size:.92rem}.network-chip{display:inline-flex;align-items:center;gap:7px;color:#d8d3cd;font-size:.73rem}.network-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:#e22b36;box-shadow:0 0 0 5px rgba(226,43,54,.12)}
+      .national-map-wrap{position:relative;aspect-ratio:915/400;background:#f2efe9;overflow:hidden}.national-map-wrap img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(.86) brightness(.7);opacity:.92}.national-map-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,32,36,.05),rgba(32,32,36,.18));pointer-events:none}
+      .national-cluster{position:absolute;left:32.8%;top:38%;transform:translate(-50%,-50%);z-index:3;width:42px;height:42px;border-radius:50%;background:#e22b36;border:3px solid #fff;color:#fff;font:800 13px/1 ui-sans-serif,system-ui,sans-serif;display:grid;place-items:center;box-shadow:0 0 0 10px rgba(226,43,54,.18),0 8px 28px rgba(0,0,0,.24)}
+      .national-label{position:absolute;left:36.8%;top:33%;z-index:3;background:rgba(24,24,27,.92);border:1px solid #4a474d;padding:8px 10px;line-height:1.25}.national-label strong{display:block;font-size:.76rem}.national-label span{display:block;color:#aaa59e;font-size:.65rem;margin-top:3px}
+      .map-credit{padding:8px 14px;color:#77727b;font-size:.62rem;border-top:1px solid #3f3d43}
+      .cluster-plot{position:relative;aspect-ratio:1.55/1;background:radial-gradient(circle at 72% 42%,rgba(217,35,46,.09),transparent 24%),linear-gradient(180deg,#262529,#222125);overflow:hidden}
+      .cluster-plot::before{content:'';position:absolute;inset:7%;border:1px solid #3d3b41;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:20% 20%}
+      .cluster-title{position:absolute;left:9%;bottom:7%;color:#747078;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase}.north{position:absolute;right:8%;top:8%;color:#7f7a82;font-size:.62rem;font-weight:800;letter-spacing:.08em}.north::before{content:'↑';display:block;font-size:1rem;text-align:center;color:#aaa59e}
+      .network-marker{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border:0;background:transparent;cursor:pointer;z-index:2;padding:0}.network-marker::before{content:'';position:absolute;inset:7px;border-radius:50%;background:#ef3340;border:2px solid #fff;box-shadow:0 0 0 5px rgba(239,51,64,.14);transition:.16s ease}.network-marker:hover::before,.network-marker:focus-visible::before,.network-marker.is-active::before{transform:scale(1.22);box-shadow:0 0 0 8px rgba(239,51,64,.2)}.network-marker span{position:absolute;left:50%;top:-15px;transform:translateX(-50%);padding:3px 6px;background:#111;color:#fff;border:1px solid #454249;font-size:.61rem;font-weight:800;opacity:0;white-space:nowrap}.network-marker:hover span,.network-marker:focus-visible span,.network-marker.is-active span{opacity:1}
+      .network-detail{padding:17px 18px;border-top:1px solid #454249;min-height:112px}.network-detail .status{display:inline-flex;align-items:center;gap:7px;color:#f06a72;font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}.network-detail .status::before{content:'';width:6px;height:6px;border-radius:50%;background:#e22b36}.network-detail h3{font-size:1.05rem;margin:7px 0 5px}.network-detail p{margin:0;color:#aaa59e;font-size:.8rem}.network-detail small{display:block;color:#77727b;margin-top:8px;line-height:1.45}
+      .network-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}.network-location{appearance:none;text-align:left;border:1px solid #454249;background:#29282c;color:#ece9e4;padding:11px 12px;font:700 .78rem/1.35 ui-sans-serif,system-ui,sans-serif;cursor:pointer}.network-location:hover,.network-location:focus-visible,.network-location.is-active{border-color:#e22b36;background:#31282b}.network-location small{display:block;color:#858087;font-weight:600;margin-top:3px}
+      .network-help{color:#8e8990;font-size:.72rem;margin:11px 0 0}
+      @media(min-width:900px){.network-layout{grid-template-columns:1.08fr .92fr}}
+      @media(max-width:680px){.network-stats{grid-template-columns:1fr}.network-layout{grid-template-columns:1fr}.network-list{grid-template-columns:1fr}.national-label{left:38%;top:27%}.national-cluster{left:33%;top:39%}.cluster-plot{aspect-ratio:1/1}.network-card-head{align-items:flex-start;flex-direction:column}}
     `;
     document.head.appendChild(style);
   };
 
-  const malaysiaSvg = (c) => `
-    <svg class="malaysia-map" viewBox="0 0 780 420" role="img" aria-label="${c.malaysia}">
-      <path class="map-land" d="M122 58l30 12 18 24 9 31 19 30 9 43 20 36 12 44 22 34 19 22-8 18-22-7-21-27-21-28-17-38-17-34-16-37-13-31-18-29-13-31-5-34z"/>
-      <path class="map-coast" d="M122 58c18 31 34 58 45 95s24 73 41 111 39 69 72 70"/>
-      <path class="map-land" d="M449 229l27-28 47-21 56-8 58 15 42 32 11 34-19 23-44 9-32 31-54 7-52-13-36-30-24-31z"/>
-      <path class="map-land" d="M601 181l31-22 52 7 32 23 15 35-13 30-26-20-17-27-42-11z"/>
-      <text x="110" y="385" class="map-label">SEMENANJUNG</text>
-      <text x="514" y="357" class="map-label">SABAH · SARAWAK</text>
-      <circle cx="196" cy="194" r="20" class="national-pulse"/>
-      <circle cx="196" cy="194" r="9" class="national-core"/>
-      <text x="196" y="194" class="national-count">10</text>
-      <line x1="207" y1="188" x2="284" y2="153" stroke="#e22b36" stroke-width="1.4"/>
-      <text x="294" y="150" class="national-caption">Dungun</text>
-      <text x="294" y="168" class="national-sub">Terengganu · P039</text>
-    </svg>`;
-
   const markerHtml = () => locations.map((loc, i) => {
-    const p = adjustedPoint(loc, i);
+    const p = adjustedPoint(loc);
     return `<button class="network-marker${i===0?' is-active':''}" type="button" data-location-id="${loc.id}" style="left:${p.x.toFixed(3)}%;top:${p.y.toFixed(3)}%" aria-label="${loc.name}"><span>${i+1}</span></button>`;
   }).join('');
 
   const listHtml = () => locations.map((loc, i) => `<button class="network-location${i===0?' is-active':''}" type="button" data-location-id="${loc.id}">${i+1}. ${loc.name}<small>Dungun · Terengganu</small></button>`).join('');
 
+  const detailHtml = (loc, c) => `<span class="status">${c.status}</span><h3>${loc.name}</h3><p>${c.coords}: ${loc.lat.toFixed(6)}, ${loc.lng.toFixed(6)}</p><small>${c.closeNote}</small>`;
+
   const sectionHtml = (c) => `
     <div class="wrap">
       <div class="shead"><span class="quest-eyebrow">${c.eyebrow}</span><h2>${c.title}</h2><p>${c.body}</p></div>
-      <div class="network-stats" aria-label="LOOKaL network summary">
+      <div class="network-stats">
         <div class="network-stat"><span>${c.active}</span><strong>${locations.length}</strong></div>
         <div class="network-stat"><span>${c.state}</span><strong>${c.stateValue}</strong></div>
         <div class="network-stat"><span>${c.parliament}</span><strong>${c.parliamentValue}</strong></div>
       </div>
       <div class="network-layout">
-        <div class="network-panel"><div class="network-panel-head"><strong>${c.malaysia}</strong><span class="network-chip">${c.cluster}</span></div>${malaysiaSvg(c)}</div>
-        <div class="network-panel">
-          <div class="network-panel-head"><strong>${c.dungun}</strong><span class="network-chip">${c.cluster}</span></div>
-          <div class="dungun-map">${markerHtml()}<span class="dungun-axis">Dungun · Terengganu</span></div>
-          <div class="network-detail" aria-live="polite"><span class="status">${c.activeStatus}</span><h3>${locations[0].name}</h3><p>${c.coords}: ${locations[0].lat.toFixed(6)}, ${locations[0].lng.toFixed(6)}</p><div class="network-note">${c.note}</div></div>
+        <div class="network-card">
+          <div class="network-card-head"><strong>${c.malaysia}</strong><span class="network-chip">${c.cluster}</span></div>
+          <div class="national-map-wrap">
+            <img src="${MALAYSIA_MAP}" alt="Malaysia map outline" loading="lazy" decoding="async">
+            <div class="national-cluster" aria-label="Dungun cluster, 10 active locations">10</div>
+            <div class="national-label"><strong>Dungun</strong><span>Terengganu · P039</span></div>
+          </div>
+          <div class="map-credit">${c.mapCredit}</div>
+        </div>
+        <div class="network-card">
+          <div class="network-card-head"><strong>${c.dungun}</strong><span class="network-chip">${c.cluster}</span></div>
+          <div class="cluster-plot">${markerHtml()}<span class="north">N</span><span class="cluster-title">Dungun · Terengganu</span></div>
+          <div class="network-detail" aria-live="polite">${detailHtml(locations[0], c)}</div>
         </div>
       </div>
-      <p class="network-note">${c.tap}</p>
+      <p class="network-help">${c.tap}</p>
       <div class="network-list">${listHtml()}</div>
     </div>`;
 
   const selectLocation = (section, id) => {
     const loc = locations.find((item) => item.id === id);
     if (!loc) return;
-    section.querySelectorAll('[data-location-id]').forEach((el) => el.classList.toggle('is-active', el.dataset.locationId === id));
-    const detail = section.querySelector('.network-detail');
     const c = copy();
-    if (detail) detail.innerHTML = `<span class="status">${c.activeStatus}</span><h3>${loc.name}</h3><p>${c.coords}: ${loc.lat.toFixed(6)}, ${loc.lng.toFixed(6)}</p><div class="network-note">${c.note}</div>`;
+    section.querySelectorAll('[data-location-id]').forEach((node) => node.classList.toggle('is-active', node.dataset.locationId === id));
+    const detail = section.querySelector('.network-detail');
+    if (detail) detail.innerHTML = detailHtml(loc, c);
   };
 
   const render = () => {
@@ -148,20 +146,15 @@
       if (locationsSection?.parentNode) locationsSection.parentNode.insertBefore(section, locationsSection);
       else if (proofSection?.parentNode) proofSection.insertAdjacentElement('afterend', section);
       else document.querySelector('main#main')?.appendChild(section);
+      section.addEventListener('click', (event) => {
+        const trigger = event.target.closest('[data-location-id]');
+        if (trigger) selectLocation(section, trigger.dataset.locationId);
+      });
     }
     section.innerHTML = sectionHtml(c);
-    section.addEventListener('click', (event) => {
-      const trigger = event.target.closest('[data-location-id]');
-      if (!trigger || !section.contains(trigger)) return;
-      selectLocation(section, trigger.dataset.locationId);
-    }, { once:false });
   };
 
-  const schedule = () => {
-    requestAnimationFrame(render);
-    setTimeout(render, 140);
-  };
-
+  const schedule = () => { requestAnimationFrame(render); setTimeout(render, 120); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', schedule, { once:true });
   else schedule();
   window.addEventListener('pageshow', schedule);
