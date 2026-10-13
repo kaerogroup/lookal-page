@@ -87,6 +87,12 @@ for (const rel of htmlFiles) {
 const homePath = path.join(out, 'index.html');
 let home = fs.readFileSync(homePath, 'utf8');
 
+// Prevent a flash of the legacy source markup before the accepted homepage runtime patches apply.
+// Header remains visible; main/footer reveal as soon as home-proof.js marks the page ready.
+// A short fail-safe guarantees the page can never remain hidden if a runtime patch errors.
+const prePaintGuard = `<style id="lookal-prepaint-guard">html.lookal-home-patching body>main,html.lookal-home-patching body>footer{visibility:hidden!important}html.lookal-home-ready body>main,html.lookal-home-ready body>footer{visibility:visible!important}</style><script>(function(){var d=document.documentElement;d.classList.add('lookal-home-patching');window.setTimeout(function(){d.classList.remove('lookal-home-patching');d.classList.add('lookal-home-ready')},2200)})();</script>`;
+if (!home.includes('lookal-prepaint-guard')) home = home.replace('</head>', `${prePaintGuard}\n</head>`);
+
 const proofReplacements = [
   ['assets/screens/VID-20260915-WA0001.mp4', 'assets/web-media/screens/location-01.mp4', 'assets/web-media/screens/location-01.jpg'],
   ['assets/screens/VID20260920082504%20(1).mp4', 'assets/web-media/screens/location-02.mp4', 'assets/web-media/screens/location-02.jpg'],
