@@ -47,6 +47,10 @@
     const style = document.createElement('style');
     style.id = 'lookal-proof-layout';
     style.textContent = `
+      header{background:rgba(255,255,255,.96)}
+      header .brand{background:transparent}
+      header .brand img{height:36px;max-width:122px;background:transparent;mix-blend-mode:multiply;box-shadow:none}
+      @media(max-width:420px){header .brand img{height:32px;max-width:108px}}
       #bukti .proof-grid{align-items:stretch}
       #bukti .proof-item{height:100%}
       #bukti .proof-item .video-frame{background:#111}
