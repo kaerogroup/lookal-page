@@ -72,27 +72,42 @@
     document.head.appendChild(style);
   };
 
+  const ensureDelegatedDrawerClose = (drawer) => {
+    if (!drawer || drawer.dataset.lookalDelegatedClose) return;
+    drawer.dataset.lookalDelegatedClose = 'true';
+    drawer.addEventListener('click', (event) => {
+      const link = event.target.closest('a');
+      if (link) document.getElementById('menuClose')?.click();
+    });
+  };
+
   const syncDrawerWhatsApp = () => {
     const drawer = document.querySelector('.drawer-nav');
     if (!drawer) return;
-    if (!drawer.dataset.lookalDelegatedClose) {
-      drawer.dataset.lookalDelegatedClose = 'true';
-      drawer.addEventListener('click', (event) => {
-        const link = event.target.closest('a');
-        if (link) document.getElementById('menuClose')?.click();
-      });
-    }
+    ensureDelegatedDrawerClose(drawer);
     const label = isEnglish() ? 'WhatsApp Link' : 'Pautan WhatsApp';
-    const existing = drawer.querySelector('a[href="/tools/whatsapp-link/"],a[href="/tools/whatsapp-link/index.html"]');
-    if (existing) {
-      existing.textContent = label;
-      return;
+    let link = drawer.querySelector('a[href="/tools/whatsapp-link/"],a[href="/tools/whatsapp-link/index.html"]');
+    if (!link) {
+      link = document.createElement('a');
+      link.href = '/tools/whatsapp-link/';
+      drawer.appendChild(link);
     }
-    const link = document.createElement('a');
-    link.href = '/tools/whatsapp-link/';
     link.textContent = label;
-    const partner = drawer.querySelector('a[href="/business-partner/"],a[href="/business-partner/index.html"]');
-    if (partner) drawer.insertBefore(link, partner);
+  };
+
+  const syncLocationPinLink = () => {
+    const drawer = document.querySelector('.drawer-nav');
+    if (!drawer) return;
+    ensureDelegatedDrawerClose(drawer);
+    const label = isEnglish() ? 'Location Pin' : 'Pin Lokasi';
+    let link = drawer.querySelector('a[href="/tools/location-pin/"],a[href="/tools/location-pin/index.html"]');
+    if (!link) {
+      link = document.createElement('a');
+      link.href = '/tools/location-pin/';
+    }
+    link.textContent = label;
+    const whatsapp = drawer.querySelector('a[href="/tools/whatsapp-link/"],a[href="/tools/whatsapp-link/index.html"]');
+    if (whatsapp) drawer.insertBefore(link, whatsapp);
     else drawer.appendChild(link);
   };
 
@@ -103,8 +118,8 @@
       if (!link) {
         link = document.createElement('a');
         link.href = '#hubungi';
-        const premise = nav.querySelector('a[href="#pemilik-premis"],a[href="/publisher/"],a[href="/publisher/index.html"]');
-        if (premise) nav.insertBefore(link, premise);
+        const publisher = nav.querySelector('a[href="/publisher/"],a[href="/publisher/index.html"]');
+        if (publisher) nav.insertBefore(link, publisher);
         else nav.appendChild(link);
       }
       link.textContent = label;
@@ -112,10 +127,21 @@
   };
 
   const syncPublisherLinks = () => {
-    const label = isEnglish() ? 'Premise Owners' : 'Pemilik Premis';
+    const label = isEnglish() ? 'Become Publisher' : 'Jadi Publisher';
     document.querySelectorAll('a[href="#pemilik-premis"]').forEach((link) => {
       link.href = '/publisher/';
-      if (link.closest('.desktop-nav,.drawer-nav')) link.textContent = label;
+    });
+    document.querySelectorAll('.desktop-nav,.drawer-nav').forEach((nav) => {
+      let publisher = nav.querySelector('a[href="/publisher/"],a[href="/publisher/index.html"]');
+      if (!publisher) {
+        publisher = document.createElement('a');
+        publisher.href = '/publisher/';
+      }
+      publisher.textContent = label;
+
+      const partner = nav.querySelector('a[href="/business-partner/"],a[href="/business-partner/index.html"]');
+      if (partner) nav.insertBefore(publisher, partner);
+      else if (!publisher.parentNode) nav.appendChild(publisher);
     });
   };
 
@@ -181,6 +207,7 @@
     const section = document.getElementById('bukti');
     installStyle();
     syncDrawerWhatsApp();
+    syncLocationPinLink();
     syncPublisherLinks();
     syncContactLinks();
     syncFooter();
