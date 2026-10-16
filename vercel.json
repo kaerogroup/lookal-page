@@ -9,6 +9,10 @@
     {
       "source": "/motion/:path*",
       "destination": "https://lookal-snap2ads-test.vercel.app/motion/:path*"
+    },
+    {
+      "source": "/api/generate-motion-direction",
+      "destination": "https://lookal-snap2ads-test.vercel.app/api/generate-motion-direction"
     }
   ],
   "headers": [
