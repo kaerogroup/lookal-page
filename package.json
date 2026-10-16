@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "node scripts/build-static.mjs && node scripts/secondary-home-nav.mjs"
+    "build": "node scripts/build-static.mjs && node scripts/secondary-home-nav.mjs && node scripts/motion-public-entry.mjs",
+    "verify": "npm run build && node scripts/verify-motion-public-entry.mjs"
   },
   "dependencies": {
     "ffmpeg-static": "^5.2.0"
