@@ -38,5 +38,8 @@ const csp = globalHeaders.find((item) => item.key === 'Content-Security-Policy')
 if (!csp.includes("media-src 'self' blob:")) {
   throw new Error('vercel.json: CSP must permit blob media for Motion video preview');
 }
+if (!csp.includes("connect-src 'self' blob:")) {
+  throw new Error('vercel.json: CSP must permit blob fetch for Motion prefetch');
+}
 
 console.log('LOOKaL Motion public entry verification PASS.');
