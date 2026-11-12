@@ -272,7 +272,7 @@
     }
 
     document.querySelectorAll('.desktop-nav,.drawer-nav').forEach((nav) => {
-      nav.innerHTML = `<a href="#cara">${c.navHow}</a><a href="#lokasi">${c.navLocations}</a><a href="#harga">${c.navPrice}</a><a href="#pemilik-premis">${c.navPremise}</a><a href="/business-partner/">${currentLanguage()==='en'?'Business Partner':'Rakan Niaga'}</a>`;
+      nav.innerHTML = `<a href="/iklan/">${currentLanguage()==='en'?'How to advertise':'Cara beriklan'}</a><a href="/lokasi/">${currentLanguage()==='en'?'Screen locations':'Lokasi skrin'}</a><a href="#harga">${c.navPrice}</a><a href="#pemilik-premis">${c.navPremise}</a><a href="/business-partner/">${currentLanguage()==='en'?'Business Partner':'Rakan Niaga'}</a>`;
     });
   };
 
