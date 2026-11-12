@@ -48,5 +48,19 @@ check(!home.includes('255 saat satu giliran tayangan'), 'homepage does not claim
 check(!home.includes('112–169 kali sehari'), 'homepage does not claim fixed daily plays across mixed slots');
 check(pricingScript.includes('nav.innerHTML = `<a href="/iklan/">'), 'runtime navigation retains advertiser page');
 check(pricingScript.includes('<a href="/lokasi/">'), 'runtime navigation retains location page');
+
+// Mobile shared-navigation regression: no wrapped desktop header on SEO pages.
+check(fs.existsSync(path.join(root, 'assets/lookal-public-nav.css')), 'shared navigation CSS is deployed');
+check(fs.existsSync(path.join(root, 'assets/lookal-public-nav.js')), 'shared navigation JS is deployed');
+const navStyle = read('assets/lookal-public-nav.css');
+check(navStyle.includes('@media(min-width:1200px)'), 'desktop navigation only appears on wide screens');
+for (const uri of ['/iklan/', '/lokasi/']) {
+  const html = read(uri.slice(1) + 'index.html');
+  check(html.includes('id="lookalPublicMenuOpen"'), uri + ' includes hamburger trigger');
+  check(html.includes('id="lookalPublicDrawer"'), uri + ' includes mobile drawer');
+  check(html.includes('href="/assets/lookal-public-nav.css"'), uri + ' loads shared drawer CSS');
+  check(html.includes('src="/assets/lookal-public-nav.js"'), uri + ' loads shared drawer controls');
+  check(!html.includes('class="wrap nav"'), uri + ' no legacy wrapped subpage navbar');
+}
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
