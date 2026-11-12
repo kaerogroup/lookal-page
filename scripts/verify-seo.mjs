@@ -79,5 +79,34 @@ for (const filename of unifiedPages) {
   check(html.includes('id="lookalPublicMenuOpen"'), filename + ' has responsive menu trigger');
   check(html.includes('/assets/lookal-public-nav.js'), filename + ' includes functional drawer JS');
 }
+
+check(home.includes('.drawer{position:fixed;left:0;'), 'homepage drawer is left-anchored');
+check(navStyle.includes('.lookal-public-drawer{position:fixed;left:0;'), 'secondary pages drawer is left-anchored');
+const proofScript = read('assets/home-proof.js');
+check(!proofScript.includes('Premium formats are being prepared and are not open for booking yet.'), 'premium is no longer described as coming soon');
+check(!proofScript.includes('Format Premium sedang disediakan dan belum dibuka untuk tempahan.'), 'Malay premium copy reflects launch');
+check(pricingScript.includes("['/', en ? 'Home' : 'Utama']"), 'homepage drawer offers consistent Home navigation');
+const mapScript = read('assets/network-map.js');
+check(mapScript.includes("'/lokasi/'"), 'network map supports locations route');
+const locHtml = read('lokasi/index.html');
+check(locHtml.includes('id="network-map"'), 'locations page has map mount');
+check(locHtml.includes('src="/assets/network-map.js"'), 'locations page loads interactive map');
+check(locHtml.includes('id="galeri-lokasi"'), 'locations page retains image gallery');
+const advertHtml = read('iklan/index.html');
+check(advertHtml.includes('id="video-tutorial"'), 'advertiser page retains video tutorials');
+check(advertHtml.includes('id="skrin-sebenar"'), 'advertiser page retains on-premise video proof');
+for (const file of [
+  'assets/web-media/walkthroughs/dashboard.mp4',
+  'assets/web-media/walkthroughs/snap2ads-editor.mp4',
+  'assets/web-media/walkthroughs/own-poster.mp4',
+  'assets/web-media/screens/location-01.mp4',
+  'assets/web-media/screens/location-02.mp4',
+  'assets/web-media/screens/location-03.mp4',
+  'assets/locations/160017.jpg',
+  'assets/locations/IMG-20260910-WA0004.jpg',
+  'assets/locations/IMG-20260920-WA0000.jpg',
+]) {
+  check(fs.existsSync(path.join(root, file)), 'visual asset exists: ' + file);
+}
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
