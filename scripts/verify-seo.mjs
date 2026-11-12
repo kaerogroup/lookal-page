@@ -108,5 +108,8 @@ for (const file of [
 ]) {
   check(fs.existsSync(path.join(root, file)), 'visual asset exists: ' + file);
 }
+check(home.includes("drawer.addEventListener('click',(event)=>{if(event.target.closest('a[href]'))closeDrawer();});"), 'homepage drawer handles dynamic navigation links');
+check(!home.includes('.location-card:nth-child(n+6){display:none}'), 'all location photos remain visible');
+check(home.includes('#bukti,#lihat,#lokasi,#network-map{content-visibility:visible!important'), 'visual proof and map sections are not content-hidden');
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
