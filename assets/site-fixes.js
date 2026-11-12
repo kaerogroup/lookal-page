@@ -69,9 +69,9 @@
     priceTitle: 'Choose the level of visibility after you understand the value.',
     priceBody: 'Start with the format that fits the campaign. Pricing is shown here after the use case, locations and operating model are clear.',
     tiers: [
-      ['Basic','RM2','/ day','A practical starting point for local campaigns using the three-zone display.'],
-      ['Premium','RM4','/ day','Fullscreen visibility for campaigns that need stronger visual focus.'],
-      ['Premium Extended','RM6','/ day','Longer fullscreen exposure for messages that need more time.']
+      ['Basic · 8s','RM2','/ day','An 8-second three-zone display for local campaigns.'],
+      ['Premium Fullscreen · 15s','RM4','/ day','15 seconds of fullscreen advertising for stronger visual focus.'],
+      ['Premium Extended Fullscreen · 30s','RM6','/ day','30 seconds of fullscreen advertising for messages requiring more time.']
     ],
     modelTitle: 'Simple pricing. Clear operating rules.',
     modelBody: 'Choose the location, campaign period and display tier. Slot capacity is limited by location so the playback rotation remains controlled.',
@@ -134,9 +134,9 @@
     priceTitle: 'Pilih tahap pendedahan selepas nilai kempen jelas.',
     priceBody: 'Mulakan dengan bentuk tayangan yang sesuai dengan keperluan kempen. Harga diterangkan selepas tujuan, lokasi dan cara operasi difahami.',
     tiers: [
-      ['Basic','RM2','/ hari','Pilihan asas untuk kempen setempat menggunakan paparan tiga zon.'],
-      ['Premium','RM4','/ hari','Paparan skrin penuh untuk kempen yang memerlukan tumpuan visual lebih kuat.'],
-      ['Premium Extended','RM6','/ hari','Paparan skrin penuh lebih panjang untuk mesej yang memerlukan lebih masa.']
+      ['Basic · 8 saat','RM2','/ hari','Paparan asas tiga zon selama 8 saat untuk kempen setempat.'],
+      ['Premium Fullscreen · 15 saat','RM4','/ hari','Slot premium paparan skrin penuh selama 15 saat untuk tumpuan visual lebih kuat.'],
+      ['Premium Extended Fullscreen · 30 saat','RM6','/ hari','Slot premium lanjutan paparan skrin penuh selama 30 saat untuk mesej yang memerlukan lebih masa.']
     ],
     modelTitle: 'Harga mudah. Kaedah operasi jelas.',
     modelBody: 'Pilih lokasi, tempoh kempen dan jenis tayangan. Kapasiti ruang iklan dihadkan mengikut lokasi supaya giliran tayangan kekal terkawal.',
