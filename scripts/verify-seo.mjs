@@ -37,5 +37,12 @@ check(home.includes('href="/iklan/"'), 'homepage links to advertiser landing');
 check(home.includes('href="/lokasi/"'), 'homepage links to locations landing');
 check(home.includes('property="og:image"'), 'homepage social preview image is configured');
 check(fs.existsSync(path.join(root, 'assets/locations/160017.jpg')), 'homepage social preview image exists');
+
+const advert = read('iklan/index.html');
+const pricingScript = read('assets/site-fixes.js');
+check(advert.includes('Premium Fullscreen · 15 saat'), 'advertiser page describes 15s fullscreen');
+check(advert.includes('Premium Extended Fullscreen · 30 saat'), 'advertiser page describes 30s fullscreen');
+check(pricingScript.includes('Premium Fullscreen · 15 saat'), 'homepage runtime pricing describes 15s fullscreen');
+check(pricingScript.includes('Premium Extended Fullscreen · 30 saat'), 'homepage runtime pricing describes 30s fullscreen');
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
