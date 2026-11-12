@@ -159,7 +159,7 @@
   const drawer=document.getElementById('siteDrawer');const backdrop=document.getElementById('drawerBackdrop');const openBtn=document.getElementById('menuOpen');const closeBtn=document.getElementById('menuClose');let lastFocus=null;
   const openDrawer=()=>{lastFocus=document.activeElement;drawer.classList.add('is-open');backdrop.classList.add('is-open');drawer.setAttribute('aria-hidden','false');openBtn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';closeBtn.focus();};
   const closeDrawer=()=>{drawer.classList.remove('is-open');backdrop.classList.remove('is-open');drawer.setAttribute('aria-hidden','true');openBtn.setAttribute('aria-expanded','false');document.body.style.overflow='';if(lastFocus)lastFocus.focus();};
-  openBtn.addEventListener('click',openDrawer);closeBtn.addEventListener('click',closeDrawer);backdrop.addEventListener('click',closeDrawer);drawer.querySelectorAll('a').forEach((link)=>link.addEventListener('click',closeDrawer));document.addEventListener('keydown',(event)=>{if(event.key==='Escape'&&drawer.classList.contains('is-open'))closeDrawer();});
+  openBtn.addEventListener('click',openDrawer);closeBtn.addEventListener('click',closeDrawer);backdrop.addEventListener('click',closeDrawer);drawer.addEventListener('click',(event)=>{if(event.target.closest('a[href]'))closeDrawer();});document.addEventListener('keydown',(event)=>{if(event.key==='Escape'&&drawer.classList.contains('is-open'))closeDrawer();});
 })();
 </script>
 </body>
