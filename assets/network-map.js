@@ -156,7 +156,7 @@
       });
     } catch (error) {
       console.error('LOOKaL MapLibre map failed to load', error);
-      container.innerHTML = '<div style="padding:40px;color:#c9c5bf;text-align:center">Interactive map is temporarily unavailable.</div>';
+      container.innerHTML = '<div style="padding:40px 20px;color:#e5e0dc;text-align:center;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;min-height:280px"><strong>Peta interaktif tidak dapat dimuat pada pelayar ini.</strong><a style="color:#fff;background:#d9232e;padding:12px 18px;text-decoration:none;border-radius:7px;font-weight:800" href="https://www.openstreetmap.org/#map=12/4.750/103.415" target="_blank" rel="noopener noreferrer">Buka peta Dungun di OpenStreetMap</a></div>';
     }
   };
 
