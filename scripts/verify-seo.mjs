@@ -63,6 +63,8 @@ for (const uri of ['/iklan/', '/lokasi/']) {
   check(!html.includes('class="wrap nav"'), uri + ' no legacy wrapped subpage navbar');
 }
 
+check(home.includes('@media(min-width:900px) and (max-width:1199px)'), 'homepage tablet breakpoint uses mobile navigation');
+check(navStyle.includes('@media(min-width:1200px)'), 'subpage wide navigation breakpoint remains aligned');
 const unifiedPages = [
   'publisher/index.html',
   'business-partner/index.html',
