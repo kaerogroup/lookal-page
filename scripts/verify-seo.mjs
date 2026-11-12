@@ -44,5 +44,9 @@ check(advert.includes('Premium Fullscreen · 15 saat'), 'advertiser page describ
 check(advert.includes('Premium Extended Fullscreen · 30 saat'), 'advertiser page describes 30s fullscreen');
 check(pricingScript.includes('Premium Fullscreen · 15 saat'), 'homepage runtime pricing describes 15s fullscreen');
 check(pricingScript.includes('Premium Extended Fullscreen · 30 saat'), 'homepage runtime pricing describes 30s fullscreen');
+check(!home.includes('255 saat satu giliran tayangan'), 'homepage does not claim fixed rotation duration across mixed slots');
+check(!home.includes('112–169 kali sehari'), 'homepage does not claim fixed daily plays across mixed slots');
+check(pricingScript.includes('nav.innerHTML = `<a href="/iklan/">'), 'runtime navigation retains advertiser page');
+check(pricingScript.includes('<a href="/lokasi/">'), 'runtime navigation retains location page');
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
