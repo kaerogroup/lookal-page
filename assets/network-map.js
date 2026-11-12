@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const isHome = location.pathname === '/' || location.pathname === '/index.html';
-  if (!isHome) return;
+  const supportsMap = ['/', '/index.html', '/lokasi/', '/lokasi/index.html'].includes(location.pathname);
+  if (!supportsMap) return;
 
   const STORAGE_KEY = 'lookal-language';
   const isEnglish = () => localStorage.getItem(STORAGE_KEY) === 'en';
