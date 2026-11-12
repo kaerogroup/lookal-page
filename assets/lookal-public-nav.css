@@ -14,7 +14,7 @@
 .lookal-public-menu .lookal-menu-lines::after{top:6px}
 .lookal-public-backdrop{position:fixed;inset:0;background:rgba(20,20,22,.42);z-index:100;opacity:0;pointer-events:none;transition:opacity .2s ease}
 .lookal-public-backdrop.is-open{opacity:1;pointer-events:auto}
-.lookal-public-drawer{position:fixed;right:0;top:0;bottom:0;width:min(380px,88vw);background:#fff;z-index:101;transform:translateX(100%);transition:transform .24s ease;box-shadow:-20px 0 60px rgba(0,0,0,.16);padding:22px;display:flex;flex-direction:column;visibility:hidden}
+.lookal-public-drawer{position:fixed;left:0;top:0;bottom:0;width:min(380px,88vw);background:#fff;z-index:101;transform:translateX(-100%);transition:transform .24s ease;box-shadow:20px 0 60px rgba(0,0,0,.16);padding:22px;display:flex;flex-direction:column;visibility:hidden}
 .lookal-public-drawer.is-open{visibility:visible;transform:translateX(0)}
 .lookal-public-drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:20px;border-bottom:1px solid #ded8cf}
 .lookal-public-drawer-head img{display:block;width:auto;height:42px;max-width:138px}
