@@ -9,7 +9,7 @@ const template = fs.readFileSync(templateFile, 'utf8');
 const start = template.indexOf('<header class="lookal-public-header">');
 const end = template.indexOf('</aside>', start);
 if (start < 0 || end < 0) throw new Error('Public nav template unavailable');
-const shell = template.slice(start, end + '</aside>'.length);
+const shell = template.slice(start, end + '</aside>'.length).replaceAll(' aria-current="page"', '');
 const pages = [
   'publisher/index.html',
   'business-partner/index.html',
