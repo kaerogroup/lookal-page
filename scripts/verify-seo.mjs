@@ -62,5 +62,20 @@ for (const uri of ['/iklan/', '/lokasi/']) {
   check(html.includes('src="/assets/lookal-public-nav.js"'), uri + ' loads shared drawer controls');
   check(!html.includes('class="wrap nav"'), uri + ' no legacy wrapped subpage navbar');
 }
+
+const unifiedPages = [
+  'publisher/index.html',
+  'business-partner/index.html',
+  'business-partner/revenue-share/index.html',
+  'business-partner/node-specifications/index.html',
+  'tools/whatsapp-link/index.html',
+  'tools/roi-calculator/index.html',
+];
+for (const filename of unifiedPages) {
+  const html = read(filename);
+  check(html.includes('id="lookalPublicDrawer"'), filename + ' shares public drawer');
+  check(html.includes('id="lookalPublicMenuOpen"'), filename + ' has responsive menu trigger');
+  check(html.includes('/assets/lookal-public-nav.js'), filename + ' includes functional drawer JS');
+}
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
