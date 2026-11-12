@@ -83,11 +83,11 @@
     finalSecondary: 'View locations',
     navHow: 'How it works', navLocations: 'Locations', navPrice: 'Pricing', navPremise: 'Premise Owners'
   } : {
-    title: 'LOOKaL | Lebih cepat dilihat. Lebih kerap muncul.',
-    description: 'LOOKaL membantu jenama, perkhidmatan, perniagaan dan tawaran muncul berulang kali di hadapan pelanggan melalui skrin di lokasi fizikal terpilih.',
+    title: 'LOOKaL | Iklan Skrin Digital & DOOH untuk Perniagaan Tempatan',
+    description: 'Iklan perniagaan di skrin digital premis komuniti bersama LOOKaL. Pilih lokasi dan hari kempen, kemudian mula beriklan dari RM2 sehari bagi satu lokasi.',
     heroTag: 'Pendedahan fizikal untuk perniagaan setempat',
     heroTitle: 'Adakah pelanggan melihat anda cukup kerap untuk mengingati anda?',
-    heroBody: 'Jenama, perkhidmatan atau tawaran yang baik tetap perlukan pendedahan yang mencukupi untuk mula dikenali. LOOKaL membantu anda muncul berulang kali di hadapan pelanggan melalui skrin di lokasi fizikal terpilih.',
+    heroBody: 'LOOKaL ialah rangkaian iklan skrin digital komuniti (hyperlocal DOOH) di premis fizikal terpilih. Pilih lokasi dan hari kempen yang sesuai supaya jenama, perkhidmatan dan tawaran anda lebih mudah dilihat oleh pelanggan setempat.',
     heroPrimary: 'Lihat bagaimana LOOKaL membantu',
     heroSecondary: 'Lihat lokasi sebenar',
     painEyebrow: 'Cabaran sebenar',
