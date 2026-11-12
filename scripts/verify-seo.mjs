@@ -21,11 +21,11 @@ for (const uri of pages) {
   const html = read(file);
   const canonical = base + uri;
   check(html.includes('rel="canonical" href="' + canonical + '"'), uri + ' canonical URL');
-  check((html.match(/<h1\\b/g) || []).length === 1, uri + ' exactly one H1');
-  check(/<title>[^<]{15,}<\\/title>/.test(html), uri + ' meaningful title');
+  check((html.match(/<h1\b/g) || []).length === 1, uri + ' exactly one H1');
+  check(/<title>[^<]{15,}<\/title>/.test(html), uri + ' meaningful title');
   check(/<meta name="description" content="[^"]{50,}"/.test(html), uri + ' meta description');
   check(sitemap.includes('<loc>' + canonical + '</loc>'), uri + ' listed in sitemap');
-  const ld = [...html.matchAll(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/g)];
+  const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   check(ld.length > 0, uri + ' structured data present');
   for (const [index, item] of ld.entries()) {
     try { JSON.parse(item[1]); check(true, uri + ' JSON-LD block ' + (index + 1) + ' parses'); }
