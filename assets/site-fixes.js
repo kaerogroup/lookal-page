@@ -272,7 +272,21 @@
     }
 
     document.querySelectorAll('.desktop-nav,.drawer-nav').forEach((nav) => {
-      nav.innerHTML = `<a href="/iklan/">${currentLanguage()==='en'?'How to advertise':'Cara beriklan'}</a><a href="/lokasi/">${currentLanguage()==='en'?'Screen locations':'Lokasi skrin'}</a><a href="#harga">${c.navPrice}</a><a href="#pemilik-premis">${c.navPremise}</a><a href="/business-partner/">${currentLanguage()==='en'?'Business Partner':'Rakan Niaga'}</a>`;
+      const en = currentLanguage() === 'en';
+      const items = [
+        ['/', en ? 'Home' : 'Utama'],
+        ['/iklan/', en ? 'How to advertise' : 'Cara beriklan'],
+        ['/lokasi/', en ? 'Screen locations' : 'Lokasi skrin'],
+        ['#harga', en ? 'Pricing' : 'Harga'],
+        ['#hubungi', en ? 'Contact Us' : 'Hubungi Kami'],
+        ['/publisher/', en ? 'Become Publisher' : 'Jadi Publisher'],
+        ['/business-partner/', en ? 'Business Partner' : 'Rakan Niaga'],
+        ['/tools/whatsapp-link/', en ? 'WhatsApp Link' : 'Pautan WhatsApp']
+      ];
+      const shown = nav.classList.contains('drawer-nav')
+        ? items
+        : items.filter(([url]) => ['/', '/iklan/', '/lokasi/', '#harga', '/publisher/'].includes(url));
+      nav.innerHTML = shown.map(([url,label]) => `<a href="${url}">${label}</a>`).join('');
     });
   };
 
