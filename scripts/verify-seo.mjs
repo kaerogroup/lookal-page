@@ -46,8 +46,8 @@ check(pricingScript.includes('Premium Fullscreen · 15 saat'), 'homepage runtime
 check(pricingScript.includes('Premium Extended Fullscreen · 30 saat'), 'homepage runtime pricing describes 30s fullscreen');
 check(!home.includes('255 saat satu giliran tayangan'), 'homepage does not claim fixed rotation duration across mixed slots');
 check(!home.includes('112–169 kali sehari'), 'homepage does not claim fixed daily plays across mixed slots');
-check(pricingScript.includes('nav.innerHTML = `<a href="/iklan/">'), 'runtime navigation retains advertiser page');
-check(pricingScript.includes('<a href="/lokasi/">'), 'runtime navigation retains location page');
+check(pricingScript.includes("['/iklan/', en ? 'How to advertise' : 'Cara beriklan']"), 'runtime navigation retains advertiser page');
+check(pricingScript.includes("['/lokasi/', en ? 'Screen locations' : 'Lokasi skrin']"), 'runtime navigation retains location page');
 
 // Mobile shared-navigation regression: no wrapped desktop header on SEO pages.
 check(fs.existsSync(path.join(root, 'assets/lookal-public-nav.css')), 'shared navigation CSS is deployed');
