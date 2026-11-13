@@ -121,7 +121,7 @@ for (const uri of ['/iklan/', '/lokasi/']) {
  const headerHtml = read(uri.slice(1) + 'index.html');
  const navAt = headerHtml.indexOf('id="lookalPublicMenuOpen"');
  const brandAt = headerHtml.indexOf('class="lookal-public-brand"');
- check(navAt > 0 && brandAt > 0, uri + ' has brand and functional menu button');
+ check(navAt > 0 && brandAt > 0 && navAt < brandAt, uri + ' has left-first menu before brand in DOM order');
 }
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
