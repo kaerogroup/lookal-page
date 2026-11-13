@@ -111,5 +111,17 @@ for (const file of [
 check(home.includes("drawer.addEventListener('click',(event)=>{if(event.target.closest('a[href]'))closeDrawer();});"), 'homepage drawer handles dynamic navigation links');
 check(!home.includes('.location-card:nth-child(n+6){display:none}'), 'all location photos remain visible');
 check(home.includes('#bukti,#lihat,#lokasi,#network-map{content-visibility:visible!important'), 'visual proof and map sections are not content-hidden');
+
+const homepageLanguage = read('assets/i18n.js');
+check(homepageLanguage.includes('header .brand{display:inline-flex!important;order:2;flex:0 0 auto;margin-right:auto}'), 'homepage mobile header shows brand next to left menu');
+check(navStyle.includes('.lookal-public-menu{order:1;'), 'subpage mobile menu is positioned first, on left');
+check(navStyle.includes('.lookal-public-brand{display:inline-flex;align-items:center;flex:0 0 auto;order:2;margin-left:auto}'), 'subpage mobile logo is positioned after the menu');
+check(navStyle.includes('@media(min-width:1200px)'), 'desktop header remains separately controlled');
+for (const uri of ['/iklan/', '/lokasi/']) {
+ const headerHtml = read(uri.slice(1) + 'index.html');
+ const navAt = headerHtml.indexOf('id="lookalPublicMenuOpen"');
+ const brandAt = headerHtml.indexOf('class="lookal-public-brand"');
+ check(navAt > 0 && brandAt > 0, uri + ' has brand and functional menu button');
+}
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
