@@ -179,100 +179,17 @@
     return section;
   };
 
+  // Homepage v3 is authored in static HTML for accessibility, SEO and stable rendering.
+  // This function now updates labels only; it never creates, deletes or moves sections.
   const renderHomepageV2 = () => {
     if (!isHome) return;
-    const main = document.querySelector('main#main');
-    const hero = main?.querySelector('.hero');
-    if (!main || !hero) return;
-    const c = homepageCopy();
-    addHomepageStyle();
-
-    document.title = c.title;
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', c.description);
-
-    const heroLive = hero.querySelector('.live');
-    if (heroLive) heroLive.innerHTML = `<span class="dot"></span>${c.heroTag}`;
-    const heroTitle = hero.querySelector('h1');
-    if (heroTitle) heroTitle.textContent = c.heroTitle;
-    const heroBody = hero.querySelector('.lede');
-    if (heroBody) heroBody.textContent = c.heroBody;
-    const heroBtns = hero.querySelector('.btns');
-    if (heroBtns) heroBtns.innerHTML = `<a class="btn btn-red" href="#nilai">${c.heroPrimary} <span aria-hidden="true" style="margin-left:8px">→</span></a><a class="btn btn-ghost" href="#lokasi">${c.heroSecondary}</a>`;
-
-    const oldMetrics = hero.nextElementSibling;
-    if (oldMetrics && !oldMetrics.id) oldMetrics.classList.add('home-metrics-original');
-
-    ['masalah','nilai','kegunaan','bukti','harga'].forEach((id) => document.getElementById(id)?.remove());
-
-    const painCards = c.painCards.map(([h,p]) => `<article class="quest-card"><h3>${h}</h3><p>${p}</p></article>`).join('');
-    const pain = makeSection('masalah', c.painEyebrow, c.painTitle, c.painBody, `<div class="quest-grid">${painCards}</div>`);
-    hero.insertAdjacentElement('afterend', pain);
-
-    const valueCards = c.valueCards.map(([h,p]) => `<article class="quest-card"><h3>${h}</h3><p>${p}</p></article>`).join('');
-    const value = makeSection('nilai', c.valueEyebrow, c.valueTitle, c.valueBody, `<div class="quest-grid">${valueCards}</div>`);
-    value.classList.add('quest-value');
-    pain.insertAdjacentElement('afterend', value);
-
-    const useCards = c.uses.map(([h,p]) => `<article class="quest-use"><strong>${h}</strong><p>${p}</p></article>`).join('');
-    const use = makeSection('kegunaan', c.useEyebrow, c.useTitle, c.useBody, `<div class="quest-use-grid">${useCards}</div>`);
-    value.insertAdjacentElement('afterend', use);
-
-    const proof = makeSection('bukti', c.proofEyebrow, c.proofTitle, c.proofBody, '');
-    proof.classList.add('quest-proof');
-    const proofHero = hero.querySelector('.proof-hero');
-    if (proofHero) proof.querySelector('.wrap').appendChild(proofHero);
-    use.insertAdjacentElement('afterend', proof);
-
-    const how = document.getElementById('cara');
-    if (how) {
-      const shead = how.querySelector('.shead');
-      if (shead) shead.innerHTML = `<h2>${c.howTitle}</h2><p>${c.howBody}</p>`;
-      const steps = how.querySelector('.steps');
-      if (steps) steps.innerHTML = c.steps.map(([n,h,p]) => `<div class="step"><div class="stepn">${n}</div><h3>${h}</h3><p>${p}</p></div>`).join('');
-      proof.insertAdjacentElement('afterend', how);
-    }
-
-    const proposition = document.getElementById('masa-depan');
-    if (proposition) {
-      const shead = proposition.querySelector('.shead');
-      if (shead) shead.innerHTML = `<h2>${c.propositionTitle}</h2><p>${c.propositionBody}</p>`;
-      if (how) how.insertAdjacentElement('afterend', proposition);
-    }
-
-    const locations = document.getElementById('lokasi');
-    if (locations && proposition) proposition.insertAdjacentElement('afterend', locations);
-
-    const tiers = c.tiers.map(([name,price,unit,body], i) => `<article class="quest-tier${i===1?' featured':''}"><span class="tier-name">${name}</span><div class="tier-price">${price} <span>${unit}</span></div><p>${body}</p></article>`).join('');
-    const pricing = makeSection('harga', c.priceEyebrow, c.priceTitle, c.priceBody, `<div class="quest-pricing">${tiers}</div><div class="quest-model"><h3>${c.modelTitle}</h3><p>${c.modelBody}</p></div>`);
-    if (locations) locations.insertAdjacentElement('afterend', pricing);
-
-    const numbers = document.getElementById('angka');
-    if (numbers && pricing) pricing.insertAdjacentElement('afterend', numbers);
-
-    const walkthrough = document.getElementById('lihat');
-    if (walkthrough) {
-      const shead = walkthrough.querySelector('.shead');
-      if (shead) shead.innerHTML = `<h2>${c.walkthroughTitle}</h2><p>${c.walkthroughBody}</p>`;
-      if (numbers) numbers.insertAdjacentElement('afterend', walkthrough);
-    }
-
-    const faq = [...main.querySelectorAll('section')].find((section) => section.querySelector('details'));
-    const premise = document.getElementById('pemilik-premis');
-    if (faq && premise) faq.insertAdjacentElement('afterend', premise);
-
-    const finalSection = main.querySelector('.final');
-    if (finalSection) {
-      const h2 = finalSection.querySelector('h2');
-      const lede = finalSection.querySelector('.lede');
-      const btns = finalSection.querySelector('.btns');
-      if (h2) h2.textContent = c.finalTitle;
-      if (lede) lede.textContent = c.finalBody;
-      if (btns) btns.innerHTML = `<a class="btn btn-red" href="https://app.lookal.tech/signup">${c.finalPrimary} <span aria-hidden="true" style="margin-left:8px">→</span></a><a class="btn btn-ghost" href="#lokasi">${c.finalSecondary}</a>`;
-    }
-
+    const lang = currentLanguage();
+    document.querySelectorAll('#main [data-copy-bm][data-copy-en]').forEach((el) => {
+      const key = lang === 'en' ? 'copyEn' : 'copyBm';
+      if (el.textContent !== el.dataset[key]) el.textContent = el.dataset[key];
+    });
     document.querySelectorAll('.desktop-nav,.drawer-nav').forEach((nav) => {
-      const en = currentLanguage() === 'en';
+      const en = lang === 'en';
       const items = [
         ['/', en ? 'Home' : 'Utama'],
         ['/iklan/', en ? 'How to advertise' : 'Cara beriklan'],
@@ -286,7 +203,10 @@
       const shown = nav.classList.contains('drawer-nav')
         ? items
         : items.filter(([url]) => ['/', '/iklan/', '/lokasi/', '#harga', '/publisher/'].includes(url));
+      const signature = JSON.stringify(shown);
+      if (nav.dataset.lookalMenuSignature === signature) return;
       nav.innerHTML = shown.map(([url,label]) => `<a href="${url}">${label}</a>`).join('');
+      nav.dataset.lookalMenuSignature = signature;
     });
   };
 
