@@ -114,10 +114,12 @@ check(home.includes('#bukti,#lihat,#lokasi,#network-map{content-visibility:visib
 
 check(home.indexOf('id="menuOpen"') < home.indexOf('class="brand" href="#top"'), 'homepage menu precedes brand in keyboard and DOM order');
 const homepageLanguage = read('assets/i18n.js');
-check(homepageLanguage.includes('header .brand{display:inline-flex!important;order:2;flex:0 0 auto;margin-right:auto}'), 'homepage mobile header shows brand next to left menu');
+check(homepageLanguage.includes('header .brand{display:inline-flex!important;order:2;flex:0 0 auto;margin:0!important;position:absolute;left:50%;transform:translateX(-50%);z-index:1}'), 'homepage mobile brand is centered');
 check(navStyle.includes('.lookal-public-menu{order:1;'), 'subpage mobile menu is positioned first, on left');
-check(navStyle.includes('.lookal-public-brand{display:inline-flex;align-items:center;flex:0 0 auto;order:2;margin-left:auto}'), 'subpage mobile logo is positioned after the menu');
+check(navStyle.includes('.lookal-public-brand{display:inline-flex;align-items:center;flex:0 0 auto;order:2;margin:0;position:absolute;left:50%;transform:translateX(-50%);z-index:1}'), 'subpage mobile logo is centered');
 check(navStyle.includes('@media(min-width:1200px)'), 'desktop header remains separately controlled');
+check(homepageLanguage.includes('@media(min-width:900px) and (max-width:1199px)'), 'homepage tablet uses same centered header geometry');
+check(navStyle.includes('position:static;transform:none'), 'subpage desktop logo returns to ordinary layout');
 for (const uri of ['/iklan/', '/lokasi/']) {
  const headerHtml = read(uri.slice(1) + 'index.html');
  const navAt = headerHtml.indexOf('id="lookalPublicMenuOpen"');
