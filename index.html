@@ -88,6 +88,88 @@
     .split{display:grid;gap:38px}@media(min-width:860px){.split{grid-template-columns:1fr 1fr;gap:56px}}.checklist{list-style:none;padding:0;margin:24px 0}.checklist li{position:relative;padding:13px 0 13px 28px;border-bottom:1px solid var(--line);font-size:.95rem}.checklist li::before{content:"";position:absolute;left:2px;top:20px;width:10px;height:6px;border-left:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(-45deg)}.note{border:1px solid var(--line);background:#fff;padding:22px;margin-bottom:2px}.note h3{margin-bottom:8px}.note p{margin:0;color:var(--smoke);font-size:.92rem}
     details{border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;padding:21px 38px 21px 0;font-weight:700;position:relative}summary::-webkit-details-marker{display:none}summary::after{content:"+";position:absolute;right:8px;color:var(--red);font-size:1.4rem;font-weight:400}details[open] summary::after{content:"–"}.ans{padding:0 0 20px;color:var(--smoke);max-width:70ch;font-size:.95rem}.ans p{margin:0}.final{background:var(--charcoal);color:#fff}.final .lede{color:#c9c4bd}@media(max-width:959px){section{padding:64px 0}.hero{padding:60px 0 54px}}footer{border-top:1px solid var(--line);padding:36px 0;color:var(--smoke);font-size:.85rem;background:#fff}.fgrid{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
   </style>
+
+<style id="lookal-home-canonical-v3">
+/* Homepage v3: stable semantic order, no runtime section creation. */
+#main > section{padding:52px 0}
+#main .hero{padding:60px 0 44px}
+#main .hero h1{max-width:16ch;font-size:clamp(2.2rem,6vw,4.8rem);line-height:1.1;letter-spacing:-.045em;margin:20px 0}
+#main .hero .lede{max-width:64ch;font-size:clamp(1rem,2.1vw,1.22rem);line-height:1.65}
+#main .hero .btns{margin-top:26px}
+#main .home-kicker{display:block;font-size:.73rem;font-weight:800;color:var(--red);letter-spacing:.11em;margin-bottom:11px}
+#main .shead{margin-bottom:24px;max-width:64ch}
+#main .shead h2{font-size:clamp(1.7rem,3.5vw,2.7rem);letter-spacing:-.035em;line-height:1.16}
+#main .shead p{line-height:1.65}
+.home-trust-strip{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:36px}
+.home-trust-strip span{display:flex;flex-direction:column;gap:3px;flex:1 1 130px;padding:16px 14px;border-right:1px solid var(--line)}
+.home-trust-strip span:first-child{padding-left:0}
+.home-trust-strip span:last-child{border-right:0}
+.home-trust-strip strong{font-size:1.2rem;font-weight:800;line-height:1.2;white-space:nowrap}
+.home-trust-strip small{font-size:.74rem;color:var(--smoke)}
+.home-pricing{background:#fff}
+.home-pricing .quest-pricing{display:grid;gap:10px}
+.home-pricing .quest-tier{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:5px}
+.home-pricing .quest-tier.featured{background:var(--charcoal);border-color:var(--charcoal);color:#fff}
+.home-pricing .tier-name{font-size:.78rem;font-weight:800;color:var(--red)}
+.home-pricing .quest-tier.featured .tier-name{color:#ff848b}
+.home-pricing .tier-price{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.2;letter-spacing:-.045em}
+.home-pricing .tier-price span{font-size:.32em;font-weight:600;color:var(--smoke);letter-spacing:0}
+.home-pricing .quest-tier.featured .tier-price span,.home-pricing .quest-tier.featured p{color:#d5cfd0}
+.home-pricing .quest-tier p{font-size:.88rem;line-height:1.55;color:var(--smoke);margin:0}
+.home-footnote{color:var(--smoke);font-size:.8rem;margin:18px 0 8px}
+.home-text-link{font-size:.91rem;color:var(--red);font-weight:800;text-underline-offset:4px}
+.home-gallery .gallery,.home-tutorial .walkthroughs,.home-proof .proof-grid{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:4px;gap:12px;-webkit-overflow-scrolling:touch;padding-bottom:15px}
+.home-gallery .location-card,.home-tutorial .walk,.home-proof .proof-item{flex:0 0 min(82vw,340px);min-width:0;scroll-snap-align:start}
+.home-gallery .location-card:nth-child(n){display:block}
+.home-gallery .location-card.featured{grid-row:auto}
+.home-gallery .location-card .location-media{aspect-ratio:4/3;min-height:0}
+.home-gallery .location-card.featured .location-media{aspect-ratio:4/3;min-height:0}
+.home-gallery .location-card .location-meta{padding:12px 14px}
+.home-tutorial .walk-open{height:100%}
+.home-tutorial .walk-copy{min-height:165px}
+.home-tutorial .video-frame video{max-width:100%}
+.home-proof{background:var(--charcoal);color:#fff}
+.home-proof .shead p{color:#d0cacf}
+.home-proof .proof-hero{margin-top:0}
+.home-proof .proof-grid{grid-template-columns:none!important}
+.home-proof .proof-item{height:auto}
+.home-proof .proof-item .proof-caption{padding:12px 3px 0}
+.home-map{background:#202024;color:#fff}
+.home-after-gallery{margin-top:15px}
+.home-steps .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.home-steps .step{min-width:0}
+.home-measurement{background:#fff}
+.home-measurement .shead{margin-bottom:0}
+.home-publisher{background:#f4f0e9}
+.home-publisher-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.home-publisher-inner p{margin:4px 0 0;color:var(--smoke)}
+#main .final{padding:64px 0}
+#main .final h2{max-width:22ch}
+@media(min-width:760px){
+ .home-pricing .quest-pricing{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .home-gallery .gallery,.home-tutorial .walkthroughs,.home-proof .proof-grid{display:grid;overflow:visible;padding-bottom:0;grid-template-columns:repeat(3,minmax(0,1fr))}
+ .home-gallery .location-card,.home-tutorial .walk,.home-proof .proof-item{min-width:0;flex:auto}
+ .home-gallery .gallery{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .home-gallery .location-card.featured{grid-row:auto}
+ .home-gallery .location-card.featured .location-media{aspect-ratio:4/3;min-height:0}
+}
+@media(max-width:759px){
+ #main > section{padding:39px 0}
+ #main .hero{padding:44px 0 30px}
+ #main .hero h1{font-size:clamp(2.1rem,10vw,3.35rem)}
+ #main .hero .btns{display:flex;flex-direction:column;align-items:stretch}
+ #main .hero .btns .btn{width:100%}
+ .home-trust-strip{margin-top:28px}
+ .home-trust-strip span{flex:1 1 90px;padding:12px 7px}
+ .home-trust-strip strong{font-size:1rem}
+ .home-trust-strip small{font-size:.65rem}
+ .home-steps .steps{grid-template-columns:1fr}
+ .home-steps .step{padding:15px 18px}
+ .home-tutorial .walk-copy{min-height:0}
+ #main .final{padding:45px 0}
+}
+@media(prefers-reduced-motion:reduce){.home-gallery .gallery,.home-tutorial .walkthroughs,.home-proof .proof-grid{scroll-behavior:auto}}
+</style>
 </head>
 <body>
   <a class="skip-link" href="#main">Langkau ke kandungan utama</a>
@@ -109,39 +191,76 @@
   <div class="drawer-cta"><a class="btn btn-red" href="https://app.lookal.tech/signup">Mula beriklan</a><div class="drawer-note">Daftar percuma dan mula bina kempen LOOKaL.</div></div>
 </aside>
 
-<main id="main" tabindex="-1"><div id="top"></div>
-  <section class="hero" style="border-top:0">
+<main id="main" tabindex="-1" data-layout="advertiser-first-v3"><div id="top"></div>
+  <section class="hero" id="utama">
     <div class="wrap">
-      <span class="live"><span class="dot"></span>10 lokasi komuniti sedang beroperasi</span>
-      <h1>Iklan anda, dekat dengan komuniti anda.</h1>
-      <div class="rule"></div>
-      <p class="lede">LOOKaL ialah rangkaian iklan skrin digital komuniti (hyperlocal digital out-of-home / DOOH) di Malaysia yang meletakkan iklan perniagaan tempatan di premis yang orang memang datang setiap hari — tempat makan, kedai gunting, kedai runcit dan ruang menunggu. Anda pilih tempat, pilih hari, dan iklan anda muncul dekat dengan orang yang anda mahu capai.</p>
-      <div class="btns"><a class="btn btn-red action-pulse" href="https://app.lookal.tech/signup">Daftar percuma + RM6 kredit <span aria-hidden="true" style="margin-left:8px">→</span></a><a class="btn btn-ghost" href="#lihat">Tengok cara LOOKaL berfungsi</a></div>
-      <div class="offer-strip" aria-label="Promosi kredit pendaftaran LOOKaL"><strong>Daftar percuma · <span class="offer-credit">RM6 kredit penggunaan</span></strong><span>Cuba 1 lokasi × 3 hari atau 3 lokasi × 1 hari.</span></div>
-      <div class="capacity-note" aria-label="Kapasiti slot iklan setiap lokasi"><span class="capacity-badge">Maksimum 30 slot / lokasi</span><span>Kapasiti dihadkan supaya rotation kekal terkawal dan setiap kempen mendapat giliran tayangan yang konsisten.</span></div>
-      <div class="proof-hero"><div class="proof-grid"><article class="proof-item"><div class="video-frame"><video controls muted playsinline preload="metadata" aria-label="Rakaman skrin komuniti LOOKaL beroperasi di lokasi pertama"><source src="assets/screens/VID-20260915-WA0001.mp4" type="video/mp4"></video></div><div class="proof-caption"><p><strong>Skrin komuniti sedang beroperasi.</strong></p><p class="small muted">Rakaman sebenar di premis LOOKaL.</p></div></article><article class="proof-item"><div class="video-frame"><video controls muted playsinline preload="metadata" aria-label="Rakaman skrin komuniti LOOKaL beroperasi di lokasi kedua"><source src="assets/screens/VID20260920082504%20(1).mp4" type="video/mp4"></video></div><div class="proof-caption"><p><strong>Lokasi dan suasana berbeza.</strong></p><p class="small muted">Lihat bagaimana skrin ditempatkan dalam premis sebenar.</p></div></article><article class="proof-item"><div class="video-frame"><video controls muted playsinline preload="metadata" aria-label="Rakaman skrin komuniti LOOKaL beroperasi di lokasi ketiga"><source src="assets/screens/VID20260920083827.mp4" type="video/mp4"></video></div><div class="proof-caption"><p><strong>Rangkaian yang sedang berkembang.</strong></p><p class="small muted">Lebih daripada satu jenis premis dan kedudukan skrin.</p></div></article></div></div>
+      <span class="live"><span class="dot"></span>IKLAN SKRIN DIGITAL KOMUNITI</span>
+      <h1 data-copy-bm="Iklan perniagaan anda di skrin komuniti." data-copy-en="Put your business on community screens.">Iklan perniagaan anda di skrin komuniti.</h1>
+      <p class="lede" data-copy-bm="Pilih lokasi, pilih hari dan mula beriklan dari RM2 sehari. Iklan anda muncul di skrin digital dalam premis sebenar, dekat dengan pelanggan setempat." data-copy-en="Choose your locations and days, and advertise from RM2 per day. Your ad appears on digital screens in real premises, close to local customers.">Pilih lokasi, pilih hari dan mula beriklan dari RM2 sehari. Iklan anda muncul di skrin digital dalam premis sebenar, dekat dengan pelanggan setempat.</p>
+      <div class="btns"><a class="btn btn-red" href="https://app.lookal.tech/signup" data-copy-bm="Mula beriklan" data-copy-en="Start advertising">Mula beriklan</a><a class="btn btn-ghost" href="#lokasi" data-copy-bm="Lihat lokasi sebenar" data-copy-en="See real locations">Lihat lokasi sebenar</a></div>
+      <div class="home-trust-strip" aria-label="Ringkasan LOOKaL">
+        <span><strong>10</strong><small>lokasi aktif</small></span>
+        <span><strong>8s · 15s · 30s</strong><small>pilihan format</small></span>
+        <span><strong>RM2</strong><small>bermula / lokasi / hari</small></span>
+      </div>
     </div>
   </section>
-
-  <section><div class="wrap"><div class="metrics-strip" aria-label="Ringkasan rangkaian LOOKaL"><div class="metric"><div class="metric-value">10<em> lokasi</em></div><div class="metric-label">Skrin komuniti aktif</div></div><div class="metric"><div class="metric-value">65<em> inci</em></div><div class="metric-label">Saiz skrin di premis</div></div><div class="metric"><div class="metric-value">8<em> saat</em></div><div class="metric-label">Satu slot tayangan</div></div><div class="metric"><div class="metric-value">RM2<em>/hari</em></div><div class="metric-label">Harga asas untuk satu lokasi</div></div></div><div class="capacity-note" style="margin-top:18px"><span class="capacity-badge">30 slot sahaja</span><span>Setiap lokasi mempunyai kapasiti maksimum 30 slot iklan.</span></div></div></section>
-
-  <section id="rangkaian"><div class="wrap"><div class="shead"><h2>10 lokasi aktif sekarang. Lebih banyak komuniti selepas ini.</h2><p>LOOKaL bermula dengan lokasi yang dekat dengan komuniti dan berkembang secara berperingkat ke premis yang sesuai.</p></div><div class="network-intro"><div class="network-panel"><strong>Rangkaian dibina lokasi demi lokasi.</strong><p>Setiap premis dipilih kerana ada aliran orang, masa menunggu atau aktiviti yang sesuai. Fokusnya ialah kualiti lokasi, bukan sekadar menambah bilangan skrin.</p><div class="network-proof"><span><strong>10</strong> lokasi aktif</span><span><strong>8 / 15 / 30 saat</strong> pilihan format iklan</span><span><strong>Lebih banyak</strong> lokasi seterusnya</span></div></div><div class="join-card"><div class="network-kicker">Untuk pemilik premis</div><h3>Ada premis yang selalu dikunjungi orang? Sertai LOOKaL.</h3><p>Jika pelanggan anda selalu datang, duduk, menunggu atau berurusan di premis anda, ruang itu mungkin sesuai untuk menjadi lokasi skrin komuniti LOOKaL.</p><div class="btns" style="margin-top:20px"><a class="btn btn-red" href="#pemilik-premis">Saya pemilik premis</a></div></div></div></div></section>
-
-  <section id="cara"><div class="wrap"><div class="shead"><h2>Mudah dari mula sampai iklan ke skrin.</h2><p>Pilih lokasi, siapkan iklan dan hantar. Semuanya dalam satu aliran yang mudah difahami.</p></div><div class="steps"><div class="step"><div class="stepn">01</div><h3>Pilih tempat dan hari</h3><p>Pilih premis yang dekat dengan pelanggan anda dan tentukan bila iklan mahu berjalan.</p></div><div class="step"><div class="stepn">02</div><h3>Siapkan iklan</h3><p>Gunakan poster sendiri atau bina dengan Snap2Ads supaya mesej kekal ringkas, jelas dan mudah dibaca.</p></div><div class="step"><div class="stepn">03</div><h3>Hantar dan mula tayang</h3><p>Selepas semakan, iklan anda dihantar ke skrin yang anda pilih.</p></div></div></div></section>
-
-  <section id="masa-depan"><div class="wrap"><div class="shead"><h2>Mudah macam iklan online. Hadir di dunia sebenar.</h2><p>LOOKaL memudahkan pengurusan kempen secara digital, tetapi iklan tetap muncul pada skrin di premis komuniti.</p></div><div class="bridge"><article class="bridge-card"><span class="eyebrow">Kemudahan digital</span><h3>Pilih lokasi, pilih hari, urus kempen.</h3><p>Kurangkan proses manual yang biasa datang dengan media fizikal.</p></article><article class="bridge-card"><span class="eyebrow">Kehadiran fizikal</span><h3>Iklan muncul di tempat komuniti beraktiviti.</h3><p>Kedai, ruang menunggu dan premis yang memang mempunyai pergerakan orang setiap hari.</p></article></div></div><div class="vision-panel"><div class="vision-inner"><span class="eyebrow">Arah seterusnya</span><h3>Dari pilih lokasi kepada pilih audience.</h3><p>Hari ini, anda memilih lokasi dan hari. Arah pembangunan seterusnya ialah membantu memahami bila dan di mana audience yang sesuai berada — berdasarkan data agregat daripada ruang fizikal.</p><div class="vision-grid"><article class="vision-card"><span class="eyebrow">Presence</span><h4>Trafik sekitar skrin</h4><p>Ukur corak kehadiran mengikut lokasi dan waktu secara agregat.</p></article><article class="vision-card"><span class="eyebrow">Dwell</span><h4>Masa dalam zon paparan</h4><p>Fahami berapa lama orang berada di kawasan skrin, bukan hanya berapa kali iklan dimainkan.</p></article><article class="vision-card"><span class="eyebrow">Audience intelligence</span><h4>Padanan lokasi dan waktu</h4><p>Matlamatnya ialah membantu mencadangkan lokasi dan masa berdasarkan konteks audience, bukan sekadar pilihan manual.</p></article></div><p class="vision-note"><strong>Privacy-first.</strong> Ini ialah visi pembangunan masa depan, bukan fungsi semasa. Fokusnya ialah data agregat tanpa facial recognition atau pembinaan identiti individu.</p></div></div></section>
-
-  <section id="lokasi"><div class="wrap"><div class="shead"><h2>Lihat sendiri di mana skrin LOOKaL berada.</h2><p>Beberapa contoh penempatan LOOKaL — supaya anda boleh lihat sendiri bagaimana skrin hadir dalam konteks premis.</p></div><div class="gallery"><article class="location-card featured"><div class="location-media"><img src="assets/locations/160017.jpg" width="1280" height="960" loading="lazy" decoding="async" alt="Skrin komuniti LOOKaL di dalam premis tempatan"></div><div class="location-meta"><strong>Kedudukan skrin dalam premis</strong><span>Contoh penempatan LOOKaL</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260910-WA0004.jpg" width="2560" height="1706" loading="lazy" decoding="async" alt="Skrin iklan komuniti LOOKaL dalam ruang premis"></div><div class="location-meta"><strong>Dalam aliran pengunjung</strong><span>Skrin ditempatkan dalam konteks premis</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260920-WA0000.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Skrin LOOKaL di ruang komuniti"></div><div class="location-meta"><strong>Ruang komuniti</strong><span>Konteks pemasangan dan aliran pengunjung</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260830-WA0000%20(1).jpeg" loading="lazy" decoding="async" alt="Pandangan premis dengan penempatan skrin LOOKaL"></div><div class="location-meta"><strong>Pandangan lebih luas premis</strong><span>Nampak hubungan skrin dengan ruang sekeliling</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG20260919184942.jpg" loading="lazy" decoding="async" alt="Kedudukan skrin LOOKaL dari sudut premis"></div><div class="location-meta"><strong>Sudut penempatan skrin</strong><span>Lokasi fizikal dalam premis</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG20260919184959.jpg" loading="lazy" decoding="async" alt="Skrin LOOKaL dilihat dalam suasana premis"></div><div class="location-meta"><strong>Skrin dalam suasana premis</strong><span>Lebih jelas konteks pemasangan dan jarak pandang</span></div></article></div></div></section>
-
-  <section id="lihat"><div class="wrap"><div class="shead"><h2>Lihat aliran LOOKaL dari dalam platform.</h2><p>Tiga demo ringkas menunjukkan aliran sebenar dari dashboard hingga bahan iklan dihantar.</p></div><div class="walkthroughs"><article class="walk"><button class="walk-open" type="button" data-video="assets/video/browsing%20dashboard%20Dan%20function.mp4" aria-label="Buka video walkthrough dashboard LOOKaL"><div class="video-frame"><video muted playsinline preload="metadata" aria-hidden="true"><source src="assets/video/browsing%20dashboard%20Dan%20function.mp4" type="video/mp4"></video><span class="play-badge" aria-hidden="true">▶</span></div><div class="walk-copy"><h3>01 · Dari signup ke dashboard</h3><p>Daftar, masuk workspace, browse lokasi dan fahami aliran kempen LOOKaL.</p><span class="walk-hint">Tonton walkthrough <span aria-hidden="true">↗</span></span></div></button></article><article class="walk"><button class="walk-open" type="button" data-video="assets/video/snap2ads%20editor%20new%20(1).mp4" aria-label="Buka video walkthrough Snap2Ads"><div class="video-frame"><video muted playsinline preload="metadata" aria-hidden="true"><source src="assets/video/snap2ads%20editor%20new%20(1).mp4" type="video/mp4"></video><span class="play-badge" aria-hidden="true">▶</span></div><div class="walk-copy"><h3>02 · Bina iklan dengan Snap2Ads</h3><p>Masukkan maklumat, bina atau gunakan bahan iklan sendiri, preview dan submit.</p><span class="walk-hint">Tonton walkthrough <span aria-hidden="true">↗</span></span></div></button></article><article class="walk"><button class="walk-open" type="button" data-video="assets/video/snap2ads%20own%20poster.mp4" aria-label="Buka video walkthrough upload poster sendiri"><div class="video-frame"><video muted playsinline preload="metadata" aria-hidden="true"><source src="assets/video/snap2ads%20own%20poster.mp4" type="video/mp4"></video><span class="play-badge" aria-hidden="true">▶</span></div><div class="walk-copy"><h3>03 · Sudah ada poster? Terus upload.</h3><p>Pastikan poster anda dalam format portrait 8:9 — contohnya 1080×1215 px atau 1280×1440 px. LOOKaL mengekalkan design asal tanpa crop atau stretch.</p><span class="walk-hint">Tonton walkthrough <span aria-hidden="true">↗</span></span></div></button></article></div><div class="addon"><strong>Video untuk format Basic Zon B?</strong><p>Tambah video sebagai add-on RM10 untuk setiap campaign. Durasi tayangan ialah 8 saat. Jika video anda lebih panjang, pilih dan potong bahagian yang mahu digunakan terus dalam editor Snap2Ads sebelum dihantar.</p></div></div></section>
-
-  <section id="angka"><div class="wrap"><div class="shead"><h2>Setiap lokasi hanya membawa maksimum 30 slot iklan.</h2><p>Had ini memastikan rotation tidak terlalu panjang. LOOKaL merekodkan tayangan pada skrin secara berasingan daripada jumlah orang yang melihat.</p></div><div class="calc"><div class="calcrow"><span>Basic</span><span class="op">8 saat</span><span>Premium Fullscreen</span><span class="op">15 saat</span><span>Premium Extended</span><span class="op">30 saat</span></div><p class="small muted" style="margin:14px 0 0">Tempoh satu pusingan tayangan bergantung pada bilangan slot aktif, campuran format Basic dan Premium, serta jadual playback pada setiap lokasi. Oleh itu, jumlah tayangan harian tidak boleh dijamin menggunakan satu kiraan tetap. Rekod tayangan skrin juga bukan jumlah individu yang melihat iklan.</p></div><div class="pull"><p>Pilih format dan lokasi yang sesuai; semak rekod tayangan sebenar melalui laporan kempen.</p></div></div></section>
-
-  <section id="pemilik-premis"><div class="wrap"><div class="split"><div><h2 style="margin-bottom:16px">Jadikan premis anda sebahagian daripada LOOKaL.</h2><p class="muted">Kami sedang mencari lebih banyak premis yang sesuai untuk membawa skrin komuniti LOOKaL ke kawasan setempat.</p><ul class="checklist"><li>LOOKaL mengurus sistem dan kandungan pada skrin</li><li>Anda tidak perlu susun iklan satu per satu</li><li>Prestasi skrin boleh dilihat melalui platform</li><li>Kami semak kesesuaian premis sebelum pemasangan</li></ul><a class="btn btn-red" href="https://app.lookal.tech/signup">Mohon sertai rangkaian</a></div><div><div class="note"><h3>Bukan sekadar pasang skrin</h3><p>LOOKaL mengurus iklan, jadual tayangan dan rekod asas di belakang skrin supaya pemilik premis tidak perlu menguruskannya satu per satu.</p></div><div class="note"><h3>Kita pilih lokasi yang sesuai</h3><p>LOOKaL berkembang secara berperingkat. Kami utamakan premis yang memang ada aliran orang dan masa menunggu yang sesuai.</p></div><div class="note"><h3>Terma yang jelas selepas penilaian</h3><p>Butiran kerjasama dan perkongsian hasil diterangkan selepas premis dinilai, supaya janji dibuat berdasarkan keadaan sebenar lokasi.</p></div></div></div></div></section>
-
+  <section id="harga" class="home-pricing">
+    <div class="wrap">
+      <div class="shead"><span class="home-kicker">PILIH FORMAT</span><h2>Pilih paparan yang sesuai dengan kempen.</h2><p>Harga jelas. Anda tentukan lokasi dan hari; semak jumlah akhir ketika menyediakan kempen.</p></div>
+      <div class="quest-pricing">
+        <article class="quest-tier basic-live"><span class="tier-name">Basic · 8 saat</span><div class="tier-price">RM2 <span>/ hari</span></div><p>Paparan tiga zon untuk kempen setempat.</p></article>
+        <article class="quest-tier featured"><span class="tier-name">Premium Fullscreen · 15 saat</span><div class="tier-price">RM4 <span>/ hari</span></div><p>15 saat dengan paparan skrin penuh.</p></article>
+        <article class="quest-tier"><span class="tier-name">Premium Extended Fullscreen · 30 saat</span><div class="tier-price">RM6 <span>/ hari</span></div><p>30 saat dengan paparan skrin penuh.</p></article>
+      </div>
+      <p class="home-footnote">Harga asas per lokasi sehari; caj akhir dan ketersediaan bergantung pada pilihan semasa dalam platform.</p>
+      <a class="home-text-link" href="/iklan/">Lihat butiran format dan cara beriklan →</a>
+    </div>
+  </section>
+  <section id="lokasi" class="home-gallery">
+    <div class="wrap">
+      <div class="shead"><span class="home-kicker">BUKTI LOKASI</span><h2>Skrin sebenar. Premis sebenar.</h2><p>Lihat tempat iklan boleh dipaparkan. Galeri ini menggunakan gambar penempatan rangkaian LOOKaL.</p></div>
+      <div class="gallery"><article class="location-card featured"><div class="location-media"><img src="assets/locations/160017.jpg" width="1280" height="960" loading="lazy" decoding="async" alt="Skrin komuniti LOOKaL di dalam premis tempatan"></div><div class="location-meta"><strong>Kedudukan skrin dalam premis</strong><span>Contoh penempatan LOOKaL</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260910-WA0004.jpg" width="2560" height="1706" loading="lazy" decoding="async" alt="Skrin iklan komuniti LOOKaL dalam ruang premis"></div><div class="location-meta"><strong>Dalam aliran pengunjung</strong><span>Skrin ditempatkan dalam konteks premis</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260920-WA0000.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Skrin LOOKaL di ruang komuniti"></div><div class="location-meta"><strong>Ruang komuniti</strong><span>Konteks pemasangan dan aliran pengunjung</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260830-WA0000%20(1).jpeg" loading="lazy" decoding="async" alt="Pandangan premis dengan penempatan skrin LOOKaL"></div><div class="location-meta"><strong>Pandangan lebih luas premis</strong><span>Nampak hubungan skrin dengan ruang sekeliling</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG20260919184942.jpg" loading="lazy" decoding="async" alt="Kedudukan skrin LOOKaL dari sudut premis"></div><div class="location-meta"><strong>Sudut penempatan skrin</strong><span>Lokasi fizikal dalam premis</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG20260919184959.jpg" loading="lazy" decoding="async" alt="Skrin LOOKaL dilihat dalam suasana premis"></div><div class="location-meta"><strong>Skrin dalam suasana premis</strong><span>Lebih jelas konteks pemasangan dan jarak pandang</span></div></article></div></div>
+      <div class="home-after-gallery"><a class="btn btn-ghost" href="/lokasi/">Terokai lokasi dan peta LOOKaL</a></div>
+    </div>
+  </section>
+  <section id="cara" class="home-steps">
+    <div class="wrap">
+      <div class="shead"><span class="home-kicker">MUDAH BERMULA</span><h2>Tiga langkah untuk mula beriklan.</h2></div>
+      <div class="steps">
+        <div class="step"><div class="stepn">01</div><h3>Pilih lokasi dan hari</h3><p>Pilih premis yang sesuai dengan pelanggan sasaran dan tempoh kempen.</p></div>
+        <div class="step"><div class="stepn">02</div><h3>Siapkan bahan iklan</h3><p>Gunakan poster sendiri atau hasilkan kreatif dengan Snap2Ads.</p></div>
+        <div class="step"><div class="stepn">03</div><h3>Hantar kempen</h3><p>Semak butiran dan hantar iklan melalui platform LOOKaL.</p></div>
+      </div>
+    </div>
+  </section>
+  <section id="lihat" class="home-tutorial">
+    <div class="wrap">
+      <div class="shead"><span class="home-kicker">LIHAT DEMO</span><h2>Lihat bagaimana kempen diurus.</h2><p>Pilih video walkthrough. Video pertama menerangkan aliran dari signup ke dashboard.</p></div>
+      <div class="walkthroughs"><article class="walk"><button class="walk-open" type="button" data-video="assets/video/browsing%20dashboard%20Dan%20function.mp4" aria-label="Buka video walkthrough dashboard LOOKaL"><div class="video-frame"><video muted playsinline preload="metadata" aria-hidden="true"><source src="assets/video/browsing%20dashboard%20Dan%20function.mp4" type="video/mp4"></video><span class="play-badge" aria-hidden="true">▶</span></div><div class="walk-copy"><h3>01 · Dari signup ke dashboard</h3><p>Daftar, masuk workspace, browse lokasi dan fahami aliran kempen LOOKaL.</p><span class="walk-hint">Tonton walkthrough <span aria-hidden="true">↗</span></span></div></button></article><article class="walk"><button class="walk-open" type="button" data-video="assets/video/snap2ads%20editor%20new%20(1).mp4" aria-label="Buka video walkthrough Snap2Ads"><div class="video-frame"><video muted playsinline preload="metadata" aria-hidden="true"><source src="assets/video/snap2ads%20editor%20new%20(1).mp4" type="video/mp4"></video><span class="play-badge" aria-hidden="true">▶</span></div><div class="walk-copy"><h3>02 · Bina iklan dengan Snap2Ads</h3><p>Masukkan maklumat, bina atau gunakan bahan iklan sendiri, preview dan submit.</p><span class="walk-hint">Tonton walkthrough <span aria-hidden="true">↗</span></span></div></button></article><article class="walk"><button class="walk-open" type="button" data-video="assets/video/snap2ads%20own%20poster.mp4" aria-label="Buka video walkthrough upload poster sendiri"><div class="video-frame"><video muted playsinline preload="metadata" aria-hidden="true"><source src="assets/video/snap2ads%20own%20poster.mp4" type="video/mp4"></video><span class="play-badge" aria-hidden="true">▶</span></div><div class="walk-copy"><h3>03 · Sudah ada poster? Terus upload.</h3><p>Pastikan poster anda dalam format portrait 8:9 — contohnya 1080×1215 px atau 1280×1440 px. LOOKaL mengekalkan design asal tanpa crop atau stretch.</p><span class="walk-hint">Tonton walkthrough <span aria-hidden="true">↗</span></span></div></button></article></div><div class="addon"><strong>Video untuk format Basic Zon B?</strong><p>Tambah video sebagai add-on RM10 untuk setiap campaign. Durasi tayangan ialah 8 saat. Jika video anda lebih panjang, pilih dan potong bahagian yang mahu digunakan terus dalam editor Snap2Ads sebelum dihantar.</p></div></div>
+    </div>
+  </section>
+  <section id="bukti" class="quest-proof home-proof">
+    <div class="wrap">
+      <div class="shead"><span class="home-kicker">TAYANGAN DI PREMIS</span><h2>Lihat iklan pada skrin LOOKaL yang beroperasi.</h2><p>Rakaman sebenar skrin dalam premis; tayangan iklan bukan bukti jumlah penonton sebenar.</p></div>
+      <div class="proof-hero"><div class="proof-grid"><article class="proof-item"><div class="video-frame"><video controls muted playsinline preload="metadata" aria-label="Rakaman skrin komuniti LOOKaL beroperasi di lokasi pertama"><source src="assets/screens/VID-20260915-WA0001.mp4" type="video/mp4"></video></div><div class="proof-caption"><p><strong>Skrin komuniti sedang beroperasi.</strong></p><p class="small muted">Rakaman sebenar di premis LOOKaL.</p></div></article><article class="proof-item"><div class="video-frame"><video controls muted playsinline preload="metadata" aria-label="Rakaman skrin komuniti LOOKaL beroperasi di lokasi kedua"><source src="assets/screens/VID20260920082504%20(1).mp4" type="video/mp4"></video></div><div class="proof-caption"><p><strong>Lokasi dan suasana berbeza.</strong></p><p class="small muted">Lihat bagaimana skrin ditempatkan dalam premis sebenar.</p></div></article><article class="proof-item"><div class="video-frame"><video controls muted playsinline preload="metadata" aria-label="Rakaman skrin komuniti LOOKaL beroperasi di lokasi ketiga"><source src="assets/screens/VID20260920083827.mp4" type="video/mp4"></video></div><div class="proof-caption"><p><strong>Rangkaian yang sedang berkembang.</strong></p><p class="small muted">Lebih daripada satu jenis premis dan kedudukan skrin.</p></div></article></div>
+    </div>
+  </section>
+  <section id="network-map" class="home-map">
+    <div class="wrap"><div class="shead"><span class="home-kicker">LOKASI AKTIF</span><h2>Terokai rangkaian di Dungun.</h2><p>Peta interaktif lokasi LOOKaL sedang dimuatkan. Anda juga boleh <a href="/lokasi/">meneroka lokasi di halaman khusus</a>.</p></div></div>
+  </section>
+  <section id="angka" class="home-measurement">
+    <div class="wrap">
+      <div class="shead"><span class="home-kicker">LAPORAN KEMPEN</span><h2>Jelas tentang apa yang diukur.</h2><p>LOOKaL boleh merekodkan tayangan skrin. <strong>Tayangan iklan tidak sama dengan bilangan penonton.</strong> Tempoh pusingan bergantung pada gabungan slot 8s, 15s dan 30s pada setiap lokasi.</p></div>
+    </div>
+  </section>
   <section><div class="wrap"><div class="shead"><h2>Soalan biasa.</h2><p>Jawapan ringkas tentang apa itu LOOKaL, bagaimana kempen berjalan dan apa yang sebenarnya diukur.</p></div><details open><summary>Apa itu LOOKaL?</summary><div class="ans"><p>LOOKaL ialah rangkaian skrin komuniti untuk iklan perniagaan tempatan di premis sebenar. Pengiklan boleh memilih lokasi, memilih hari dan mengurus kempen secara digital tanpa perlu mengurus setiap skrin secara manual.</p></div></details><details><summary>Adakah LOOKaL sama seperti online ads?</summary><div class="ans"><p>Tidak. Pengurusannya dibuat secara digital seperti online ads, tetapi iklan dipaparkan pada skrin fizikal di premis sebenar. LOOKaL menggabungkan kemudahan pengurusan digital dengan kehadiran media di dunia sebenar.</p></div></details><details open><summary>Saya tak reti design iklan. Boleh guna LOOKaL?</summary><div class="ans"><p>Boleh. Snap2Ads membantu membina bahan iklan yang sesuai untuk skrin komuniti. Fokusnya ialah mesej ringkas, susunan yang jelas dan mudah dibaca dari jarak tontonan sebenar.</p></div></details><details><summary>Saya sudah ada poster sendiri.</summary><div class="ans"><p>Boleh. Untuk ruangan poster pada skrin LOOKaL, gunakan format portrait 8:9. Contoh resolusi: 1080×1215 px atau 1280×1440 px. LOOKaL tidak crop, stretch atau mengubah design asal poster anda.</p></div></details><details><summary>Boleh pilih satu lokasi sahaja?</summary><div class="ans"><p>Ya. LOOKaL membenarkan anda bermula dengan lokasi yang paling relevan dengan komuniti pelanggan anda.</p></div></details><details><summary>Minimum berapa lama?</summary><div class="ans"><p>Boleh bermula satu hari. Anda boleh tambah tempoh atau lokasi berdasarkan keperluan kempen.</p></div></details><details><summary>Kenapa hanya 30 slot untuk setiap lokasi?</summary><div class="ans"><p>LOOKaL menghadkan setiap lokasi kepada maksimum 30 slot supaya rotation tayangan kekal terkawal. Bila sesuatu lokasi penuh, slot baharu bergantung pada kekosongan untuk tarikh yang dipilih.</p></div></details><details><summary>Macam mana kredit percuma RM6 digunakan?</summary><div class="ans"><p>Daftar LOOKaL tanpa caj dan anda menerima RM6 kredit penggunaan. Pada kadar bermula RM2 sehari untuk satu lokasi, kredit itu boleh digunakan sebagai contoh untuk 3 hari di 1 lokasi atau 1 hari di 3 lokasi.</p></div></details><details><summary>Boleh tambah video sendiri?</summary><div class="ans"><p>Boleh. Untuk format Basic Zon B, video ialah add-on RM10 bagi setiap kempen dengan durasi 8 saat. Pilihan Premium Fullscreen 15 saat dan Premium Extended Fullscreen 30 saat ialah slot skrin penuh yang berasingan. Jika video anda lebih panjang, anda boleh potong bahagian yang mahu digunakan terus dalam editor Snap2Ads sebelum submit.</p></div></details><details><summary>Macam mana saya tahu kempen berjalan?</summary><div class="ans"><p>Platform merekodkan status kempen dan tayangan. Jika iklan menggunakan kod QR atau tindakan yang boleh dijejak, rekod itu boleh digunakan sebagai maklumat tambahan — berasingan daripada bilangan tayangan skrin.</p></div></details></div></section>
-
-  <section class="final"><div class="wrap"><h2 style="max-width:18ch;margin-bottom:16px">Cuba LOOKaL tanpa caj permulaan.</h2><p class="lede">Daftar percuma dan dapat RM6 kredit penggunaan. Gunakan untuk 1 lokasi selama 3 hari atau 3 lokasi untuk 1 hari, kemudian tambah kempen bila sesuai.</p><div class="btns"><a class="btn btn-red action-pulse" href="https://app.lookal.tech/signup">Daftar percuma + RM6 kredit <span aria-hidden="true" style="margin-left:8px">→</span></a><a class="btn btn-ghost" href="#pemilik-premis">Jadi pemilik premis</a></div></div></section>
+  <section id="pemilik-premis" class="home-publisher">
+    <div class="wrap"><div class="home-publisher-inner"><div><strong>Anda pemilik premis?</strong><p>Kenali cara premis anda boleh menyertai rangkaian skrin komuniti LOOKaL.</p></div><a class="btn btn-ghost" href="/publisher/">Jadi Publisher</a></div></div>
+  </section>
+  <section class="final" id="hubungi">
+    <div class="wrap"><h2>Mula beriklan dengan LOOKaL.</h2><p class="lede">Pilih lokasi, tempoh dan format. Anda boleh bermula daripada RM2 sehari bagi satu lokasi.</p><div class="btns"><a class="btn btn-red" href="https://app.lookal.tech/signup">Daftar dan bina kempen</a><a class="btn btn-ghost" href="/iklan/">Cara beriklan</a></div></div>
+  </section>
 </main>
 <footer><div class="wrap fgrid"><strong style="color:var(--ink)">LOOKaL · Rangkaian Skrin Komuniti</strong><span><a href="/iklan/">Cara beriklan</a> · <a href="/lokasi/">Lokasi skrin</a> · <a href="/tools/whatsapp-link/">WhatsApp Link</a> · <a href="/tools/roi-calculator/">ROI Calculator</a> · Dikendalikan oleh Uniras Sdn Bhd · lookal.tech</span></div></footer>
 <div class="video-modal" id="walkModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Video walkthrough LOOKaL"><div class="video-modal-card"><button class="video-modal-close" id="walkModalClose" type="button" aria-label="Tutup video">×</button><video id="walkModalVideo" controls playsinline preload="metadata"></video></div></div>
