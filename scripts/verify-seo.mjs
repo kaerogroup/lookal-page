@@ -42,8 +42,8 @@ const advert = read('iklan/index.html');
 const pricingScript = read('assets/site-fixes.js');
 check(advert.includes('Premium Fullscreen · 15 saat'), 'advertiser page describes 15s fullscreen');
 check(advert.includes('Premium Extended Fullscreen · 30 saat'), 'advertiser page describes 30s fullscreen');
-check(pricingScript.includes('Premium Fullscreen · 15 saat'), 'homepage runtime pricing describes 15s fullscreen');
-check(pricingScript.includes('Premium Extended Fullscreen · 30 saat'), 'homepage runtime pricing describes 30s fullscreen');
+check(home.includes('Premium Fullscreen · 15 saat'), 'homepage static pricing describes 15s fullscreen');
+check(home.includes('Premium Extended Fullscreen · 30 saat'), 'homepage static pricing describes 30s fullscreen');
 check(!home.includes('255 saat satu giliran tayangan'), 'homepage does not claim fixed rotation duration across mixed slots');
 check(!home.includes('112–169 kali sehari'), 'homepage does not claim fixed daily plays across mixed slots');
 check(pricingScript.includes("['/iklan/', en ? 'How to advertise' : 'Cara beriklan']"), 'runtime navigation retains advertiser page');
@@ -125,6 +125,28 @@ for (const uri of ['/iklan/', '/lokasi/']) {
  const navAt = headerHtml.indexOf('id="lookalPublicMenuOpen"');
  const brandAt = headerHtml.indexOf('class="lookal-public-brand"');
  check(navAt > 0 && brandAt > 0 && navAt < brandAt, uri + ' has left-first menu before brand in DOM order');
+}
+
+const canonicalIds = ['utama','harga','lokasi','cara','lihat','bukti','network-map','angka','pemilik-premis','hubungi'];
+const positions = canonicalIds.map(id => home.indexOf('id="' + id + '"'));
+check(positions.every(index => index >= 0) && positions.every((v,i)=>i===0||v>positions[i-1]), 'homepage has static advertiser-first section order');
+check(home.includes('data-layout="advertiser-first-v3"'), 'homepage uses versioned static layout');
+check(home.includes('Iklan perniagaan anda di skrin komuniti.'), 'hero immediately describes the product');
+check(home.indexOf('id="harga"') < home.indexOf('id="lokasi"'), 'pricing appears before gallery');
+check(home.indexOf('id="lihat"') < home.indexOf('id="network-map"'), 'tutorial and map remain in static content');
+check((home.match(/class="location-card/g)||[]).length >= 6, 'six genuine premise image cards retained');
+check((home.match(/class="walk-open"/g)||[]).length === 3, 'three tutorials retained and accessible');
+check((home.match(/class="proof-item"/g)||[]).length === 3, 'three on-premise screen videos retained');
+check(home.includes('scroll-snap-type:x mandatory'), 'mobile gallery and tutorials use compact snap carousel');
+check(!pricingScript.includes("insertAdjacentElement('afterend', pain)"), 'no dynamic creation of repetitive homepage sections');
+check(!pricingScript.includes("const makeSection ="), 'obsolete section factory removed from runtime');
+const sectionHtml = home.slice(home.indexOf('<main id="main"'),home.indexOf('</main>'));
+const sectionStarts = [...sectionHtml.matchAll(/<section\\b[^>]*>/g)];
+check(sectionStarts.length===11, 'homepage comprises eleven purposeful static sections');
+for(const [i, start] of sectionStarts.entries()){
+ const segment = sectionHtml.slice(start.index,i+1<sectionStarts.length?sectionStarts[i+1].index:sectionHtml.length);
+ let divBalance=0;for(const div of segment.matchAll(/<\\/?div\\b[^>]*>/g))divBalance+=div[0][1]==='/'?-1:1;
+ check(divBalance===0, 'homepage section '+(i+1)+' has balanced layout containers');
 }
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
