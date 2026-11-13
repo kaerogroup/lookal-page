@@ -361,6 +361,8 @@
     "BUKTI LOKASI": "REAL LOCATIONS",
     "MUDAH BERMULA": "GET STARTED",
     "LIHAT DEMO": "WATCH A DEMO",
+    "Leret untuk lihat lebih banyak lokasi →": "Swipe to see more locations →",
+    "Leret untuk pilihan video seterusnya →": "Swipe for more videos →",
     "TAYANGAN DI PREMIS": "SCREENS IN REAL PREMISES",
     "LOKASI AKTIF": "ACTIVE LOCATIONS",
     "LAPORAN KEMPEN": "CAMPAIGN REPORTING",
