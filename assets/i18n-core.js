@@ -333,8 +333,8 @@
 
   const titles = {
     '/': {
-      bm: 'LOOKaL Malaysia | Iklan Skrin Komuniti untuk Perniagaan Tempatan',
-      en: 'LOOKaL Malaysia | Community Screen Advertising for Local Businesses'
+      bm: 'LOOKaL | Iklan Skrin Digital & DOOH untuk Perniagaan Tempatan',
+      en: 'LOOKaL | Community Digital Screen Advertising for Local Businesses'
     },
     '/business-partner/': {
       bm: 'LOOKaL Business Partner | Managed Node Partnership',
@@ -353,6 +353,64 @@
       en: 'Page not found | LOOKaL'
     }
   };
+
+  // Canonical advertiser-first homepage v3 translations.
+  Object.assign(translations, {
+    "IKLAN SKRIN DIGITAL KOMUNITI": "COMMUNITY DIGITAL SCREEN ADS",
+    "PILIH FORMAT": "CHOOSE A FORMAT",
+    "BUKTI LOKASI": "REAL LOCATIONS",
+    "MUDAH BERMULA": "GET STARTED",
+    "LIHAT DEMO": "WATCH A DEMO",
+    "Leret untuk lihat lebih banyak lokasi →": "Swipe to see more locations →",
+    "Leret untuk pilihan video seterusnya →": "Swipe for more videos →",
+    "TAYANGAN DI PREMIS": "SCREENS IN REAL PREMISES",
+    "LOKASI AKTIF": "ACTIVE LOCATIONS",
+    "LAPORAN KEMPEN": "CAMPAIGN REPORTING",
+    "Iklan perniagaan anda di skrin komuniti.": "Advertise your business on community screens.",
+    "Pilih lokasi, pilih hari dan mula beriklan dari RM2 sehari. Iklan anda muncul di skrin digital dalam premis sebenar, dekat dengan pelanggan setempat.": "Choose locations and days, and advertise from RM2 per day. Your ads appear on digital screens in real premises, close to local customers.",
+    "Lihat lokasi sebenar": "See real locations",
+    "lokasi aktif": "active locations",
+    "pilihan format": "ad formats",
+    "bermula / lokasi / hari": "from / location / day",
+    "Pilih paparan yang sesuai dengan kempen.": "Choose a display format for your campaign.",
+    "Harga jelas. Anda tentukan lokasi dan hari; semak jumlah akhir ketika menyediakan kempen.": "Clear pricing. Choose locations and days, then confirm the final total when creating your campaign.",
+    "Basic · 8 saat": "Basic · 8 sec",
+    "Premium Fullscreen · 15 saat": "Premium Fullscreen · 15 sec",
+    "Premium Extended Fullscreen · 30 saat": "Premium Extended Fullscreen · 30 sec",
+    "Paparan tiga zon untuk kempen setempat.": "Three-zone display for local campaigns.",
+    "15 saat dengan paparan skrin penuh.": "15 seconds of fullscreen advertising.",
+    "30 saat dengan paparan skrin penuh.": "30 seconds of fullscreen advertising.",
+    "Harga asas per lokasi sehari; caj akhir dan ketersediaan bergantung pada pilihan semasa dalam platform.": "Base price per location per day. Final charges and availability depend on your current campaign selections.",
+    "Lihat butiran format dan cara beriklan →": "Explore formats and how to advertise →",
+    "Skrin sebenar. Premis sebenar.": "Real screens. Real premises.",
+    "Lihat tempat iklan boleh dipaparkan. Galeri ini menggunakan gambar penempatan rangkaian LOOKaL.": "See where your ads can appear. These photos show LOOKaL screens inside actual premises.",
+    "Terokai lokasi dan peta LOOKaL": "Explore LOOKaL locations and map",
+    "Tiga langkah untuk mula beriklan.": "Three steps to advertise.",
+    "Pilih lokasi dan hari": "Choose locations and days",
+    "Pilih premis yang sesuai dengan pelanggan sasaran dan tempoh kempen.": "Choose premises that fit your target customers and campaign period.",
+    "Siapkan bahan iklan": "Prepare your ad",
+    "Gunakan poster sendiri atau hasilkan kreatif dengan Snap2Ads.": "Use your own poster or create an ad with Snap2Ads.",
+    "Hantar kempen": "Submit your campaign",
+    "Semak butiran dan hantar iklan melalui platform LOOKaL.": "Review the details and submit through the LOOKaL platform.",
+    "Lihat bagaimana kempen diurus.": "See how campaigns are managed.",
+    "Pilih video walkthrough. Video pertama menerangkan aliran dari signup ke dashboard.": "Choose a walkthrough video. The first shows the journey from signup to dashboard.",
+    "Lihat iklan pada skrin LOOKaL yang beroperasi.": "See ads playing on operating LOOKaL screens.",
+    "Rakaman sebenar skrin dalam premis; tayangan iklan bukan bukti jumlah penonton sebenar.": "Real footage from screens in premises; ad plays do not prove how many people watched.",
+    "Terokai rangkaian di Dungun.": "Explore the network in Dungun.",
+    "Peta interaktif lokasi LOOKaL sedang dimuatkan. Anda juga boleh": "The LOOKaL interactive map is loading. You can also",
+    "meneroka lokasi di halaman khusus": "explore locations on the dedicated page",
+    "Jelas tentang apa yang diukur.": "Understand what is measured.",
+    "LOOKaL boleh merekodkan tayangan skrin.": "LOOKaL can record screen plays.",
+    "Tayangan iklan tidak sama dengan bilangan penonton.": "Ad plays are not the same as audience counts.",
+    "Tempoh pusingan bergantung pada gabungan slot 8s, 15s dan 30s pada setiap lokasi.": "Rotation length depends on the mix of 8s, 15s and 30s slots at each location.",
+    "Anda pemilik premis?": "Own a premise?",
+    "Kenali cara premis anda boleh menyertai rangkaian skrin komuniti LOOKaL.": "Find out how your premise can join the LOOKaL community screen network.",
+    "Jadi Publisher": "Become a Publisher",
+    "Mula beriklan dengan LOOKaL.": "Start advertising with LOOKaL.",
+    "Pilih lokasi, tempoh dan format. Anda boleh bermula daripada RM2 sehari bagi satu lokasi.": "Choose your locations, dates and format. You can start from RM2 per day for one location.",
+    "Daftar dan bina kempen": "Sign up and create a campaign",
+    "Cara beriklan": "How to advertise"
+  });
 
   const reverse = Object.fromEntries(Object.entries(translations).map(([bm,en]) => [en,bm]));
   const reverseAttrs = Object.fromEntries(Object.entries(attrTranslations).map(([bm,en]) => [en,bm]));

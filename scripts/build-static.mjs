@@ -68,6 +68,8 @@ const googleFontPatterns = [
 
 const htmlFiles = [
   'index.html',
+  'iklan/index.html',
+  'lokasi/index.html',
   'business-partner/index.html',
   'tools/whatsapp-link/index.html',
   'tools/roi-calculator/index.html',

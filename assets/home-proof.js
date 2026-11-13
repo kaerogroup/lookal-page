@@ -16,14 +16,14 @@
     primary: 'A real campaign playing on an operating LOOKaL screen.',
     support1: 'Another premise showing LOOKaL in its actual operating environment.',
     support2: 'A different LOOKaL location with the screen in active use.',
-    priceTitle: 'Start with the plan available today.',
-    priceBody: 'Basic is the current public campaign plan. Premium formats are being prepared and are not open for booking yet.',
+    priceTitle: 'Choose the right display for your campaign.',
+    priceBody: 'Basic, Premium Fullscreen and Premium Extended Fullscreen are available as campaign formats. Final availability and charges are shown when you create your campaign.',
     basicBody: 'The current option for local campaigns using the three-zone display.',
     soon: 'Coming soon',
-    premiumBody: 'Fullscreen campaign format is being prepared.',
-    premiumExtendedBody: 'Longer fullscreen campaign format is being prepared.',
-    modelTitle: 'Basic is available now.',
-    modelBody: 'Choose your location and campaign period. Premium options will be introduced later when the format is ready for public campaigns.'
+    premiumBody: '15-second fullscreen campaign format.',
+    premiumExtendedBody: '30-second fullscreen campaign format.',
+    modelTitle: 'Three campaign formats.',
+    modelBody: 'Choose your campaign format, locations and days. Final pricing and availability are shown during campaign creation.'
   } : {
     eyebrow: 'Bukti di dunia sebenar',
     title: 'Lihat kempen sebenar sedang ditayangkan di skrin LOOKaL.',
@@ -32,14 +32,14 @@
     primary: 'Kempen sebenar sedang ditayangkan pada skrin LOOKaL yang beroperasi.',
     support1: 'Premis lain yang menunjukkan LOOKaL dalam persekitaran operasi sebenar.',
     support2: 'Lokasi LOOKaL berbeza dengan skrin sedang digunakan.',
-    priceTitle: 'Mulakan dengan pelan yang tersedia sekarang.',
-    priceBody: 'Basic ialah pelan kempen yang sedang dibuka kepada umum. Format Premium sedang disediakan dan belum dibuka untuk tempahan.',
+    priceTitle: 'Pilih paparan yang sesuai dengan kempen.',
+    priceBody: 'Pilih Basic 8 saat, Premium Fullscreen 15 saat atau Premium Extended Fullscreen 30 saat. Semak harga akhir dan ketersediaan semasa membina kempen.',
     basicBody: 'Pilihan semasa untuk kempen setempat menggunakan paparan tiga zon.',
     soon: 'Akan datang',
-    premiumBody: 'Format kempen skrin penuh sedang disediakan.',
-    premiumExtendedBody: 'Format kempen skrin penuh lebih panjang sedang disediakan.',
-    modelTitle: 'Basic tersedia sekarang.',
-    modelBody: 'Pilih lokasi dan tempoh kempen anda. Pilihan Premium akan diperkenalkan kemudian apabila format tersebut bersedia untuk kempen umum.'
+    premiumBody: 'Paparan skrin penuh selama 15 saat.'
+    premiumExtendedBody: 'Paparan skrin penuh selama 30 saat.'
+    modelTitle: 'Tiga format kempen.'
+    modelBody: 'Pilih format tayangan, lokasi dan tempoh kempen. Harga muktamad serta ketersediaan dipaparkan semasa membina kempen.'
   };
 
   const installStyle = () => {
@@ -57,9 +57,9 @@
       #bukti .proof-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
       #bukti .proof-fact{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid var(--line);background:#fff;font-size:.78rem;font-weight:750;color:var(--charcoal)}
       #bukti .proof-fact::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex:0 0 auto}
-      #harga .quest-tier.basic-live{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
-      #harga .quest-tier.basic-live .tier-name{color:#f06a72}
-      #harga .quest-tier.basic-live .tier-price span,#harga .quest-tier.basic-live p{color:#cbc6bf}
+      #harga .quest-tier.basic-live{background:#fff;color:var(--ink);border-color:var(--line)}
+      #harga .quest-tier.basic-live .tier-name{color:var(--red)}
+      #harga .quest-tier.basic-live .tier-price span,#harga .quest-tier.basic-live p{color:var(--smoke)}
       #harga .quest-tier.coming-soon{background:#f3efe8;color:var(--ink);border-style:dashed;opacity:.82}
       #harga .quest-tier.coming-soon .tier-price{font-size:1.25rem;letter-spacing:-.02em;margin:18px 0 14px}
       #harga .quest-tier.coming-soon .tier-price span{display:none}
@@ -159,19 +159,18 @@
       if (body) body.textContent = c.basicBody;
     }
     if (tiers[1]) {
-      tiers[1].classList.remove('featured','basic-live');
-      tiers[1].classList.add('coming-soon');
+      tiers[1].classList.remove('coming-soon','basic-live');
+      tiers[1].classList.add('featured');
       const price = tiers[1].querySelector('.tier-price');
       const body = tiers[1].querySelector('p');
-      if (price) price.textContent = c.soon;
+      if (price) price.innerHTML = `RM4 <span>${isEnglish() ? '/ day' : '/ hari'}</span>`;
       if (body) body.textContent = c.premiumBody;
     }
     if (tiers[2]) {
-      tiers[2].classList.remove('featured','basic-live');
-      tiers[2].classList.add('coming-soon');
+      tiers[2].classList.remove('featured','basic-live','coming-soon');
       const price = tiers[2].querySelector('.tier-price');
       const body = tiers[2].querySelector('p');
-      if (price) price.textContent = c.soon;
+      if (price) price.innerHTML = `RM6 <span>${isEnglish() ? '/ day' : '/ hari'}</span>`;
       if (body) body.textContent = c.premiumExtendedBody;
     }
 
