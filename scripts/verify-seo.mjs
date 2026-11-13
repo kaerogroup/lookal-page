@@ -141,11 +141,11 @@ check(home.includes('scroll-snap-type:x mandatory'), 'mobile gallery and tutoria
 check(!pricingScript.includes("insertAdjacentElement('afterend', pain)"), 'no dynamic creation of repetitive homepage sections');
 check(!pricingScript.includes("const makeSection ="), 'obsolete section factory removed from runtime');
 const sectionHtml = home.slice(home.indexOf('<main id="main"'),home.indexOf('</main>'));
-const sectionStarts = [...sectionHtml.matchAll(/<section\\b[^>]*>/g)];
+const sectionStarts = [...sectionHtml.matchAll(/<section\b[^>]*>/g)];
 check(sectionStarts.length===11, 'homepage comprises eleven purposeful static sections');
 for(const [i, start] of sectionStarts.entries()){
  const segment = sectionHtml.slice(start.index,i+1<sectionStarts.length?sectionStarts[i+1].index:sectionHtml.length);
- let divBalance=0;for(const div of segment.matchAll(/<\\/?div\\b[^>]*>/g))divBalance+=div[0][1]==='/'?-1:1;
+ let divBalance=0;for(const div of segment.matchAll(/<\/?div\b[^>]*>/g))divBalance+=div[0][1]==='/'?-1:1;
  check(divBalance===0, 'homepage section '+(i+1)+' has balanced layout containers');
 }
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
