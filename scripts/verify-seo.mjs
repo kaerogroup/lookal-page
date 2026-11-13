@@ -112,6 +112,7 @@ check(home.includes("drawer.addEventListener('click',(event)=>{if(event.target.c
 check(!home.includes('.location-card:nth-child(n+6){display:none}'), 'all location photos remain visible');
 check(home.includes('#bukti,#lihat,#lokasi,#network-map{content-visibility:visible!important'), 'visual proof and map sections are not content-hidden');
 
+check(home.indexOf('id="menuOpen"') < home.indexOf('class="brand" href="#top"'), 'homepage menu precedes brand in keyboard and DOM order');
 const homepageLanguage = read('assets/i18n.js');
 check(homepageLanguage.includes('header .brand{display:inline-flex!important;order:2;flex:0 0 auto;margin-right:auto}'), 'homepage mobile header shows brand next to left menu');
 check(navStyle.includes('.lookal-public-menu{order:1;'), 'subpage mobile menu is positioned first, on left');
