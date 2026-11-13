@@ -57,6 +57,13 @@
         .drawer{left:0!important;right:auto!important;transform:translateX(-100%)!important;box-shadow:20px 0 60px rgba(0,0,0,.16)!important}
         .drawer.is-open{transform:translateX(0)!important}
       }
+      @media(min-width:900px) and (max-width:1199px){
+        header .bar{position:relative;min-height:68px}
+        header .brand{display:inline-flex!important;position:absolute;left:50%;transform:translateX(-50%);margin:0!important;order:2}
+        header .menu-btn{display:inline-grid!important;order:1;flex:0 0 44px;margin:0}
+        header .header-cta{display:none!important}
+        header .lookal-lang-switch{order:3;margin-left:auto!important}
+      }
       @media(max-width:899px){
         header .bar{position:relative;gap:10px;justify-content:space-between;padding:11px 14px;min-height:68px}
         header .brand{display:inline-flex!important;order:2;flex:0 0 auto;margin:0!important;position:absolute;left:50%;transform:translateX(-50%);z-index:1}
