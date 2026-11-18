@@ -184,5 +184,9 @@ check(locHtml.includes('bukan pengesahan ketersediaan slot untuk hari ini'), 'ma
 const fieldMapNames = [...mapScript.matchAll(/\{ name:'([^']+)', lat:/g)].map(m => m[1]);
 check(fieldMapNames.length === 10, 'field map has 10 named, pinned premises');
 for (const fieldName of fieldMapNames) check(locHtml.includes(fieldName.replace(/&/g,'&amp;')), 'mapped premise is in search-readable HTML: ' + fieldName);
+check(advertHtml.includes('<title>Harga Iklan Skrin Digital & Cara Beriklan | LOOKaL</title>'), 'advertiser title is aligned to price intent');
+check(advertHtml.includes('<h2>Harga iklan skrin digital mengikut format</h2>'), 'advertiser heading answers price intent');
+check(locHtml.includes('<title>Lokasi Iklan Skrin Digital Dungun, Terengganu | LOOKaL</title>'), 'location title reflects verified Dungun coordinates');
+check(locHtml.includes('<h1>Lokasi skrin iklan digital LOOKaL di Dungun.</h1>'), 'location H1 supports local search intent');
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
