@@ -142,6 +142,8 @@
   };
 
   const syncPricing = (c) => {
+    // Homepage V3 pricing is server-rendered in HTML and must remain canonical.
+    if (document.querySelector('main[data-layout="advertiser-first-v3"]')) return;
     const section = document.getElementById('harga');
     if (!section) return;
     const heading = section.querySelector('.shead h2');
