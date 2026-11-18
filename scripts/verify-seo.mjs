@@ -188,5 +188,10 @@ check(advertHtml.includes('<title>Harga Iklan Skrin Digital & Cara Beriklan | LO
 check(advertHtml.includes('<h2>Harga iklan skrin digital mengikut format</h2>'), 'advertiser heading answers price intent');
 check(locHtml.includes('<title>Lokasi Iklan Skrin Digital Dungun, Terengganu | LOOKaL</title>'), 'location title reflects verified Dungun coordinates');
 check(locHtml.includes('<h1>Lokasi skrin iklan digital LOOKaL di Dungun.</h1>'), 'location H1 supports local search intent');
+const homeFragmentIds = new Set([...home.matchAll(/\\bid="([^"]+)"/g)].map(m => m[1]));
+const homeFragmentLinks = [...home.matchAll(/href="#([^"]+)"/g)].map(m => m[1]);
+for (const fragment of homeFragmentLinks) check(homeFragmentIds.has(fragment), 'homepage fragment #' + fragment + ' resolves to an existing element');
+check(home.includes('href="/iklan/#video-tutorial"'), 'legacy tutorial link targets the dedicated walkthrough page');
+check(home.includes('href="/publisher/"'), 'publisher call-to-action targets publisher page');
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
