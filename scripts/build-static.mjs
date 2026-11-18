@@ -122,7 +122,9 @@ for (const [oldSrc, newSrc, poster] of walkthroughs) {
 home = home.replace('.walk-open .video-frame video{pointer-events:none}', '.walk-open .video-frame video{pointer-events:none}.walk-open .video-frame img{width:100%;height:100%;object-fit:cover}');
 home = home.replace('<video id="walkModalVideo" controls playsinline preload="metadata"></video>', '<video id="walkModalVideo" controls playsinline preload="none"></video>');
 
-if (!home.includes('content-visibility:auto')) {
+// V3 has concise, static sections and real media. Avoid injecting legacy
+// content-visibility:auto, which can defer gallery/map layout on mobile.
+if (!home.includes('data-layout="advertiser-first-v3"') && !home.includes('content-visibility:auto')) {
   home = home.replace('section{padding:78px 0;border-top:1px solid var(--line)}', 'section{padding:78px 0;border-top:1px solid var(--line)}section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 760px}');
 }
 if (!home.includes('rel="prefetch" href="/tools/whatsapp-link/"')) {
