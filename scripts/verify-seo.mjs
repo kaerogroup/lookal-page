@@ -158,7 +158,7 @@ for(const [i, start] of sectionStarts.entries()){
 check(home.includes('class="price-swipe-hint"'), 'mobile pricing visibly indicates additional formats');
 check(home.includes('aria-label="Pilihan harga iklan 8, 15 dan 30 saat"'), 'mobile price comparison has accessible region label');
 check(home.includes('.home-pricing .quest-pricing{display:flex;overflow-x:auto'), 'pricing cards use mobile horizontal scroll');
-check(home.includes('@media(min-width:760px){.home-pricing .quest-pricing{display:grid;'), 'pricing returns to three-column desktop grid');
+check(home.includes('@media(min-width:760px){.home-pricing .price-swipe-hint{display:none}.home-pricing .quest-pricing{display:grid;'), 'pricing returns to three-column desktop grid');
 const coreLanguage = read('assets/i18n-core.js');
 check(coreLanguage.includes("bm: 'LOOKaL | Iklan Skrin Digital & DOOH untuk Perniagaan Tempatan'"), 'language runtime preserves canonical homepage SEO title');
 const homeMapHelper = read('assets/home-copy-patch.js');
