@@ -170,7 +170,8 @@ check(home.includes('@media(min-width:760px){.home-pricing .price-swipe-hint{dis
 const coreLanguage = read('assets/i18n-core.js');
 check(coreLanguage.includes("bm: 'LOOKaL | Iklan Skrin Digital & DOOH untuk Perniagaan Tempatan'"), 'language runtime preserves canonical homepage SEO title');
 const homeMapHelper = read('assets/home-copy-patch.js');
-check(homeMapHelper.includes("if (!document.getElementById('network-map')) watchNetworkMap();"), 'homepage MapLibre avoids legacy DOM-wide SVG observer');
+check(homeMapHelper.includes("script.src = '/assets/network-map.js'"), 'homepage loads shared MapLibre implementation');
+check(!homeMapHelper.includes('MutationObserver') && !homeMapHelper.includes('MALAYSIA_SVG'), 'homepage no longer ships obsolete national SVG observer');
 check(home.includes('id="kenapa-lookal"'), 'homepage retains market education section');
 check(home.includes('Iklan online sudah berjalan. Adakah pelanggan nampak jenama anda di dunia sebenar?'), 'homepage explains the online-to-offline visibility need');
 check(home.includes('.home-gallery .location-meta{display:block;position:static;'), 'homepage media captions have explicit solid backgrounds');
