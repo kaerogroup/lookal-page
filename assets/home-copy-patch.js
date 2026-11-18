@@ -92,7 +92,10 @@
   };
 
   ensureNetworkMap();
-  watchNetworkMap();
+  // Homepage v3 mounts the MapLibre map directly in static HTML. The older
+  // national SVG fallback observer would otherwise watch the entire document
+  // indefinitely and re-run on every map mutation.
+  if (!document.getElementById('network-map')) watchNetworkMap();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', schedule, { once: true });
   else schedule();
   window.addEventListener('pageshow', schedule);
