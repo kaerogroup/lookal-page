@@ -94,7 +94,7 @@ check(locHtml.includes('src="/assets/network-map.js"'), 'locations page loads in
 check(locHtml.includes('id="galeri-lokasi"'), 'locations page retains image gallery');
 const advertHtml = read('iklan/index.html');
 check(advertHtml.includes('id="video-tutorial"'), 'advertiser page retains video tutorials');
-check(advertHtml.includes('id="skrin-sebenar"'), 'advertiser page retains on-premise video proof');
+check(!advertHtml.includes('id="skrin-sebenar"'), 'advertiser page does not duplicate location video proof');
 for (const file of [
   'assets/web-media/walkthroughs/dashboard.mp4',
   'assets/web-media/walkthroughs/snap2ads-editor.mp4',
@@ -110,7 +110,7 @@ for (const file of [
 }
 check(home.includes("drawer.addEventListener('click',(event)=>{if(event.target.closest('a[href]'))closeDrawer();});"), 'homepage drawer handles dynamic navigation links');
 check(!home.includes('.location-card:nth-child(n+6){display:none}'), 'all location photos remain visible');
-check(home.includes('#bukti,#lihat,#lokasi,#network-map{content-visibility:visible!important'), 'visual proof and map sections are not content-hidden');
+check(home.includes('id="network-map"') && home.includes('id="lokasi"'), 'location gallery and map remain visible sections');
 
 check(home.indexOf('id="menuOpen"') < home.indexOf('class="brand" href="#top"'), 'homepage menu precedes brand in keyboard and DOM order');
 const homepageLanguage = read('assets/i18n.js');
@@ -127,22 +127,29 @@ for (const uri of ['/iklan/', '/lokasi/']) {
  check(navAt > 0 && brandAt > 0 && navAt < brandAt, uri + ' has left-first menu before brand in DOM order');
 }
 
-const canonicalIds = ['utama','harga','lokasi','cara','lihat','bukti','network-map','angka','pemilik-premis','hubungi'];
+check(mapScript.includes("el.innerHTML = '<svg viewBox=\"0 0 36 48\""), 'map markers have pin SVG geometry');
+check(mapScript.includes("anchor:'bottom'"), 'map pin tips are anchored to actual coordinates');
+check(!mapScript.includes("anchor:'center'"), 'no remaining center-anchored circular markers');
+check(locHtml.includes('id="rakaman-skrin"'), 'field recordings are consolidated on location page');
+check((locHtml.match(/<img src="\/assets\/locations\//g) || []).length >= 6, 'locations page includes all six premise photographs');
+check((locHtml.match(/<video\b/g) || []).length >= 3, 'locations page includes three field recordings');
+check((advertHtml.match(/<video\b/g) || []).length === 3, 'advertiser page contains three workflow tutorials');
+const canonicalIds = ['utama','harga','lokasi','cara','network-map','soalan','hubungi'];
 const positions = canonicalIds.map(id => home.indexOf('id="' + id + '"'));
 check(positions.every(index => index >= 0) && positions.every((v,i)=>i===0||v>positions[i-1]), 'homepage has static advertiser-first section order');
 check(home.includes('data-layout="advertiser-first-v3"'), 'homepage uses versioned static layout');
 check(home.includes('Iklan perniagaan anda di skrin komuniti.'), 'hero immediately describes the product');
 check(home.indexOf('id="harga"') < home.indexOf('id="lokasi"'), 'pricing appears before gallery');
-check(home.indexOf('id="lihat"') < home.indexOf('id="network-map"'), 'tutorial and map remain in static content');
-check((home.match(/class="location-card/g)||[]).length >= 6, 'six genuine premise image cards retained');
-check((home.match(/class="walk-open"/g)||[]).length === 3, 'three tutorials retained and accessible');
-check((home.match(/class="proof-item"/g)||[]).length === 3, 'three on-premise screen videos retained');
+check(home.indexOf('id="cara"') < home.indexOf('id="network-map"'), 'one tutorial teaser and map remain in static content');
+check((home.match(/class="location-card/g)||[]).length === 3, 'homepage shows exactly three selected premise images');
+check((home.match(/class="walk-open"/g)||[]).length === 1, 'homepage retains one playable tutorial teaser');
+check(!home.includes('id="bukti"') && !home.includes('id="lihat"'), 'full proof videos and tutorial catalogue are not duplicated on homepage');
 check(home.includes('scroll-snap-type:x mandatory'), 'mobile gallery and tutorials use compact snap carousel');
 check(!pricingScript.includes("insertAdjacentElement('afterend', pain)"), 'no dynamic creation of repetitive homepage sections');
 check(!pricingScript.includes("const makeSection ="), 'obsolete section factory removed from runtime');
 const sectionHtml = home.slice(home.indexOf('<main id="main"'),home.indexOf('</main>'));
 const sectionStarts = [...sectionHtml.matchAll(/<section\b[^>]*>/g)];
-check(sectionStarts.length===11, 'homepage comprises eleven purposeful static sections');
+check(sectionStarts.length===7, 'homepage comprises seven focused static sections');
 for(const [i, start] of sectionStarts.entries()){
  const segment = sectionHtml.slice(start.index,i+1<sectionStarts.length?sectionStarts[i+1].index:sectionHtml.length);
  let divBalance=0;for(const div of segment.matchAll(/<\/?div\b[^>]*>/g))divBalance+=div[0][1]==='/'?-1:1;
