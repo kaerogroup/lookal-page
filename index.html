@@ -218,6 +218,16 @@
 #main .home-education-index{font-size:.75rem;letter-spacing:.07em;font-weight:800;color:var(--red)}
 #main .home-education-note{margin:20px 0 0;font-weight:700;font-size:.9rem;line-height:1.6;max-width:70ch}
 @media(max-width:759px){#main .home-education-grid{grid-template-columns:1fr}#main .home-education-item{padding:17px 19px}#main .home-education h2{font-size:clamp(1.75rem,7.5vw,2.4rem)}}
+
+/* Direct human contact: secondary to self-service campaign signup. */
+#hubungi .lookal-contact-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+#hubungi .lookal-contact-btn{display:inline-flex;align-items:center;gap:12px;padding:13px 16px;min-height:64px;min-width:0;background:#fff;color:#242326;border:1px solid #d6d0c6;border-radius:10px;text-decoration:none;box-shadow:0 2px 10px rgba(25,24,22,.045)}
+#hubungi .lookal-contact-btn:hover,#hubungi .lookal-contact-btn:focus-visible{border-color:#d9232e;outline-offset:3px}
+#hubungi .lookal-contact-btn > span:first-child{font-size:1.35rem;flex:0 0 26px;text-align:center;color:#d9232e}
+#hubungi .lookal-contact-btn strong,#hubungi .lookal-contact-btn small{display:block;line-height:1.45}
+#hubungi .lookal-contact-btn strong{font-size:.92rem;font-weight:800}
+#hubungi .lookal-contact-btn small{font-size:.78rem;color:#58544f;overflow-wrap:anywhere}
+@media(max-width:680px){#hubungi .lookal-contact-actions{display:grid;grid-template-columns:1fr}#hubungi .lookal-contact-btn{width:100%}}
 </style>
 </head>
 <body>
@@ -307,7 +317,7 @@
 <details><summary>Bagaimana cara mula beriklan?</summary><div class="ans"><p>Daftar, pilih lokasi dan tarikh, sediakan bahan iklan, kemudian hantar kempen melalui platform LOOKaL.</p></div></details>
 </div></div></section>
 <section class="final" id="hubungi">
-    <div class="wrap"><h2>Mula beriklan dengan LOOKaL.</h2><p class="lede">Pilih lokasi, tempoh dan format. Anda boleh bermula daripada RM2 sehari bagi satu lokasi.</p><div class="btns"><a class="btn btn-red" href="https://app.lookal.tech/signup">Daftar dan bina kempen</a><a class="btn btn-ghost" href="/iklan/">Cara beriklan</a></div></div>
+    <div class="wrap"><h2>Mula beriklan dengan LOOKaL.</h2><p class="lede">Pilih lokasi, tempoh dan format. Anda boleh bermula daripada RM2 sehari bagi satu lokasi.</p><div class="btns"><a class="btn btn-red" href="https://app.lookal.tech/signup">Daftar dan bina kempen</a><a class="btn btn-ghost" href="/iklan/">Cara beriklan</a></div><div class="lookal-contact-actions" aria-label="Hubungi pasukan LOOKaL"><a class="lookal-contact-btn" href="mailto:uniras.capital@gmail.com?subject=Pertanyaan%20LOOKaL" aria-label="Emel LOOKaL di uniras.capital@gmail.com"><span aria-hidden="true">✉</span><span><strong>Email</strong><small>uniras.capital@gmail.com</small></span></a><a class="lookal-contact-btn" href="https://wa.me/60123533587?text=Salam%2C%20saya%20ingin%20bertanya%20tentang%20LOOKaL." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp LOOKaL di +60 12-353 3587"><span aria-hidden="true">◉</span><span><strong>WhatsApp</strong><small>+60 12-353 3587</small></span></a></div></div>
   </section>
 </main>
 <footer><div class="wrap fgrid"><strong style="color:var(--ink)">LOOKaL · Rangkaian Skrin Komuniti</strong><span><a href="/iklan/">Cara beriklan</a> · <a href="/lokasi/">Lokasi skrin</a> · <a href="/tools/whatsapp-link/">WhatsApp Link</a> · <a href="/tools/roi-calculator/">ROI Calculator</a> · Dikendalikan oleh Uniras Sdn Bhd · lookal.tech</span></div></footer>
