@@ -45,3 +45,12 @@ Keep PR #28 as Draft and do not merge until browser QA and commercial claims are
 - Advertiser-facing screen plays are not audience impressions.
 - Never infer a guaranteed number of plays from 30 slots when formats have different durations.
 - Do not publish unverified specific location names, precise audience demographics or impression numbers.
+
+## November 2026 page-role cleanup and map marker revision
+- Homepage: streamlined to seven static sections (hero, pricing, three-premise gallery, three steps with one playable demo, map, five-question FAQ, final CTA).
+- Advertiser /iklan/: retains plan explanations, campaign steps and three walkthrough videos; removes duplicate on-premise recordings.
+- Locations /lokasi/: now owns the field map, six premise photographs and three screen recordings; generic repetitive content removed.
+- Map markers: replace circular red dot with red SVG location pin and white centre; MapLibre bottom anchoring makes the tip point to recorded coordinates.
+- Field-pinned coordinates and map attribution remain unchanged.
+- Automated checks cover page separation, media assets, section order, marker SVG and marker anchor.
+- Before merge: real browser/mobile verification of layout, interactive marker positioning, media playback and commercial flow.
