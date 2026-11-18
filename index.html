@@ -145,6 +145,11 @@
 .home-publisher{background:#f4f0e9}
 .home-publisher-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .home-publisher-inner p{margin:4px 0 0;color:var(--smoke)}
+.home-pricing .quest-pricing{display:flex;overflow-x:auto;overflow-y:hidden;gap:12px;scroll-snap-type:x mandatory;scroll-padding-inline:3px;padding:2px 1px 16px;-webkit-overflow-scrolling:touch}
+.home-pricing .quest-tier{flex:0 0 min(78vw,320px);scroll-snap-align:start;min-width:0}
+.home-pricing .quest-pricing:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.home-pricing .price-swipe-hint{font-size:.78rem;color:var(--smoke);margin:8px 0 0}
+@media(min-width:760px){.home-pricing .quest-pricing{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;padding-bottom:0}.home-pricing .quest-tier{flex:auto}}
 #main .final{padding:64px 0}
 #main .final h2{max-width:22ch}
 @media(min-width:760px){
@@ -210,11 +215,12 @@
   <section id="harga" class="home-pricing">
     <div class="wrap">
       <div class="shead"><span class="home-kicker">PILIH FORMAT</span><h2>Pilih paparan yang sesuai dengan kempen.</h2><p>Harga jelas. Anda tentukan lokasi dan hari; semak jumlah akhir ketika menyediakan kempen.</p></div>
-      <div class="quest-pricing">
-        <article class="quest-tier basic-live"><span class="tier-name">Basic · 8 saat</span><div class="tier-price">RM2 <span>/ hari</span></div><p>Paparan tiga zon untuk kempen setempat.</p></article>
+      <div class="quest-pricing" role="region" aria-label="Pilihan harga iklan 8, 15 dan 30 saat" tabindex="0">
+        <article class="quest-tier basic-live"<span class="tier-name">Basic · 8 saat</span><div class="tier-price">RM2 <span>/ hari</span></div><p>Paparan tiga zon untuk kempen setempat.</p></article>
         <article class="quest-tier featured"><span class="tier-name">Premium Fullscreen · 15 saat</span><div class="tier-price">RM4 <span>/ hari</span></div><p>15 saat dengan paparan skrin penuh.</p></article>
         <article class="quest-tier"><span class="tier-name">Premium Extended Fullscreen · 30 saat</span><div class="tier-price">RM6 <span>/ hari</span></div><p>30 saat dengan paparan skrin penuh.</p></article>
       </div>
+      <p class="price-swipe-hint">Leret ke kiri untuk lihat format seterusnya.</p>
       <p class="home-footnote">Harga asas per lokasi sehari; caj akhir dan ketersediaan bergantung pada pilihan semasa dalam platform.</p>
       <a class="home-text-link" href="/iklan/">Lihat butiran format dan cara beriklan →</a>
     </div>
