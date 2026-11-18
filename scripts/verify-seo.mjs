@@ -202,5 +202,9 @@ const homeFragmentLinks = [...home.matchAll(/href="#([^"]+)"/g)].map(m => m[1]);
 for (const fragment of homeFragmentLinks) check(homeFragmentIds.has(fragment), 'homepage fragment #' + fragment + ' resolves to an existing element');
 check(home.includes('href="/iklan/#video-tutorial"'), 'legacy tutorial link targets the dedicated walkthrough page');
 check(home.includes('href="/publisher/"'), 'publisher call-to-action targets publisher page');
+check(home.includes('data-layout="advertiser-first-v3"'), 'homepage primary content is server-rendered');
+check(!home.includes('lookal-prepaint-guard'), 'homepage does not hide content until JavaScript runs');
+check(!home.includes('lookal-home-patching'), 'homepage has no JS-gated initial visibility');
+
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
