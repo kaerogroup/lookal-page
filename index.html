@@ -194,6 +194,30 @@
 #main .home-faq-list .ans{padding:10px 4px;color:var(--smoke)}
 @media(min-width:760px){#main .home-video-card{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);padding:20px}}
 @media(max-width:759px){#main .home-map #lookal-live-map{height:300px}#main .home-map .network-stats{grid-template-columns:1fr}#main .home-video-card .walk{max-width:none}}
+
+/* Explicit caption surfaces: never place text directly over images. */
+#main .home-gallery .location-card{display:flex;flex-direction:column;background:#fff;border:1px solid #ddd7cd;border-radius:12px;overflow:hidden;isolation:isolate;box-shadow:0 3px 14px rgba(27,24,22,.055)}
+#main .home-gallery .location-media{display:block;position:relative;background:#ebe6de;overflow:hidden}
+#main .home-gallery .location-media img{display:block;width:100%;height:100%;object-fit:cover}
+#main .home-gallery .location-meta{display:block;position:static;inset:auto;transform:none;flex:1;background:#fff!important;background-image:none!important;color:#222226!important;padding:15px 16px 17px;border-top:1px solid #e9e3db;opacity:1;z-index:auto;box-shadow:none}
+#main .home-gallery .location-meta strong{display:block;color:#222226!important;font-weight:800;line-height:1.4;margin-bottom:5px;text-shadow:none}
+#main .home-gallery .location-meta span{display:block;color:#5d5954!important;line-height:1.55;text-shadow:none}
+#main .home-video-card .walk,.home-video-card .walk-open{background:#fff;color:#242326}
+#main .home-video-card .walk-copy{background:#fff!important;color:#242326!important;position:static;inset:auto;transform:none;padding:15px 17px;border-top:1px solid #e9e3db}
+#main .home-video-card .walk-copy h3{color:#242326!important;text-shadow:none}
+#main .home-video-card .walk-copy p{color:#595651!important;text-shadow:none}
+#main .home-video-card .walk-hint{color:#b71d2a}
+#main .home-education{background:#f4f0e9}
+#main .home-education .wrap{max-width:1120px}
+#main .home-education h2{font-size:clamp(1.85rem,4vw,3rem);letter-spacing:-.04em;line-height:1.17;max-width:23ch;margin:10px 0 18px}
+#main .home-education-lede{max-width:70ch;font-size:clamp(1rem,1.8vw,1.13rem);line-height:1.72;color:#514d49;margin-bottom:22px}
+#main .home-education-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#main .home-education-item{background:#fff;border:1px solid #ddd6cb;border-radius:10px;padding:23px}
+#main .home-education-item h3{font-size:1.1rem;line-height:1.4;margin:9px 0}
+#main .home-education-item p{font-size:.92rem;color:#5c5752;line-height:1.65;margin:0}
+#main .home-education-index{font-size:.75rem;letter-spacing:.07em;font-weight:800;color:var(--red)}
+#main .home-education-note{margin:20px 0 0;font-weight:700;font-size:.9rem;line-height:1.6;max-width:70ch}
+@media(max-width:759px){#main .home-education-grid{grid-template-columns:1fr}#main .home-education-item{padding:17px 19px}#main .home-education h2{font-size:clamp(1.75rem,7.5vw,2.4rem)}}
 </style>
 </head>
 <body>
@@ -243,7 +267,19 @@
       <a class="home-text-link" href="/iklan/">Lihat butiran format dan cara beriklan →</a>
     </div>
   </section>
-  <section id="lokasi" class="home-gallery">
+  <section id="kenapa-lookal" class="home-education" aria-labelledby="home-education-heading">
+  <div class="wrap">
+    <span class="home-kicker">KENAPA KEHADIRAN FIZIKAL?</span>
+    <h2 id="home-education-heading" data-copy-bm="Iklan online sudah berjalan. Adakah pelanggan nampak jenama anda di dunia sebenar?" data-copy-en="Your online ads are running. Can customers see your brand in the real world?">Iklan online sudah berjalan. Adakah pelanggan nampak jenama anda di dunia sebenar?</h2>
+    <p class="home-education-lede" data-copy-bm="Google dan media sosial membantu orang menemui perniagaan anda. Tetapi perjalanan pelanggan tidak berhenti di telefon. LOOKaL melengkapkan pemasaran online dengan kehadiran iklan pada skrin di premis yang mereka kunjungi." data-copy-en="Google and social media help people discover your business. But a customer's journey does not stop on their phone. LOOKaL complements online marketing with digital screens in physical premises they visit.">Google dan media sosial membantu orang menemui perniagaan anda. Tetapi perjalanan pelanggan tidak berhenti di telefon. LOOKaL melengkapkan pemasaran online dengan kehadiran iklan pada skrin di premis yang mereka kunjungi.</p>
+    <div class="home-education-grid">
+      <article class="home-education-item"><span class="home-education-index">01</span><h3 data-copy-bm="Ditemui secara online" data-copy-en="Discovered online">Ditemui secara online</h3><p data-copy-bm="Carian dan iklan digital memperkenalkan jenama ketika orang menggunakan peranti mereka." data-copy-en="Search and digital ads introduce your brand when people use their devices.">Carian dan iklan digital memperkenalkan jenama ketika orang menggunakan peranti mereka.</p></article>
+      <article class="home-education-item"><span class="home-education-index">02</span><h3 data-copy-bm="Dilihat dalam komuniti" data-copy-en="Seen in the community">Dilihat dalam komuniti</h3><p data-copy-bm="Skrin LOOKaL memberi peluang jenama anda muncul dalam ruang fizikal yang relevan dengan pelanggan setempat." data-copy-en="LOOKaL screens give your brand opportunities to appear in physical spaces relevant to nearby customers.">Skrin LOOKaL memberi peluang jenama anda muncul dalam ruang fizikal yang relevan dengan pelanggan setempat.</p></article>
+    </div>
+    <p class="home-education-note" data-copy-bm="Bukan menggantikan iklan online — tetapi menambah satu lagi titik pertemuan antara jenama dan komuniti." data-copy-en="Not a replacement for online ads — an additional place for brands and communities to connect.">Bukan menggantikan iklan online — tetapi menambah satu lagi titik pertemuan antara jenama dan komuniti.</p>
+  </div>
+</section>
+<section id="lokasi" class="home-gallery">
     <div class="wrap">
       <div class="shead"><span class="home-kicker">BUKTI LOKASI</span><h2>Skrin sebenar. Premis sebenar.</h2><p>Lihat tempat iklan boleh dipaparkan. Galeri ini menggunakan gambar penempatan rangkaian LOOKaL.</p></div>
       <p class="home-swipe-hint">Leret untuk lihat lebih banyak lokasi →</p><div class="gallery" tabindex="0" role="region" aria-label="Galeri lokasi LOOKaL yang boleh ditatal"><article class="location-card featured"><div class="location-media"><img src="assets/locations/160017.jpg" width="1280" height="960" loading="lazy" decoding="async" alt="Skrin komuniti LOOKaL di dalam premis tempatan"></div><div class="location-meta"><strong>Kedudukan skrin dalam premis</strong><span>Contoh penempatan LOOKaL</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260910-WA0004.jpg" width="2560" height="1706" loading="lazy" decoding="async" alt="Skrin iklan komuniti LOOKaL dalam ruang premis"></div><div class="location-meta"><strong>Dalam aliran pengunjung</strong><span>Skrin ditempatkan dalam konteks premis</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260920-WA0000.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Skrin LOOKaL di ruang komuniti"></div><div class="location-meta"><strong>Ruang komuniti</strong><span>Konteks pemasangan dan aliran pengunjung</span></div></article></div>
