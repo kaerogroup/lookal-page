@@ -51,7 +51,6 @@
       @media(min-width:900px){
         header .bar{gap:12px;padding:12px 22px}
         header .menu-btn{display:inline-grid!important;order:1;flex:0 0 44px;margin-right:4px;margin-left:0}
-        header .brand{display:inline-flex!important;order:2;margin-right:auto}
         header .header-cta{display:inline-flex!important;order:3}
         header .lookal-lang-switch{order:4;margin-left:0!important;flex:0 0 auto;min-height:44px}
         .drawer{left:0!important;right:auto!important;transform:translateX(-100%)!important;box-shadow:20px 0 60px rgba(0,0,0,.16)!important}
@@ -59,14 +58,12 @@
       }
       @media(min-width:900px) and (max-width:1199px){
         header .bar{position:relative;min-height:68px}
-        header .brand{display:inline-flex!important;position:absolute;left:50%;transform:translateX(-50%);margin:0!important;order:2}
         header .menu-btn{display:inline-grid!important;order:1;flex:0 0 44px;margin:0}
         header .header-cta{display:none!important}
         header .lookal-lang-switch{order:3;margin-left:auto!important}
       }
       @media(max-width:899px){
         header .bar{position:relative;gap:10px;justify-content:space-between;padding:11px 14px;min-height:68px}
-        header .brand{display:inline-flex!important;order:2;flex:0 0 auto;margin:0!important;position:absolute;left:50%;transform:translateX(-50%);z-index:1}
         header .header-cta{display:none!important}
         header .menu-btn{display:inline-grid!important;order:1;flex:0 0 44px;margin-right:0}
         header .lookal-lang-switch{order:3;margin-left:auto!important;flex:0 0 auto;min-height:44px;padding:0 11px}
@@ -75,7 +72,7 @@
       }
       @media(max-width:420px){
         header .bar{gap:8px;padding-left:12px;padding-right:12px}
-        header .lookal-lang-switch{gap:5px;padding:0 9px}header .brand img{max-width:105px!important;height:32px!important}
+        header .lookal-lang-switch{gap:5px;padding:0 9px}
       }
     `;
     document.head.appendChild(style);
