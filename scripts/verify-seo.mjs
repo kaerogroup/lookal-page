@@ -206,6 +206,8 @@ check(home.includes('href="/publisher/"'), 'publisher call-to-action targets pub
 check(home.includes('data-layout="advertiser-first-v3"'), 'homepage primary content is server-rendered');
 check(!home.includes('lookal-prepaint-guard'), 'homepage does not hide content until JavaScript runs');
 check(!home.includes('lookal-home-patching'), 'homepage has no JS-gated initial visibility');
+check(!home.includes('section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 760px}'), 'homepage avoids legacy media-deferring section containment');
+
 
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
