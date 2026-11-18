@@ -188,6 +188,15 @@ check(advertHtml.includes('<title>Harga Iklan Skrin Digital & Cara Beriklan | LO
 check(advertHtml.includes('<h2>Harga iklan skrin digital mengikut format</h2>'), 'advertiser heading answers price intent');
 check(locHtml.includes('<title>Lokasi Iklan Skrin Digital Dungun, Terengganu | LOOKaL</title>'), 'location title reflects verified Dungun coordinates');
 check(locHtml.includes('<h1>Lokasi skrin iklan digital LOOKaL di Dungun.</h1>'), 'location H1 supports local search intent');
+
+const indexedUrls = [...sitemap.matchAll(/<loc>(https:\/\/lookal\.tech\/[^<]*)<\/loc>/g)].map(m => m[1]);
+check(indexedUrls.length > 0, 'sitemap includes canonical URLs');
+check(new Set(indexedUrls).size === indexedUrls.length, 'sitemap has no duplicate URLs');
+for (const url of indexedUrls) {
+  const pathname = new URL(url).pathname;
+  const output = pathname === '/' ? 'index.html' : pathname.replace(/^\//,'') + 'index.html';
+  check(fs.existsSync(path.join(root,output)), 'sitemap destination exists: ' + pathname);
+}
 const homeFragmentIds = new Set([...home.matchAll(/\\bid="([^"]+)"/g)].map(m => m[1]));
 const homeFragmentLinks = [...home.matchAll(/href="#([^"]+)"/g)].map(m => m[1]);
 for (const fragment of homeFragmentLinks) check(homeFragmentIds.has(fragment), 'homepage fragment #' + fragment + ' resolves to an existing element');
