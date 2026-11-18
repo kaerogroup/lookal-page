@@ -210,5 +210,13 @@ check(!home.includes('lookal-home-patching'), 'homepage has no JS-gated initial 
 check(!home.includes('section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 760px}'), 'homepage avoids legacy media-deferring section containment');
 
 
+
+// Contact channels: available as genuine action links, not decorative placeholders.
+for (const [path, html] of [['/', home], ['/iklan/', advertHtml], ['/lokasi/', locHtml]]) {
+  check(html.includes('class="lookal-contact-actions"'), path + ' has direct contact buttons');
+  check(html.includes('href="mailto:uniras.capital@gmail.com?subject=Pertanyaan%20LOOKaL"'), path + ' has valid contact email link');
+  check(html.includes('href="https://wa.me/60123533587?text='), path + ' has valid international-format WhatsApp link');
+  check(html.includes('rel="noopener noreferrer"'), path + ' protects new-tab WhatsApp navigation');
+}
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
