@@ -116,3 +116,32 @@ Before final SEO launch:
 - Search Console verification
 - sitemap submission
 - Rich Results / structured-data validation
+
+## Search intent and keyword-to-page ownership (Nov 2026)
+
+A keyword is a clue to user intent, not a ranking guarantee. The list below is an editorial target list, **not verified search volume or traffic**. Validate real phrases, impressions and clicks in Google Search Console once production is indexed.
+
+| Page | Primary user intent | Primary phrase | Natural supporting phrases | Conversion / evidence |
+| --- | --- | --- | --- | --- |
+| `/` | Discover an alternative to online-only local advertising | iklan skrin digital; iklan perniagaan tempatan | iklan di premis, skrin komuniti, pemasaran offline | Explain the concept, show real premise photographs, direct to plans and locations |
+| `/iklan/` | Compare price, format and campaign setup | harga iklan skrin digital; cara beriklan | iklan skrin 8 saat, fullscreen 15 saat, iklan video 30 saat, DOOH Malaysia | 8/15/30s options, RM2/RM4/RM6 base, tutorials, signup |
+| `/lokasi/` | Find real physical ad placements | lokasi iklan skrin digital Dungun | iklan di Dungun, lokasi skrin komuniti Terengganu, peta skrin iklan | Map coordinates, dated 10-premise field list, photo/video evidence; verify availability in app |
+| `/publisher/` | Join as a screen host | jadi publisher skrin digital | letak skrin iklan di kedai, pendapatan pemilik premis | Publisher eligibility and enquiry |
+| `/business-partner/` | Seek a commercial partnership | rakan niaga pengiklanan digital | kerjasama rangkaian skrin, rakan pengembangan lokasi | Explain partner terms accurately |
+
+### AEO / AI-search answer coverage
+- What is LOOKaL? Describe it as an in-premise community digital-screen advertising network.
+- How much? State the basic advertised rates with unit (per location/day), durations and final-check qualification.
+- How does it work? Choose location and days, prepare creative, submit campaign.
+- Where does it operate? Present verified locations and distinguish a dated field map from current purchasable inventory.
+- Is a screen play a viewer? No; keep audience measurement claims separate from display events.
+
+### Do not do
+- Do not add `meta keywords`, keyword density targets, or city doorway pages.
+- Do not create a new page for spelling and word-order variations of the same intent.
+- Do not assert nationwide inventory or a specific town's coverage without sourced locations.
+- Do not imply keyword inclusion guarantees AI citation or Google ranking.
+- Do not estimate commercial search volume without Query/Keyword Planner data.
+
+### Monitoring after production launch
+Review landing pages by queries, impressions, clicks, CTR, and conversions in Search Console and first-party analytics. For AI referrals, examine referrer data where available and track factual AI answers manually; absence of referral data is not evidence of non-appearance.
