@@ -212,7 +212,7 @@ check(!home.includes('section:not(.hero){content-visibility:auto;contain-intrins
 
 
 // Contact channels: available as genuine action links, not decorative placeholders.
-for (const [path, html] of [['/', home], ['/iklan/', advertHtml], ['/lokasi/', locHtml]]) {
+for (const [path, html] of [['/', home], ['/iklan/', advertHtml], ['/lokasi/', locHtml], ['/publisher/', read('publisher/index.html')], ['/business-partner/', read('business-partner/index.html')]]) {
   check(html.includes('class="lookal-contact-actions"'), path + ' has direct contact buttons');
   check(html.includes('href="mailto:uniras.capital@gmail.com?subject=Pertanyaan%20LOOKaL"'), path + ' has valid contact email link');
   check(html.includes('href="https://wa.me/60123533587?text='), path + ' has valid international-format WhatsApp link');
