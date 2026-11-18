@@ -177,5 +177,12 @@ check(home.includes('.home-gallery .location-meta{display:block;position:static;
 check(home.includes('.home-video-card .walk-copy{background:#fff!important;'), 'homepage tutorial caption has readable light background');
 check(locHtml.includes('lookal-media-caption-polish'), 'location photo and video captions use a consistent card surface');
 check(advertHtml.includes('lookal-tutorial-card-polish'), 'advertiser tutorial cards have clear labels');
+check(advertHtml.includes('id="jawapan-pantas"'), 'advertiser has accessible AEO answer-first block');
+check(advertHtml.includes('Berapa harga dan durasinya?'), 'advertiser answers price and duration directly');
+check(locHtml.includes('id="senarai-premis"'), 'location page includes textual map coverage');
+check(locHtml.includes('bukan pengesahan ketersediaan slot untuk hari ini'), 'mapped coordinates are distinguished from availability');
+const fieldMapNames = [...mapScript.matchAll(/\\{ name:'([^']+)', lat:/g)].map(m => m[1]);
+check(fieldMapNames.length === 10, 'field map has 10 named, pinned premises');
+for (const fieldName of fieldMapNames) check(locHtml.includes(fieldName.replace(/&/g,'&amp;')), 'mapped premise is in search-readable HTML: ' + fieldName);
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
