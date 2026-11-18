@@ -192,6 +192,7 @@ check(locHtml.includes('<h1>Lokasi skrin iklan digital LOOKaL di Dungun.</h1>'),
 const indexedUrls = [...sitemap.matchAll(/<loc>(https:\/\/lookal\.tech\/[^<]*)<\/loc>/g)].map(m => m[1]);
 check(indexedUrls.length > 0, 'sitemap includes canonical URLs');
 check(new Set(indexedUrls).size === indexedUrls.length, 'sitemap has no duplicate URLs');
+check(!indexedUrls.includes('https://lookal.tech/motion/'), 'external Motion rewrite is excluded from canonical sitemap');
 for (const url of indexedUrls) {
   const pathname = new URL(url).pathname;
   const output = pathname === '/' ? 'index.html' : pathname.replace(/^\//,'') + 'index.html';
