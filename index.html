@@ -148,8 +148,8 @@
 .home-pricing .quest-pricing{display:flex;overflow-x:auto;overflow-y:hidden;gap:12px;scroll-snap-type:x mandatory;scroll-padding-inline:3px;padding:2px 1px 16px;-webkit-overflow-scrolling:touch}
 .home-pricing .quest-tier{flex:0 0 min(78vw,320px);scroll-snap-align:start;min-width:0}
 .home-pricing .quest-pricing:focus-visible{outline:2px solid var(--red);outline-offset:3px}
-.home-pricing .price-swipe-hint{font-size:.78rem;color:var(--smoke);margin:8px 0 0}
-@media(min-width:760px){.home-pricing .quest-pricing{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;padding-bottom:0}.home-pricing .quest-tier{flex:auto}}
+.home-pricing .price-swipe-hint{display:block;font-size:.78rem;color:var(--smoke);margin:8px 0 0}
+@media(min-width:760px){.home-pricing .price-swipe-hint{display:none}.home-pricing .quest-pricing{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;padding-bottom:0}.home-pricing .quest-tier{flex:auto}}
 #main .final{padding:64px 0}
 #main .final h2{max-width:22ch}
 @media(min-width:760px){
