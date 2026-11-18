@@ -154,5 +154,7 @@ check(home.includes('.home-pricing .quest-pricing{display:flex;overflow-x:auto')
 check(home.includes('@media(min-width:760px){.home-pricing .quest-pricing{display:grid;'), 'pricing returns to three-column desktop grid');
 const coreLanguage = read('assets/i18n-core.js');
 check(coreLanguage.includes("bm: 'LOOKaL | Iklan Skrin Digital & DOOH untuk Perniagaan Tempatan'"), 'language runtime preserves canonical homepage SEO title');
+const homeMapHelper = read('assets/home-copy-patch.js');
+check(homeMapHelper.includes("if (!document.getElementById('network-map')) watchNetworkMap();"), 'homepage MapLibre avoids legacy DOM-wide SVG observer');
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
