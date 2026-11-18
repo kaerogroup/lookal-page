@@ -112,19 +112,27 @@ check(home.includes("drawer.addEventListener('click',(event)=>{if(event.target.c
 check(!home.includes('.location-card:nth-child(n+6){display:none}'), 'all location photos remain visible');
 check(home.includes('id="network-map"') && home.includes('id="lokasi"'), 'location gallery and map remain visible sections');
 
-check(home.indexOf('id="menuOpen"') < home.indexOf('class="brand" href="#top"'), 'homepage menu precedes brand in keyboard and DOM order');
+
+const publicHeader = home.slice(home.indexOf('<header>'),home.indexOf('</header>') + '</header>'.length);
+const homeDrawer = home.slice(home.indexOf('<aside class="drawer"'),home.indexOf('</aside>') + '</aside>'.length);
+check(publicHeader.includes('id="menuOpen"') && !publicHeader.includes('class="brand"'), 'homepage header contains menu without redundant logo');
+check(homeDrawer.includes('IMG-20251231-WA0002.jpg'), 'homepage drawer retains logo');
 const homepageLanguage = read('assets/i18n.js');
-check(homepageLanguage.includes('header .brand{display:inline-flex!important;order:2;flex:0 0 auto;margin:0!important;position:absolute;left:50%;transform:translateX(-50%);z-index:1}'), 'homepage mobile brand is centered');
+
 check(navStyle.includes('.lookal-public-menu{order:1;'), 'subpage mobile menu is positioned first, on left');
-check(navStyle.includes('.lookal-public-brand{display:inline-flex;align-items:center;flex:0 0 auto;order:2;margin:0;position:absolute;left:50%;transform:translateX(-50%);z-index:1}'), 'subpage mobile logo is centered');
+
 check(navStyle.includes('@media(min-width:1200px)'), 'desktop header remains separately controlled');
 check(homepageLanguage.includes('@media(min-width:900px) and (max-width:1199px)'), 'homepage tablet uses same centered header geometry');
-check(navStyle.includes('position:static;transform:none'), 'subpage desktop logo returns to ordinary layout');
+
 for (const uri of ['/iklan/', '/lokasi/']) {
  const headerHtml = read(uri.slice(1) + 'index.html');
  const navAt = headerHtml.indexOf('id="lookalPublicMenuOpen"');
- const brandAt = headerHtml.indexOf('class="lookal-public-brand"');
- check(navAt > 0 && brandAt > 0 && navAt < brandAt, uri + ' has left-first menu before brand in DOM order');
+ const headerEnd = headerHtml.indexOf('</header>');
+ const topHeader = headerHtml.slice(0,headerEnd);
+ const drawer = headerHtml.slice(headerEnd);
+ check(navAt > 0 && navAt < headerEnd, uri + ' has left hamburger in public header');
+ check(!topHeader.includes('class="lookal-public-brand"') && !topHeader.includes('IMG-20251231-WA0002.jpg'), uri + ' has no redundant header logo');
+ check(drawer.includes('lookal-public-drawer-head') && drawer.includes('IMG-20251231-WA0002.jpg'), uri + ' retains LOOKaL logo in drawer');
 }
 
 check(mapScript.includes("el.innerHTML = '<svg viewBox=\"0 0 36 48\""), 'map markers have pin SVG geometry');
