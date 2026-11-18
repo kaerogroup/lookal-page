@@ -181,7 +181,7 @@ check(advertHtml.includes('id="jawapan-pantas"'), 'advertiser has accessible AEO
 check(advertHtml.includes('Berapa harga dan durasinya?'), 'advertiser answers price and duration directly');
 check(locHtml.includes('id="senarai-premis"'), 'location page includes textual map coverage');
 check(locHtml.includes('bukan pengesahan ketersediaan slot untuk hari ini'), 'mapped coordinates are distinguished from availability');
-const fieldMapNames = [...mapScript.matchAll(/\\{ name:'([^']+)', lat:/g)].map(m => m[1]);
+const fieldMapNames = [...mapScript.matchAll(/\{ name:'([^']+)', lat:/g)].map(m => m[1]);
 check(fieldMapNames.length === 10, 'field map has 10 named, pinned premises');
 for (const fieldName of fieldMapNames) check(locHtml.includes(fieldName.replace(/&/g,'&amp;')), 'mapped premise is in search-readable HTML: ' + fieldName);
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
