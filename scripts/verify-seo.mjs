@@ -197,7 +197,7 @@ for (const url of indexedUrls) {
   const output = pathname === '/' ? 'index.html' : pathname.replace(/^\//,'') + 'index.html';
   check(fs.existsSync(path.join(root,output)), 'sitemap destination exists: ' + pathname);
 }
-const homeFragmentIds = new Set([...home.matchAll(/\\bid="([^"]+)"/g)].map(m => m[1]));
+const homeFragmentIds = new Set([...home.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]));
 const homeFragmentLinks = [...home.matchAll(/href="#([^"]+)"/g)].map(m => m[1]);
 for (const fragment of homeFragmentLinks) check(homeFragmentIds.has(fragment), 'homepage fragment #' + fragment + ' resolves to an existing element');
 check(home.includes('href="/iklan/#video-tutorial"'), 'legacy tutorial link targets the dedicated walkthrough page');
