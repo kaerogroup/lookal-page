@@ -134,7 +134,7 @@ check(locHtml.includes('id="rakaman-skrin"'), 'field recordings are consolidated
 check((locHtml.match(/<img src="\/assets\/locations\//g) || []).length >= 6, 'locations page includes all six premise photographs');
 check((locHtml.match(/<video\b/g) || []).length >= 3, 'locations page includes three field recordings');
 check((advertHtml.match(/<video\b/g) || []).length === 3, 'advertiser page contains three workflow tutorials');
-const canonicalIds = ['utama','harga','lokasi','cara','network-map','soalan','hubungi'];
+const canonicalIds = ['utama','harga','kenapa-lookal','lokasi','cara','network-map','soalan','hubungi'];
 const positions = canonicalIds.map(id => home.indexOf('id="' + id + '"'));
 check(positions.every(index => index >= 0) && positions.every((v,i)=>i===0||v>positions[i-1]), 'homepage has static advertiser-first section order');
 check(home.includes('data-layout="advertiser-first-v3"'), 'homepage uses versioned static layout');
@@ -149,7 +149,7 @@ check(!pricingScript.includes("insertAdjacentElement('afterend', pain)"), 'no dy
 check(!pricingScript.includes("const makeSection ="), 'obsolete section factory removed from runtime');
 const sectionHtml = home.slice(home.indexOf('<main id="main"'),home.indexOf('</main>'));
 const sectionStarts = [...sectionHtml.matchAll(/<section\b[^>]*>/g)];
-check(sectionStarts.length===7, 'homepage comprises seven focused static sections');
+check(sectionStarts.length===8, 'homepage has eight focused sections including short market education');
 for(const [i, start] of sectionStarts.entries()){
  const segment = sectionHtml.slice(start.index,i+1<sectionStarts.length?sectionStarts[i+1].index:sectionHtml.length);
  let divBalance=0;for(const div of segment.matchAll(/<\/?div\b[^>]*>/g))divBalance+=div[0][1]==='/'?-1:1;
@@ -163,5 +163,11 @@ const coreLanguage = read('assets/i18n-core.js');
 check(coreLanguage.includes("bm: 'LOOKaL | Iklan Skrin Digital & DOOH untuk Perniagaan Tempatan'"), 'language runtime preserves canonical homepage SEO title');
 const homeMapHelper = read('assets/home-copy-patch.js');
 check(homeMapHelper.includes("if (!document.getElementById('network-map')) watchNetworkMap();"), 'homepage MapLibre avoids legacy DOM-wide SVG observer');
+check(home.includes('id="kenapa-lookal"'), 'homepage retains market education section');
+check(home.includes('Iklan online sudah berjalan. Adakah pelanggan nampak jenama anda di dunia sebenar?'), 'homepage explains the online-to-offline visibility need');
+check(home.includes('.home-gallery .location-meta{display:block;position:static;'), 'homepage media captions have explicit solid backgrounds');
+check(home.includes('.home-video-card .walk-copy{background:#fff!important;'), 'homepage tutorial caption has readable light background');
+check(locHtml.includes('lookal-media-caption-polish'), 'location photo and video captions use a consistent card surface');
+check(advertHtml.includes('lookal-tutorial-card-polish'), 'advertiser tutorial cards have clear labels');
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
