@@ -218,5 +218,9 @@ for (const [path, html] of [['/', home], ['/iklan/', advertHtml], ['/lokasi/', l
   check(html.includes('href="https://wa.me/60123533587?text='), path + ' has valid international-format WhatsApp link');
   check(html.includes('rel="noopener noreferrer"'), path + ' protects new-tab WhatsApp navigation');
 }
+check(home.includes('LOOKaL ialah pilihan iklan offline melalui skrin digital di kedai'), 'homepage explains offline advertising in everyday language');
+check(home.includes('premis dipetakan'), 'homepage does not imply every mapped premise has live inventory');
+check(advertHtml.includes('Apa itu iklan offline, dan bagaimana ia melengkapkan iklan online?'), 'advertiser page answers an accessible offline-advertising question');
+check(locHtml.includes('iklan kedai atau promosi perniagaan'), 'location page uses natural-language local search intent');
 if (failures) { console.error(failures + ' SEO verification(s) failed'); process.exit(1); }
 console.log('SEO static verification complete.');
