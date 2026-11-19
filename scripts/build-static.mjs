@@ -68,6 +68,8 @@ const googleFontPatterns = [
 
 const htmlFiles = [
   'index.html',
+  'iklan/index.html',
+  'lokasi/index.html',
   'business-partner/index.html',
   'tools/whatsapp-link/index.html',
   'tools/roi-calculator/index.html',
@@ -87,12 +89,12 @@ for (const rel of htmlFiles) {
 const homePath = path.join(out, 'index.html');
 let home = fs.readFileSync(homePath, 'utf8');
 
-// Suppress the entire legacy source document before first paint. The accepted homepage
-// is still assembled by the current runtime patch stack, so exposing even the old header
-// for one frame produces a visible flash. Keep body completely hidden until the final
-// patch signals readiness. A fail-safe ensures the page can never remain hidden.
-const prePaintGuard = `<script>(function(){document.documentElement.classList.add('lookal-home-patching')})();</script><style id="lookal-prepaint-guard">html{background:#f8f5ef}html.lookal-home-patching body{visibility:hidden!important;opacity:0!important}html.lookal-home-ready body{visibility:visible!important;opacity:1!important}</style><script>(function(){var d=document.documentElement;window.setTimeout(function(){d.classList.remove('lookal-home-patching');d.classList.add('lookal-home-ready')},2200)})();</script>`;
-if (!home.includes('lookal-prepaint-guard')) home = home.replace('</head>', `${prePaintGuard}\n</head>`);
+// The advertiser-first V3 homepage is now server-rendered, so never hide its body
+// while waiting for JavaScript. This avoids a flash of blank content on mobile,
+// improves first paint, and keeps the primary offer readable without scripts.
+if (!home.includes('data-layout="advertiser-first-v3"')) {
+  throw new Error('Expected static homepage V3; do not reintroduce runtime-only rendering');
+}
 
 const proofReplacements = [
   ['assets/screens/VID-20260915-WA0001.mp4', 'assets/web-media/screens/location-01.mp4', 'assets/web-media/screens/location-01.jpg'],
@@ -120,7 +122,9 @@ for (const [oldSrc, newSrc, poster] of walkthroughs) {
 home = home.replace('.walk-open .video-frame video{pointer-events:none}', '.walk-open .video-frame video{pointer-events:none}.walk-open .video-frame img{width:100%;height:100%;object-fit:cover}');
 home = home.replace('<video id="walkModalVideo" controls playsinline preload="metadata"></video>', '<video id="walkModalVideo" controls playsinline preload="none"></video>');
 
-if (!home.includes('content-visibility:auto')) {
+// V3 has concise, static sections and real media. Avoid injecting legacy
+// content-visibility:auto, which can defer gallery/map layout on mobile.
+if (!home.includes('data-layout="advertiser-first-v3"') && !home.includes('content-visibility:auto')) {
   home = home.replace('section{padding:78px 0;border-top:1px solid var(--line)}', 'section{padding:78px 0;border-top:1px solid var(--line)}section:not(.hero){content-visibility:auto;contain-intrinsic-size:auto 760px}');
 }
 if (!home.includes('rel="prefetch" href="/tools/whatsapp-link/"')) {

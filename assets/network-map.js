@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const isHome = location.pathname === '/' || location.pathname === '/index.html';
-  if (!isHome) return;
+  const supportsMap = ['/', '/index.html', '/lokasi/', '/lokasi/index.html'].includes(location.pathname);
+  if (!supportsMap) return;
 
   const STORAGE_KEY = 'lookal-language';
   const isEnglish = () => localStorage.getItem(STORAGE_KEY) === 'en';
@@ -60,13 +60,17 @@
       .malaysia-card{position:relative;background:#202024;border:1px solid #454249;overflow:hidden}
       #lookal-live-map{width:100%;height:520px;background:#232327}
       .map-hint{position:absolute;z-index:3;left:14px;bottom:14px;padding:8px 10px;border-radius:8px;background:rgba(24,24,27,.88);backdrop-filter:blur(8px);color:#f0ece7;font-size:.72rem;font-weight:700;box-shadow:0 6px 24px rgba(0,0,0,.2);pointer-events:none}
-      .lookal-map-marker{width:18px;height:18px;border-radius:50%;background:#ef3340;border:3px solid #fff;box-sizing:border-box;box-shadow:0 0 0 7px rgba(239,51,64,.20),0 5px 14px rgba(0,0,0,.38);cursor:pointer;padding:0;appearance:none;-webkit-appearance:none}
-      .lookal-map-marker:hover,.lookal-map-marker:focus{transform:scale(1.18);outline:none;box-shadow:0 0 0 8px rgba(239,51,64,.28),0 6px 16px rgba(0,0,0,.42)}
+      .lookal-map-marker{display:flex;align-items:center;justify-content:center;width:36px;height:48px;border:0;background:transparent;box-sizing:border-box;cursor:pointer;padding:0;appearance:none;-webkit-appearance:none;filter:drop-shadow(0 3px 5px rgba(0,0,0,.30));transition:filter .15s ease;transform-origin:50% 100%}
+      .lookal-map-marker svg{display:block;width:36px;height:48px;overflow:visible;transition:transform .15s ease;transform-origin:50% 100%}
+      .lookal-map-marker:hover svg,.lookal-map-marker:focus-visible svg{transform:scale(1.12)}
+      .lookal-map-marker:focus-visible{outline:3px solid #fff;outline-offset:3px;border-radius:6px}
+      .lookal-map-marker[aria-expanded="true"] svg{transform:scale(1.12)}
+
       .maplibregl-popup-content{background:#242327!important;color:#fff!important;border-radius:10px!important;padding:12px 14px!important;box-shadow:0 14px 34px rgba(0,0,0,.35)!important;font:600 .78rem ui-sans-serif,system-ui,sans-serif}
       .maplibregl-popup-content strong{display:block;font-size:.82rem;margin-bottom:4px}.maplibregl-popup-content small{color:#aaa5ad}.maplibregl-popup-close-button{color:#fff;font-size:18px;padding:3px 7px}
       .maplibregl-popup-anchor-bottom .maplibregl-popup-tip{border-top-color:#242327!important}.maplibregl-popup-anchor-top .maplibregl-popup-tip{border-bottom-color:#242327!important}.maplibregl-popup-anchor-left .maplibregl-popup-tip{border-right-color:#242327!important}.maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:#242327!important}
       .maplibregl-ctrl-group{border-radius:9px!important;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.22)!important}.maplibregl-ctrl-attrib{font-size:10px!important}
-      @media(max-width:680px){.network-stats{grid-template-columns:1fr}#lookal-live-map{height:390px}.map-hint{right:14px;font-size:.65rem}.lookal-map-marker{width:16px;height:16px}}
+      @media(max-width:680px){.network-stats{grid-template-columns:1fr}#lookal-live-map{height:390px}.map-hint{right:14px;font-size:.65rem}.lookal-map-marker{width:32px;height:43px}.lookal-map-marker svg{width:32px;height:43px}}
     `;
     document.head.appendChild(style);
   };
@@ -136,13 +140,15 @@
         el.type = 'button';
         el.className = 'lookal-map-marker';
         el.setAttribute('aria-label', loc.name);
+        el.setAttribute('aria-haspopup', 'dialog');
         el.title = loc.name;
+        el.innerHTML = '<svg viewBox="0 0 36 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M18 1C8.6 1 1 8.6 1 18c0 12.3 17 28.5 17 28.5S35 30.3 35 18C35 8.6 27.4 1 18 1Z" fill="#EF1B23" stroke="#B91019" stroke-width="1"/><circle cx="18" cy="18" r="7.5" fill="#FFFFFF"/></svg>';
 
         const accuracy = Number.isFinite(loc.accuracy) ? ` · ±${Math.round(loc.accuracy)}m` : '';
         const popup = new maplibregl.Popup({ offset:16, closeButton:true })
           .setHTML(`<strong>${loc.name}</strong><small>${c.popup} · ${loc.lat.toFixed(6)}, ${loc.lng.toFixed(6)}${accuracy}</small>`);
 
-        new maplibregl.Marker({ element:el, anchor:'center' })
+        new maplibregl.Marker({ element:el, anchor:'bottom' })
           .setLngLat([loc.lng, loc.lat])
           .setPopup(popup)
           .addTo(map);
@@ -156,7 +162,7 @@
       });
     } catch (error) {
       console.error('LOOKaL MapLibre map failed to load', error);
-      container.innerHTML = '<div style="padding:40px;color:#c9c5bf;text-align:center">Interactive map is temporarily unavailable.</div>';
+      container.innerHTML = '<div style="padding:40px 20px;color:#e5e0dc;text-align:center;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;min-height:280px"><strong>Peta interaktif tidak dapat dimuat pada pelayar ini.</strong><a style="color:#fff;background:#d9232e;padding:12px 18px;text-decoration:none;border-radius:7px;font-weight:800" href="https://www.openstreetmap.org/#map=12/4.750/103.415" target="_blank" rel="noopener noreferrer">Buka peta Dungun di OpenStreetMap</a></div>';
     }
   };
 
