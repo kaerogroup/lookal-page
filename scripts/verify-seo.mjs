@@ -135,7 +135,9 @@ for (const uri of ['/iklan/', '/lokasi/']) {
  check(drawer.includes('lookal-public-drawer-head') && drawer.includes('IMG-20251231-WA0002.jpg'), uri + ' retains LOOKaL logo in drawer');
 }
 
-check(mapScript.includes("el.innerHTML = '<svg viewBox=\"0 0 36 48\""), 'map markers have pin SVG geometry');
+check(mapScript.includes('viewBox="0 0 40 54"') && mapScript.includes('${index + 1}'), 'map markers render distinct numbered teardrop pins');
+check(mapScript.includes('max-width:none!important') && mapScript.includes('overflow:visible!important'), 'map pins retain full shape on mobile');
+check(mapScript.includes("active:'Premis dipetakan'"), 'map labels do not imply unverified live inventory');
 check(mapScript.includes("anchor:'bottom'"), 'map pin tips are anchored to actual coordinates');
 check(!mapScript.includes("anchor:'center'"), 'no remaining center-anchored circular markers');
 check(locHtml.includes('id="rakaman-skrin"'), 'field recordings are consolidated on location page');
