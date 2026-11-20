@@ -22,21 +22,21 @@
   ];
 
   const copy = () => isEnglish() ? {
-    eyebrow:'Live network footprint',
-    title:'Explore LOOKaL active locations.',
-    body:'The map opens on the current Dungun network using the latest field-pinned coordinates. Zoom out to view the wider Malaysia footprint.',
-    active:'Active locations', state:'State', parliament:'Parliament',
+    eyebrow:'Mapped local network',
+    title:'Explore mapped LOOKaL premises.',
+    body:'Explore ten premises mapped in Dungun using field-recorded coordinates. Map pins show locations, not live advertising slot availability.',
+    active:'Mapped premises', state:'State', parliament:'Parliament',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
     hint:'Drag or zoom the map to explore locations',
-    popup:'Active LOOKaL location'
+    popup:'Mapped LOOKaL premise'
   } : {
-    eyebrow:'Jejak rangkaian aktif',
-    title:'Terokai lokasi aktif LOOKaL.',
-    body:'Peta menggunakan koordinat terbaru yang telah dipin di lapangan untuk rangkaian Dungun. Zum keluar untuk melihat jejak rangkaian Malaysia.',
-    active:'Lokasi aktif', state:'Negeri', parliament:'Parlimen',
+    eyebrow:'Jejak premis dipetakan',
+    title:'Terokai premis LOOKaL yang dipetakan.',
+    body:'Peta memaparkan 10 premis yang dipetakan di Dungun berdasarkan koordinat lapangan. Pin menunjukkan lokasi, bukan pengesahan slot iklan tersedia hari ini.',
+    active:'Premis dipetakan', state:'Negeri', parliament:'Parlimen',
     stateValue:'Terengganu', parliamentValue:'P039 Dungun',
     hint:'Gerakkan atau zum peta untuk melihat lokasi',
-    popup:'Lokasi LOOKaL aktif'
+    popup:'Premis LOOKaL dipetakan'
   };
 
   const ensureMapLibreCss = () => {
@@ -60,8 +60,9 @@
       .malaysia-card{position:relative;background:#202024;border:1px solid #454249;overflow:hidden}
       #lookal-live-map{width:100%;height:520px;background:#232327}
       .map-hint{position:absolute;z-index:3;left:14px;bottom:14px;padding:8px 10px;border-radius:8px;background:rgba(24,24,27,.88);backdrop-filter:blur(8px);color:#f0ece7;font-size:.72rem;font-weight:700;box-shadow:0 6px 24px rgba(0,0,0,.2);pointer-events:none}
-      .lookal-map-marker{display:flex;align-items:center;justify-content:center;width:36px;height:48px;border:0;background:transparent;box-sizing:border-box;cursor:pointer;padding:0;appearance:none;-webkit-appearance:none;filter:drop-shadow(0 3px 5px rgba(0,0,0,.30));transition:filter .15s ease;transform-origin:50% 100%}
-      .lookal-map-marker svg{display:block;width:36px;height:48px;overflow:visible;transition:transform .15s ease;transform-origin:50% 100%}
+      /* MapLibre positions the button itself. Preserve the full teardrop artwork on mobile. */
+      #lookal-live-map .lookal-map-marker{display:flex!important;align-items:center;justify-content:center;width:40px!important;height:54px!important;min-width:40px;min-height:54px;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;box-sizing:border-box;cursor:pointer;padding:0!important;appearance:none;-webkit-appearance:none;overflow:visible!important;filter:drop-shadow(0 4px 5px rgba(0,0,0,.38));transform-origin:50% 100%}
+      #lookal-live-map .lookal-map-marker svg{display:block!important;flex:none!important;width:40px!important;height:54px!important;max-width:none!important;overflow:visible!important;transition:scale .15s ease;transform-origin:50% 100%}
       .lookal-map-marker:hover svg,.lookal-map-marker:focus-visible svg{transform:scale(1.12)}
       .lookal-map-marker:focus-visible{outline:3px solid #fff;outline-offset:3px;border-radius:6px}
       .lookal-map-marker[aria-expanded="true"] svg{transform:scale(1.12)}
@@ -70,7 +71,7 @@
       .maplibregl-popup-content strong{display:block;font-size:.82rem;margin-bottom:4px}.maplibregl-popup-content small{color:#aaa5ad}.maplibregl-popup-close-button{color:#fff;font-size:18px;padding:3px 7px}
       .maplibregl-popup-anchor-bottom .maplibregl-popup-tip{border-top-color:#242327!important}.maplibregl-popup-anchor-top .maplibregl-popup-tip{border-bottom-color:#242327!important}.maplibregl-popup-anchor-left .maplibregl-popup-tip{border-right-color:#242327!important}.maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:#242327!important}
       .maplibregl-ctrl-group{border-radius:9px!important;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.22)!important}.maplibregl-ctrl-attrib{font-size:10px!important}
-      @media(max-width:680px){.network-stats{grid-template-columns:1fr}#lookal-live-map{height:390px}.map-hint{right:14px;font-size:.65rem}.lookal-map-marker{width:32px;height:43px}.lookal-map-marker svg{width:32px;height:43px}}
+      @media(max-width:680px){.network-stats{grid-template-columns:1fr}#lookal-live-map{height:390px}.map-hint{right:14px;font-size:.65rem}#lookal-live-map .lookal-map-marker{width:36px!important;height:49px!important;min-width:36px;min-height:49px}#lookal-live-map .lookal-map-marker svg{width:36px!important;height:49px!important}}
     `;
     document.head.appendChild(style);
   };
@@ -84,7 +85,7 @@
         <div class="network-stat"><span>${c.parliament}</span><strong>${c.parliamentValue}</strong></div>
       </div>
       <div class="malaysia-card">
-        <div id="lookal-live-map" role="region" aria-label="Interactive map of active LOOKaL locations"></div>
+        <div id="lookal-live-map" role="region" aria-label="Interactive map of mapped LOOKaL premises"></div>
         <div class="map-hint">${c.hint}</div>
       </div>
     </div>`;
@@ -135,14 +136,14 @@
       map.addControl(new maplibregl.NavigationControl({ showCompass:false, visualizePitch:false }), 'top-right');
 
       const c = copy();
-      locations.forEach((loc) => {
+      locations.forEach((loc, index) => {
         const el = document.createElement('button');
         el.type = 'button';
         el.className = 'lookal-map-marker';
         el.setAttribute('aria-label', loc.name);
         el.setAttribute('aria-haspopup', 'dialog');
         el.title = loc.name;
-        el.innerHTML = '<svg viewBox="0 0 36 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M18 1C8.6 1 1 8.6 1 18c0 12.3 17 28.5 17 28.5S35 30.3 35 18C35 8.6 27.4 1 18 1Z" fill="#EF1B23" stroke="#B91019" stroke-width="1"/><circle cx="18" cy="18" r="7.5" fill="#FFFFFF"/></svg>';
+        el.innerHTML = `<svg width="40" height="54" viewBox="0 0 40 54" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M20 2C9.7 2 2 10.1 2 20.2c0 13.2 18 31 18 31s18-17.8 18-31C38 10.1 30.3 2 20 2Z" fill="#DF1E2C" stroke="#FFFFFF" stroke-width="2.5"/><circle cx="20" cy="20" r="11.5" fill="#FFFFFF"/><text x="20" y="24.5" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="800" fill="#B91728">${index + 1}</text></svg>`;
 
         const accuracy = Number.isFinite(loc.accuracy) ? ` · ±${Math.round(loc.accuracy)}m` : '';
         const popup = new maplibregl.Popup({ offset:16, closeButton:true })
