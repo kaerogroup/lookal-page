@@ -8,7 +8,7 @@
   if (document.querySelector('script[data-lookal-network-map]')) return;
 
   const script = document.createElement('script');
-  script.src = '/assets/network-map.js';
+  script.src = '/assets/network-map.js?v=pin-20261120';
   script.dataset.lookalNetworkMap = 'true';
   script.defer = true;
   document.head.appendChild(script);
