@@ -90,7 +90,7 @@ const mapScript = read('assets/network-map.js');
 check(mapScript.includes("'/lokasi/'"), 'network map supports locations route');
 const locHtml = read('lokasi/index.html');
 check(locHtml.includes('id="network-map"'), 'locations page has map mount');
-check(locHtml.includes('src="/assets/network-map.js"'), 'locations page loads interactive map');
+check(locHtml.includes('src="/assets/network-map.js?v=pin-20261120"'), 'locations page loads versioned map markers');
 check(locHtml.includes('id="galeri-lokasi"'), 'locations page retains image gallery');
 const advertHtml = read('iklan/index.html');
 check(advertHtml.includes('id="video-tutorial"'), 'advertiser page retains video tutorials');
@@ -153,8 +153,8 @@ check(home.indexOf('id="harga"') < home.indexOf('id="lokasi"'), 'pricing appears
 check(home.indexOf('id="cara"') < home.indexOf('id="network-map"'), 'one tutorial teaser and map remain in static content');
 check((home.match(/class="location-card/g)||[]).length === 6, 'homepage gallery has three screen recordings and three exterior location photos');
 check((home.match(/class="location-media"><video controls muted playsinline/g)||[]).length === 3, 'homepage shows three playable screen evidence clips');
-check(home.includes('<h2>Paparan iklan LOOKaL di premis sebenar.</h2>'), 'gallery heading describes actual screen ad playback naturally');
-check(home.includes('<strong>Suasana sekitar premis</strong>') && home.includes('<strong>Premis di tepi jalan</strong>') && home.includes('<strong>Pintu masuk premis</strong>'), 'exterior photos describe the setting rather than name shops');
+check(home.includes('<h2>Lihat skrin LOOKaL di premis.</h2>'), 'gallery heading is short and factual');
+check((home.match(/<strong>Premis sekitar<\/strong><span>Lokasi dalam rangkaian LOOKaL\.<\/span>/g)||[]).length === 3, 'all exterior photos use concise neutral premises captions');
 check(home.includes('<strong>Skrin dipasang di dinding</strong>') && home.includes('<strong>Iklan bersama kod QR</strong>') && home.includes('<strong>Iklan perkhidmatan</strong>'), 'video captions describe visible screen details');
 check(!home.includes('<strong>Perut Bakar Hatyai</strong>') && !home.includes('<strong>Elva Crunch</strong>'), 'no shop names used as gallery card headings');
 for (const n of ['01','02','03']) check(home.includes('poster="/assets/web-media/screens/location-' + n + '.jpg"') && home.includes('src="/assets/web-media/screens/location-' + n + '.mp4"'), 'screen ' + n + ' uses generated web-media poster and video');
@@ -179,7 +179,7 @@ check(home.includes('@media(min-width:760px){.home-pricing .price-swipe-hint{dis
 const coreLanguage = read('assets/i18n-core.js');
 check(coreLanguage.includes("bm: 'LOOKaL | Iklan Skrin Digital & DOOH untuk Perniagaan Tempatan'"), 'language runtime preserves canonical homepage SEO title');
 const homeMapHelper = read('assets/home-copy-patch.js');
-check(homeMapHelper.includes("script.src = '/assets/network-map.js'"), 'homepage loads shared MapLibre implementation');
+check(homeMapHelper.includes("script.src = '/assets/network-map.js?v=pin-20261120'"), 'homepage loads cache-busted MapLibre markers');
 check(!homeMapHelper.includes('MutationObserver') && !homeMapHelper.includes('MALAYSIA_SVG'), 'homepage no longer ships obsolete national SVG observer');
 check(home.includes('id="kenapa-lookal"'), 'homepage retains market education section');
 check(home.includes('Iklan online sudah berjalan. Adakah pelanggan nampak jenama anda di dunia sebenar?'), 'homepage explains the online-to-offline visibility need');
