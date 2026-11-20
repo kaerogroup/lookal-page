@@ -180,6 +180,13 @@ const coreLanguage = read('assets/i18n-core.js');
 check(coreLanguage.includes("bm: 'LOOKaL | Iklan Skrin Digital & DOOH untuk Perniagaan Tempatan'"), 'language runtime preserves canonical homepage SEO title');
 const homeMapHelper = read('assets/home-copy-patch.js');
 check(homeMapHelper.includes("script.src = '/assets/network-map.js?v=pin-20261120'"), 'homepage loads cache-busted MapLibre markers');
+const vercelConfig = JSON.parse(read('vercel.json'));
+for (const source of ['/assets/network-map.js', '/assets/home-copy-patch.js']) {
+  check(vercelConfig.headers.some(rule => rule.source === source && rule.headers.some(h => h.key === 'Cache-Control' && h.value === 'no-cache, no-store, must-revalidate')), source + ' bypasses stale asset caching');
+}
+const staticBuilder = read('scripts/build-static.mjs');
+check(staticBuilder.includes('/assets/home-copy-patch.js?v=pin-20261120'), 'built homepage references versioned map-loader URL');
+
 check(!homeMapHelper.includes('MutationObserver') && !homeMapHelper.includes('MALAYSIA_SVG'), 'homepage no longer ships obsolete national SVG observer');
 check(home.includes('id="kenapa-lookal"'), 'homepage retains market education section');
 check(home.includes('Iklan online sudah berjalan. Adakah pelanggan nampak jenama anda di dunia sebenar?'), 'homepage explains the online-to-offline visibility need');
