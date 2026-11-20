@@ -228,6 +228,11 @@
 #hubungi .lookal-contact-btn strong{font-size:.92rem;font-weight:800}
 #hubungi .lookal-contact-btn small{font-size:.78rem;color:#58544f;overflow-wrap:anywhere}
 @media(max-width:680px){#hubungi .lookal-contact-actions{display:grid;grid-template-columns:1fr}#hubungi .lookal-contact-btn{width:100%}}
+
+/* Display actual screen footage before exterior context photos. */
+#main .home-gallery .location-media video{display:block;width:100%;height:100%;aspect-ratio:4/3;object-fit:contain;background:#18181b}
+#main .home-gallery .location-card .location-media{aspect-ratio:4/3;min-height:0}
+#main .home-gallery .location-card .location-media img{width:100%;height:100%;object-fit:cover}
 </style>
 </head>
 <body>
@@ -289,12 +294,17 @@
   </div>
 </section>
 <section id="lokasi" class="home-gallery">
-    <div class="wrap">
-      <div class="shead"><span class="home-kicker">BUKTI LOKASI</span><h2>Skrin sebenar. Premis sebenar.</h2><p>Lihat tempat iklan boleh dipaparkan. Galeri ini menggunakan gambar penempatan rangkaian LOOKaL.</p></div>
-      <p class="home-swipe-hint">Leret untuk lihat lebih banyak lokasi →</p><div class="gallery" tabindex="0" role="region" aria-label="Galeri lokasi LOOKaL yang boleh ditatal"><article class="location-card featured"><div class="location-media"><img src="assets/locations/160017.jpg" width="1280" height="960" loading="lazy" decoding="async" alt="Skrin komuniti LOOKaL di dalam premis tempatan"></div><div class="location-meta"><strong>Kedudukan skrin dalam premis</strong><span>Contoh penempatan LOOKaL</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260910-WA0004.jpg" width="2560" height="1706" loading="lazy" decoding="async" alt="Skrin iklan komuniti LOOKaL dalam ruang premis"></div><div class="location-meta"><strong>Dalam aliran pengunjung</strong><span>Skrin ditempatkan dalam konteks premis</span></div></article><article class="location-card"><div class="location-media"><img src="assets/locations/IMG-20260920-WA0000.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Skrin LOOKaL di ruang komuniti"></div><div class="location-meta"><strong>Ruang komuniti</strong><span>Konteks pemasangan dan aliran pengunjung</span></div></article></div>
-      <div class="home-after-gallery"><a class="btn btn-ghost" href="/lokasi/">Terokai lokasi dan peta LOOKaL</a></div>
-    </div>
-  </section>
+  <div class="wrap">
+    <div class="shead"><span class="home-kicker">BUKTI SKRIN & PREMIS</span><h2>Lihat skrin beriklan dan lokasi premis LOOKaL.</h2><p>Lihat bagaimana kandungan iklan dipaparkan pada skrin melalui rakaman sebenar, kemudian kenali suasana luar premis yang direkodkan dalam galeri lokasi.</p></div>
+    <p class="home-swipe-hint">Leret untuk lihat lebih banyak rakaman dan gambar →</p>
+    <div class="gallery" tabindex="0" role="region" aria-label="Rakaman skrin dan foto luar premis LOOKaL"><article class="location-card featured"><div class="location-media"><video controls muted playsinline preload="none" poster="/assets/web-media/screens/location-01.jpg" aria-label="Rakaman skrin LOOKaL 1"><source src="/assets/web-media/screens/location-01.mp4" type="video/mp4">Rakaman tidak dapat dimainkan pada pelayar ini.</video></div><div class="location-meta"><strong>Skrin di ruang premis</strong><span>Rakaman memperlihatkan skrin digital dipasang pada dinding. Tonton untuk melihat paparan iklan.</span></div></article>
+<article class="location-card"><div class="location-media"><video controls muted playsinline preload="none" poster="/assets/web-media/screens/location-02.jpg" aria-label="Rakaman skrin LOOKaL 2"><source src="/assets/web-media/screens/location-02.mp4" type="video/mp4">Rakaman tidak dapat dimainkan pada pelayar ini.</video></div><div class="location-meta"><strong>Contoh paparan iklan</strong><span>Lihat kandungan promosi yang dipaparkan pada skrin LOOKaL dalam rakaman sebenar.</span></div></article>
+<article class="location-card"><div class="location-media"><video controls muted playsinline preload="none" poster="/assets/web-media/screens/location-03.jpg" aria-label="Rakaman skrin LOOKaL 3"><source src="/assets/web-media/screens/location-03.mp4" type="video/mp4">Rakaman tidak dapat dimainkan pada pelayar ini.</video></div><div class="location-meta"><strong>Variasi kandungan pada skrin</strong><span>Rakaman paparan kreatif iklan yang boleh dilihat pada skrin digital LOOKaL.</span></div></article><article class="location-card"><div class="location-media"><img src="/assets/locations/160017.jpg" width="1280" height="960" loading="lazy" decoding="async" alt="Gambar bahagian luar premis dalam koleksi lokasi LOOKaL"></div><div class="location-meta"><strong>Persekitaran lokasi</strong><span>Pandangan luar kawasan premis sebagai rujukan suasana setempat.</span></div></article>
+<article class="location-card"><div class="location-media"><img src="/assets/locations/IMG-20260910-WA0004.jpg" width="2560" height="1706" loading="lazy" decoding="async" alt="Gambar bahagian luar premis dalam koleksi lokasi LOOKaL"></div><div class="location-meta"><strong>Perut Bakar Hatyai</strong><span>Pandangan hadapan premis dan kawasan laluan pengunjung.</span></div></article>
+<article class="location-card"><div class="location-media"><img src="/assets/locations/IMG-20260920-WA0000.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Gambar bahagian luar premis dalam koleksi lokasi LOOKaL"></div><div class="location-meta"><strong>Elva Crunch</strong><span>Pandangan fasad dan pintu masuk premis.</span></div></article></div>
+    <div class="home-after-gallery"><a class="btn btn-ghost" href="/lokasi/">Terokai lokasi dan peta LOOKaL</a></div>
+  </div>
+</section>
   <section id="cara" class="home-steps">
     <div class="wrap">
       <div class="shead"><span class="home-kicker">MUDAH BERMULA</span><h2>Tiga langkah untuk mula beriklan.</h2></div>

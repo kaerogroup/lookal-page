@@ -151,7 +151,12 @@ check(home.includes('data-layout="advertiser-first-v3"'), 'homepage uses version
 check(home.includes('Iklan perniagaan anda di skrin komuniti.'), 'hero immediately describes the product');
 check(home.indexOf('id="harga"') < home.indexOf('id="lokasi"'), 'pricing appears before gallery');
 check(home.indexOf('id="cara"') < home.indexOf('id="network-map"'), 'one tutorial teaser and map remain in static content');
-check((home.match(/class="location-card/g)||[]).length === 3, 'homepage shows exactly three selected premise images');
+check((home.match(/class="location-card/g)||[]).length === 6, 'homepage gallery has three screen recordings and three exterior location photos');
+check((home.match(/class="location-media"><video controls muted playsinline/g)||[]).length === 3, 'homepage shows three playable screen evidence clips');
+check(home.includes('<strong>Persekitaran lokasi</strong>') && home.includes('<strong>Perut Bakar Hatyai</strong>') && home.includes('<strong>Elva Crunch</strong>'), 'exterior photos have truthful and distinct place-specific captions');
+check(home.includes('<strong>Skrin di ruang premis</strong>') && home.includes('<strong>Contoh paparan iklan</strong>') && home.includes('<strong>Variasi kandungan pada skrin</strong>'), 'screen videos each describe the visual evidence');
+for (const n of ['01','02','03']) check(home.includes('poster="/assets/web-media/screens/location-' + n + '.jpg"') && home.includes('src="/assets/web-media/screens/location-' + n + '.mp4"'), 'screen ' + n + ' uses generated web-media poster and video');
+check(home.includes('src="/assets/locations/160017.jpg"') && home.includes('src="/assets/locations/IMG-20260910-WA0004.jpg"') && home.includes('src="/assets/locations/IMG-20260920-WA0000.jpg"'), 'original photo filenames preserved in homepage');
 check((home.match(/class="walk-open"/g)||[]).length === 1, 'homepage retains one playable tutorial teaser');
 check(!home.includes('id="bukti"') && !home.includes('id="lihat"'), 'full proof videos and tutorial catalogue are not duplicated on homepage');
 check(home.includes('scroll-snap-type:x mandatory'), 'mobile gallery and tutorials use compact snap carousel');
