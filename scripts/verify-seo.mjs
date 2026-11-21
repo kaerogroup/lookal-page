@@ -44,6 +44,11 @@ check(advert.includes('Premium Fullscreen · 15 saat'), 'advertiser page describ
 check(advert.includes('Premium Extended Fullscreen · 30 saat'), 'advertiser page describes 30s fullscreen');
 check(home.includes('Premium Fullscreen · 15 saat'), 'homepage static pricing describes 15s fullscreen');
 check(home.includes('Premium Extended Fullscreen · 30 saat'), 'homepage static pricing describes 30s fullscreen');
+check(home.includes('Skrin penuh selama 15 saat. Untuk satu tawaran atau mesej utama yang ringkas.'), '15s homepage tier explains concise-message use case');
+check(home.includes('Skrin penuh selama 30 saat. Lebih ruang masa untuk memperkenalkan produk atau perkhidmatan.'), '30s homepage tier explains extended-message use case');
+check(advert.includes('Skrin penuh selama 15 saat untuk satu tawaran atau mesej utama yang ringkas. Harga asas: RM4 sehari bagi satu lokasi.'), '15s advertiser tier describes content and accurate per-location daily price');
+check(advert.includes('Skrin penuh selama 30 saat, dengan lebih masa untuk memperkenalkan produk atau perkhidmatan. Harga asas: RM6 sehari bagi satu lokasi.'), '30s advertiser tier describes content and accurate per-location daily price');
+
 check(!home.includes('255 saat satu giliran tayangan'), 'homepage does not claim fixed rotation duration across mixed slots');
 check(!home.includes('112–169 kali sehari'), 'homepage does not claim fixed daily plays across mixed slots');
 check(pricingScript.includes("['/iklan/', en ? 'How to advertise' : 'Cara beriklan']"), 'runtime navigation retains advertiser page');
