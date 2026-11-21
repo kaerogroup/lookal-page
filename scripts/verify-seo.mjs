@@ -139,6 +139,10 @@ check(mapScript.includes('viewBox="0 0 40 54"') && mapScript.includes('${index +
 check(mapScript.includes('max-width:none!important') && mapScript.includes('overflow:visible!important'), 'map pins retain full shape on mobile');
 check(mapScript.includes("active:'Premis dipetakan'"), 'map labels do not imply unverified live inventory');
 check(mapScript.includes("anchor:'bottom'"), 'map pin tips are anchored to actual coordinates');
+check(mapScript.includes('generation !== renderGeneration'), 'late MapLibre imports cannot render into superseded map containers');
+check(mapScript.includes('if (map) { map.remove(); map = null; }'), 'existing map instance is disposed before DOM replacement');
+check(mapScript.includes('if (event.persisted) schedule();'), 'page-show rebuild only occurs on bfcache restoration');
+check(mapScript.includes('cancelAnimationFrame(scheduledFrame)'), 'concurrent render requests are coalesced');
 check(!mapScript.includes("anchor:'center'"), 'no remaining center-anchored circular markers');
 check(locHtml.includes('id="rakaman-skrin"'), 'field recordings are consolidated on location page');
 check((locHtml.match(/<img src="\/assets\/locations\//g) || []).length >= 6, 'locations page includes all six premise photographs');
