@@ -92,19 +92,21 @@
 
   let map = null;
   let modulePromise = null;
+  let renderGeneration = 0;
+  let scheduledFrame = null;
 
   const loadMapLibre = () => {
     if (!modulePromise) modulePromise = import('https://unpkg.com/maplibre-gl@6.14.0/dist/maplibre-gl.mjs');
     return modulePromise;
   };
 
-  const buildMap = async () => {
+  const buildMap = async (generation) => {
     const container = document.getElementById('lookal-live-map');
     if (!container) return;
 
     try {
       const maplibregl = await loadMapLibre();
-      if (!document.body.contains(container)) return;
+      if (generation !== renderGeneration || !document.body.contains(container)) return;
 
       if (map) {
         map.remove();
@@ -180,13 +182,20 @@
       else if (proofSection?.parentNode) proofSection.insertAdjacentElement('afterend', section);
       else document.querySelector('main#main')?.appendChild(section);
     }
+    // Detach the old instance before replacing its container; async MapLibre loads
+    // must never create a second map against a stale node.
+    renderGeneration += 1;
+    if (map) { map.remove(); map = null; }
     section.innerHTML = sectionHtml(copy());
-    buildMap();
+    buildMap(renderGeneration);
   };
 
-  const schedule = () => requestAnimationFrame(render);
+  const schedule = () => {
+    if (scheduledFrame !== null) cancelAnimationFrame(scheduledFrame);
+    scheduledFrame = requestAnimationFrame(() => { scheduledFrame = null; render(); });
+  };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', schedule, { once:true });
   else schedule();
-  window.addEventListener('pageshow', schedule);
+  window.addEventListener('pageshow', (event) => { if (event.persisted) schedule(); });
   document.addEventListener('lookal:languagechange', schedule);
 })();
