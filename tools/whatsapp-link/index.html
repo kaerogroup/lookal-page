@@ -252,7 +252,7 @@
     const normalized = normalizePhone(phone.value);
     const text = message.value.trim();
 
-    if (!/^\\d{8,15}$/.test(normalized)) {
+    if (!/^\d{8,15}$/.test(normalized)) {
       result.classList.add('show');
       generatedLink.textContent = '';
       test.setAttribute('href', '#');
